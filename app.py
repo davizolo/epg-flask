@@ -140,21 +140,24 @@ def mostrar_epg():
             <style>
                 body {{ font-family: Arial, sans-serif; background: #111; color: #eee; padding: 10px; margin: 0; }}
                 .contenedor {{ max-width: 800px; margin: auto; padding: 10px; }}
-                h2 {{ font-size: 1.5em; text-align: center; margin-bottom: 20px; }}
-                form {{ display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }}
-                select {{ font-size: 1em; padding: 8px; border-radius: 5px; background: #333; color: #eee; border: 1px solid #555; width: 100%; max-width: 300px; }}
-                button {{ padding: 8px 16px; background: #4cf; color: #111; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }}
+                .logo {{ display: block; margin: 0 auto; max-width: 200px; height: auto; }}
+                h1 {{ font-size: 1.8em; text-align: center; margin: 20px 0; font-weight: bold; }}
+                form {{ display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; }}
+                select {{ font-size: 1.2em; padding: 12px; border-radius: 8px; background: #333; color: #eee; border: 1px solid #555; width: 100%; max-width: 350px; text-align: center; }}
+                button {{ padding: 12px 24px; background: #4cf; color: #111; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2em; }}
                 button:hover {{ background: #3be; }}
                 @media (max-width: 600px) {{ 
-                    select {{ font-size: 0.9em; padding: 6px; }}
-                    h2 {{ font-size: 1.2em; }}
-                    button {{ font-size: 0.9em; padding: 6px 12px; }}
+                    .logo {{ max-width: 150px; }}
+                    h1 {{ font-size: 1.4em; }}
+                    select {{ font-size: 1.1em; padding: 10px; max-width: 100%; }}
+                    button {{ font-size: 1.1em; padding: 10px 20px; }}
                 }}
             </style>
         </head>
         <body>
             <div class="contenedor">
-                <h2>Selecciona un canal y día</h2>
+                <img src="/static/img/logo.png" alt="Logo" class="logo">
+                <h1>Guía de programación para los canales de EMBY TV</h1>
                 <form method="get">
                     <select name="canal">{selector_canales}</select>
                     <select name="dia">{selector_dias}</select>
@@ -243,14 +246,15 @@ def mostrar_epg():
         <style>
             body {{ font-family: Arial, sans-serif; background: #111; color: #eee; padding: 10px; margin: 0; }}
             .contenedor {{ max-width: 800px; margin: auto; padding: 10px; }}
-            h2 {{ font-size: 1.5em; text-align: center; margin-bottom: 20px; }}
-            form {{ display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }}
-            select {{ font-size: 1em; padding: 8px; border-radius: 5px; background: #333; color: #eee; border: 1px solid #555; width: 100%; max-width: 300px; }}
-            button {{ padding: 8px 16px; background: #4cf; color: #111; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }}
+            .logo {{ display: block; margin: 0 auto; max-width: 200px; height: auto; }}
+            h1 {{ font-size: 1.8em; text-align: center; margin: 20px 0; font-weight: bold; }}
+            form {{ display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; }}
+            select {{ font-size: 1.2em; padding: 12px; border-radius: 8px; background: #333; color: #eee; border: 1px solid #555; width: 100%; max-width: 350px; text-align: center; }}
+            button {{ padding: 12px 24px; background: #4cf; color: #111; border: none; border-radius: 8px; cursor: pointer; font-size: 1.2em; }}
             button:hover {{ background: #3be; }}
-            .evento {{ background: #222; padding: 10px; margin: 5px 0; border-radius: 5px; border-left: 4px solid #4cf; cursor: pointer; }}
+            .evento {{ background: #222; padding: 10px; margin: 5px 0; border-radius: 5px; border-left: 4px solid #4cf; cursor: pointer; font-size: 1.1em; }}
             .evento:hover {{ background: #333; }}
-            .no-programas {{ text-align: center; color: #aaa; margin-top: 20px; }}
+            .no-programas {{ text-align: center; color: #aaa; margin-top: 20px; font-size: 1.1em; }}
             .modal {{ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto; }}
             .modal-content {{ background: #222; margin: 5% auto; padding: 20px; border-radius: 5px; width: 90%; max-width: 600px; color: #eee; }}
             .modal-header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }}
@@ -261,24 +265,27 @@ def mostrar_epg():
             .modal-image {{ width: 100%; max-width: 300px; margin: 0 auto; }}
             .modal-image img {{ width: 100%; max-height: 200px; object-fit: contain; border-radius: 5px; display: none; }}
             .modal-details {{ width: 100%; padding: 10px; }}
-            .modal-details p {{ margin: 10px 0; line-height: 1.4; }}
+            .modal-details p {{ margin: 10px 0; line-height: 1.4; font-size: 1.1em; }}
             .modal-details strong {{ color: #4cf; }}
             .modal-section {{ margin-bottom: 15px; }}
             @media (max-width: 600px) {{ 
-                select {{ font-size: 0.9em; padding: 6px; }}
-                h2 {{ font-size: 1.2em; }}
-                button {{ font-size: 0.9em; padding: 6px 12px; }}
-                .evento {{ font-size: 0.9em; padding: 8px; }}
+                .logo {{ max-width: 150px; }}
+                h1 {{ font-size: 1.4em; }}
+                select {{ font-size: 1.1em; padding: 10px; max-width: 100%; }}
+                button {{ font-size: 1.1em; padding: 10px 20px; }}
+                .evento {{ font-size: 1em; padding: 8px; }}
                 .modal-content {{ width: 95%; padding: 15px; }}
                 .modal-image {{ max-width: 100%; }}
                 .modal-image img {{ max-height: 150px; }}
                 .modal-details {{ padding: 5px; }}
+                .modal-details p {{ font-size: 1em; }}
             }}
         </style>
     </head>
     <body>
         <div class="contenedor">
-            <h2>Programación para <span style="color:#4cf;">{canal}</span> ({dia_entrada.capitalize()})</h2>
+            <img src="/static/img/logo.png" alt="Logo" class="logo">
+            <h1>Guía de programación para los canales de EMBY TV</h1>
             <form method="get">
                 <select name="canal">{selector_canales}</select>
                 <select name="dia">{selector_dias}</select>
