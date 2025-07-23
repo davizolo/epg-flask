@@ -11,13 +11,15 @@ import time
 app = Flask(__name__)
 
 CHANNELS_OFICIALES = [
-    "M. LaLiga", "DAZN LaLiga", "#Vamos por M+", "Movistar Plus+", "DAZN 1",
+    "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte", "M. LaLiga", "DAZN LaLiga", "#Vamos por M+", "Movistar Plus+", "DAZN 1",
     "DAZN 2", "LaLiga TV Hypermotion HD", "DAZN F1", "Eurosport 1", "Eurosport 2",
     "M. Deportes", "M. Deportes 2", "Liga de Campeones", "Liga de Campeones 2",
     "Liga de Campeones 3", "Liga de Campeones 4"
 ]
 
 ALIAS_CANAL = {
+    "La 1": "La 1 HD", "La 2": "La 2", "Antena 3": "Antena 3 HD", "Cuatro HD": "Cuatro HD", "Telecinco HD": "Telecinco HD", "La Sexta HD": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte",
+
     "Movistar LaLiga": "M. LaLiga", "Movistar La Liga": "M. LaLiga", "M LaLiga": "M. LaLiga",
     "M+ LaLiga TV HD": "M. LaLiga", "DAZN LaLiga": "DAZN LaLiga", "Dazn Laliga": "DAZN LaLiga",
     "DAZN LaLiga HD": "DAZN LaLiga", "Vamos": "#Vamos por M+", "#Vamos": "#Vamos por M+",
