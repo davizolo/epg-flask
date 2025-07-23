@@ -39,25 +39,71 @@ ALIAS_CANAL = {
 
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
 
+def create_temp_epg_file(data, temp_file="epg_temp.xml"):
+    """Create a temporary XML file with only the specified channels."""
+    filtered_data = {
+        'tv': {
+            'channel': [],
+            'programme': []
+        }
+    }
+    
+    # Filter channels
+    if 'channel' in data['tv']:
+        channels = data['tv']['channel']
+        if isinstance(channels, dict):
+            channels = [channels]
+        filtered_data['tv']['channel'] = [
+            ch for ch in channels
+            if ALIAS_CANAL.get(ch.get('@id', ''), ch.get('@id', '')) in CHANNELS_OFICIALES
+        ]
+    
+    # Filter programmes
+    if 'programme' in data['tv']:
+        programmes = data['tv']['programme']
+        if isinstance(programmes, dict):
+            programmes = [programmes]
+        filtered_data['tv']['programme'] = [
+            prog for prog in programmes
+            if ALIAS_CANAL.get(prog.get('@channel', ''), prog.get('@channel', '')) in CHANNELS_OFICIALES
+        ]
+    
+    # Write to temporary file
+    xml_string = xmltodict.unparse(filtered_data, pretty=True)
+    with open(temp_file, "w", encoding="utf-8") as f:
+        f.write(xml_string)
+    
+    return filtered_data
+
 def get_epg_data():
     cache_file = "epg_cache.xml"
+    temp_file = "epg_temp.xml"
     today = datetime.now(pytz.utc).date()
     
-    # Verificar si el archivo existe y es de hoy
+    # Check if temp file exists and is from today
+    if os.path.exists(temp_file):
+        file_mtime = datetime.fromtimestamp(os.path.getmtime(temp_file), tz=pytz.utc).date()
+        if file_mtime == today:
+            with open(temp_file, "r", encoding="utf-8") as f:
+                return xmltodict.parse(f.read())
+    
+    # Check if cache file exists and is from today
     if os.path.exists(cache_file):
         file_mtime = datetime.fromtimestamp(os.path.getmtime(cache_file), tz=pytz.utc).date()
         if file_mtime == today:
             with open(cache_file, "rb") as f:
-                return xmltodict.parse(f.read())
+                data = xmltodict.parse(f.read())
+                return create_temp_epg_file(data, temp_file)
     
-    # Descargar y guardar nuevo XML
+    # Download and save new XML
     try:
         respuesta = requests.get(URL_Guia, timeout=10)
         respuesta.raise_for_status()
         xml = gzip.decompress(respuesta.content)
         with open(cache_file, "wb") as f:
             f.write(xml)
-        return xmltodict.parse(xml)
+        data = xmltodict.parse(xml)
+        return create_temp_epg_file(data, temp_file)
     except Exception as e:
         raise Exception(f"Error al obtener la EPG: {e}")
 
