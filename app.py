@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 import pytz
 import gzip
 import io
+import os
+import time
 
 app = Flask(__name__)
 
@@ -36,6 +38,28 @@ ALIAS_CANAL = {
 }
 
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
+
+def get_epg_data():
+    cache_file = "epg_cache.xml"
+    today = datetime.now(pytz.utc).date()
+    
+    # Verificar si el archivo existe y es de hoy
+    if os.path.exists(cache_file):
+        file_mtime = datetime.fromtimestamp(os.path.getmtime(cache_file), tz=pytz.utc).date()
+        if file_mtime == today:
+            with open(cache_file, "rb") as f:
+                return xmltodict.parse(f.read())
+    
+    # Descargar y guardar nuevo XML
+    try:
+        respuesta = requests.get(URL_Guia, timeout=10)
+        respuesta.raise_for_status()
+        xml = gzip.decompress(respuesta.content)
+        with open(cache_file, "wb") as f:
+            f.write(xml)
+        return xmltodict.parse(xml)
+    except Exception as e:
+        raise Exception(f"Error al obtener la EPG: {e}")
 
 def escape_js_string(s):
     """Escape special characters for JavaScript string literals."""
@@ -97,10 +121,7 @@ def mostrar_epg():
         return html
 
     try:
-        respuesta = requests.get(URL_Guia, timeout=10)
-        respuesta.raise_for_status()
-        xml = gzip.decompress(respuesta.content)
-        data = xmltodict.parse(xml)
+        data = get_epg_data()
     except Exception as e:
         return f"<h3>Error al obtener la EPG: {e}</h3>"
 
