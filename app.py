@@ -333,6 +333,13 @@ def mostrar_epg():
             for evento in eventos
         ) if eventos else '<p class="text-center text-gray-600 text-lg font-semibold">No hay programas en la guía.</p>'
 
+    # Add channel logo above the event list
+    channel_logo_html = (
+        f'<div class="flex justify-center mb-6">'
+        f'<img src="/static/img/{CANAL_TO_PNG.get(canal, "default.png")}" alt="{canal}" class="max-h-16 object-contain" onerror="this.style.display=\'none\';">'
+        f'</div>'
+    )
+
     html = """<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -378,7 +385,7 @@ def mostrar_epg():
             </div>
         </form>
         <div class="w-full">
-            """ + lista_html + """
+            """ + channel_logo_html + lista_html + """
         </div>
     </main>
     <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-20">
