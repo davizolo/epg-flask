@@ -47,7 +47,7 @@ ALIAS_CANAL = {
 }
 
 CANAL_TO_PNG = {
-    "M. LaLiga": "mlaliga.png",
+    "M. LaLiga": "movistarlaliga.png",
     "DAZN LaLiga": "daznlaliga.png",
     "#Vamos por M+": "vamos.png",
     "Movistar Plus+": "mplus.png",
