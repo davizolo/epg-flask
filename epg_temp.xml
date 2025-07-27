@@ -198,6 +198,17 @@
 		<display-name lang="es">DAZN F1 1080</display-name>
 		<icon src="https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/DAZN%20F1.png"></icon>
 	</channel>
+	<channel id="DAZN 1 HD">
+		<display-name lang="es">DAZN 1</display-name>
+		<display-name lang="es">DAZN 1.TV</display-name>
+		<display-name lang="es">DAZN 1 SD</display-name>
+		<display-name lang="es">DAZN 1 HD</display-name>
+		<display-name lang="es">DAZN 1 FHD</display-name>
+		<display-name lang="es">DAZN 1 UHD</display-name>
+		<display-name lang="es">DAZN 1 720</display-name>
+		<display-name lang="es">DAZN 1 1080</display-name>
+		<icon src="https://raw.githubusercontent.com/davidmuma/picons_dobleM/master/icon/DAZN%201.png"></icon>
+	</channel>
 	<channel id="DAZN 2 HD">
 		<display-name lang="es">DAZN 2</display-name>
 		<display-name lang="es">DAZN 2.TV</display-name>
@@ -354,16 +365,13 @@
 	</programme>
 	<programme start="20250727173500 +0200" stop="20250727202500 +0200" channel="La 1 HD">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | TP | ★8.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 3.
+		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250727202500 +0200" stop="20250727210000 +0200" channel="La 1 HD">
@@ -383,13 +391,16 @@
 	</programme>
 	<programme start="20250727210000 +0200" stop="20250727215500 +0200" channel="La 1 HD">
 		<title lang="es">Telediario 2 Fin de Semana</title>
-		<desc lang="es">2017 | ★4.0/10
+		<desc lang="es">2017 | TP | ★4.0/10
  · Información/Informativo · Informativo de Televisión Española de los fines de semana. Lara Siscar y Diego Losada se encargan de presentar las últimas noticias de ámbito nacional e internacional surgidas durante el día. Mientras, Marcos López, introduce el bloque de deportes. Votos: 2276.
 · País: España
 · Presenta: Lara Siscar, Igor Gómez, Marcos López.
 · Productora: Televisión Española (TVE).</desc>
 		<category lang="es">Información, Informativo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MTVEP1114180"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
 		<star-rating system="ES">
 			<value>4.0/10</value>
 		</star-rating>
@@ -409,7 +420,7 @@
 	<programme start="20250727220000 +0200" stop="20250727235500 +0200" channel="La 1 HD">
 		<title lang="es">Despierta la furia</title>
 		<desc lang="es">2021 | ⑯ | ★8.0/10
- · Cine/Acción · Un hombre misterioso, llamado H, trabaja en una empresa de camiones que se dedica a trasladar, cada semana, cientos de millones de dólares por Los Ángeles. Votos: 904.
+ · Cine/Acción · Un hombre misterioso, llamado H, trabaja en una empresa de camiones que se dedica a trasladar, cada semana, cientos de millones de dólares por Los Ángeles. Votos: 905.
 · País: EE.UU. y R.U.
 · Dirección: Guy Ritchie.
 · Reparto: Jason Statham, Holt McCallany, Josh Hartnett, Scott Eastwood, Darrell D'Silva, Jeffrey Donovan, Laz Alonso.
@@ -474,16 +485,13 @@
 	</programme>
 	<programme start="20250728070000 +0200" stop="20250728083000 +0200" channel="La 1 HD">
 		<title lang="es">Telediario Matinal</title>
-		<desc lang="es">2023 | TP | ★6.0/10
+		<desc lang="es">2023 | ★6.0/10
  · Información/Informativo · Sirun Demirjian y Álex Barreiro conducen este rápido y exhaustivo repaso de todas las noticias de interés general. Además, se ofrece la actualidad meteorológica de España y de Europa y el estado de la mar. Rubén Briones presenta la información deportiva. Votos: 900.
 · País: España
 · Presenta: Álex Barreiro, Sirun Demirjian, Rubén Briones.
 · Productora: Televisión Española (TVE).</desc>
 		<category lang="es">Información, Informativo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/M24HP518404"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
 		<star-rating system="ES">
 			<value>6.0/10</value>
 		</star-rating>
@@ -2183,11 +2191,14 @@
 	</programme>
 	<programme start="20250727173500 +0200" stop="20250727195500 +0200" channel="La 2">
 		<title lang="es">DIRECTO Llegada Etapa 21 - Mantes-la-Ville - París T2025</title>
-		<desc lang="es">Tour de Francia | 2025
- · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos.
+		<desc lang="es">Tour de Francia | 2025 | ★2.0/10
+ · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MLA2P4058154"></icon>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727195500 +0200" stop="20250727204500 +0200" channel="La 2">
 		<title lang="es">Ruralitas: Olaeta y Pedraza</title>
@@ -2267,8 +2278,8 @@
 	</programme>
 	<programme start="20250728015000 +0200" stop="20250728023700 +0200" channel="La 2">
 		<title lang="es">El asesino de la baraja: Tambores de guerra</title>
-		<desc lang="es">2022 | ⑯ | ★10.0/10
- · Documentales/Historia · En el año 2003, la violencia azota Madrid. Cada tres días se produce un asesinato. Votos: 3.
+		<desc lang="es">2022 | ⑯ | ★8.0/10
+ · Documentales/Historia · En el año 2003, la violencia azota Madrid. Cada tres días se produce un asesinato. Votos: 4.
 · País: España
 · Productora: RTVE Play.</desc>
 		<category lang="es">Documentales, Historia</category>
@@ -2277,13 +2288,13 @@
 			<value>16</value>
 		</rating>
 		<star-rating system="ES">
-			<value>10.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728023700 +0200" stop="20250728032200 +0200" channel="La 2">
 		<title lang="es">El asesino de la baraja: Rey de copas</title>
-		<desc lang="es">2022 | ⑯ | ★10.0/10
- · Documentales/Historia · Policía y Guardia Civil crean un equipo conjunto para cazar al Asesino de la Baraja. Votos: 1.
+		<desc lang="es">2022 | ⑯ | ★8.0/10
+ · Documentales/Historia · Policía y Guardia Civil crean un equipo conjunto para cazar al Asesino de la Baraja. Votos: 2.
 · País: España
 · Productora: RTVE Play.</desc>
 		<category lang="es">Documentales, Historia</category>
@@ -2292,7 +2303,7 @@
 			<value>16</value>
 		</rating>
 		<star-rating system="ES">
-			<value>10.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728032200 +0200" stop="20250728041200 +0200" channel="La 2">
@@ -2312,8 +2323,8 @@
 	</programme>
 	<programme start="20250728041200 +0200" stop="20250728045000 +0200" channel="La 2">
 		<title lang="es">El asesino de la baraja: La Mente Del Criminal (Contenido Transmedia)</title>
-		<desc lang="es">2022 | ⑯
- · Documentales/Historia · En este capítulo extra del Asesino de la baraja, nos centramos en el perfil criminal de Alfredo Galán. Tratamos de acercarnos lo máximo posible a su mente y a entender por qué alguien como él puede acabar convirtiéndose en un asesino en serie.
+		<desc lang="es">2022 | ⑯ | ★4.0/10
+ · Documentales/Historia · En este capítulo extra del Asesino de la baraja, nos centramos en el perfil criminal de Alfredo Galán. Tratamos de acercarnos lo máximo posible a su mente y a entender por qué alguien como él puede acabar convirtiéndose en un asesino en serie. Votos: 1.
 · País: España
 · Productora: RTVE Play.</desc>
 		<category lang="es">Documentales, Historia</category>
@@ -2321,6 +2332,9 @@
 		<rating system="ES">
 			<value>16</value>
 		</rating>
+		<star-rating system="ES">
+			<value>4.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728045000 +0200" stop="20250728053000 +0200" channel="La 2">
 		<title lang="es">Gervasio Sánchez. Álbum de posguerra</title>
@@ -2590,7 +2604,7 @@
 	</programme>
 	<programme start="20250728162000 +0200" stop="20250728171100 +0200" channel="La 2">
 		<title lang="es">Mi río de libélulas</title>
-		<desc lang="es">El meu riu de libèl·lules | 2021 | TP | ★6.0/10
+		<desc lang="es">2021 | TP | ★6.0/10
  · Documentales/Naturaleza · Un río humilde en el noroeste de Alemania se muestra como un paraíso natural, donde las libélulas demoiselle con bandas revolotean con alas de zafiro sobre los prados de agua, los zorros crían a sus crías y los castores construyen sus cabañas. Votos: 6.
 · País: Alemania
 · Dirección: Georg Rüppell, Dagmar Hilfert-Rüppell.
@@ -6803,6 +6817,7 @@
 · Música: Christophe Beck.
 · Productora: Berlanti Productions, 20th Century Studios, Twenty One Laps, Maximum Effort, Lit Entertainment Group.</desc>
 		<category lang="es">Cine, Acción</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3963407"></icon>
 		<rating system="ES">
 			<value>12</value>
 		</rating>
@@ -7020,7 +7035,7 @@
  · Series/Policíaca · Serie que muestra las vivencias de una brigada especial de carreteras.
 · País: Alemania</desc>
 		<category lang="es">Series, Policíaca</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MBEMADP1251130"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P1898612"></icon>
 		<rating system="ES">
 			<value>12</value>
 		</rating>
@@ -7032,7 +7047,7 @@
 · País: España
 · Presenta: Nacho Abad.</desc>
 		<category lang="es">Documentales, Actualidad</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P3900367"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4084640"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -7055,7 +7070,7 @@
  · Deportes/Programa deportes · Espacio que analiza los temas más relevantes de la actualidad futbolística y de otros deportes. Además, "El Desmarque de Cuatro" ofrece imágenes curiosas del universo deportivo.
 · País: España</desc>
 		<category lang="es">Deportes, Programa deportes</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P3899259"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4084642"></icon>
 	</programme>
 	<programme start="20250728151500 +0200" stop="20250728153000 +0200" channel="Cuatro HD">
 		<title lang="es">El tiempo</title>
@@ -7076,7 +7091,7 @@
 · País: España
 · Presenta: Pablo González Batista, Risto Mejide.</desc>
 		<category lang="es">Entretenimiento, Humor</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4055413"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4084649"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -7089,7 +7104,7 @@
 · Presenta: Xuso Jones.
 · Productora: Mediaset España.</desc>
 		<category lang="es">Entretenimiento, Concurso</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P3468734"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P3474801"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -7113,7 +7128,7 @@
 · País: España
 · Presenta: Ricardo Reyes, Luis Alberto Vaquero.</desc>
 		<category lang="es">Deportes, Programa deportes</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P3899257"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4084644"></icon>
 	</programme>
 	<programme start="20250728205500 +0200" stop="20250728210000 +0200" channel="Cuatro HD">
 		<title lang="es">El tiempo</title>
@@ -7167,7 +7182,7 @@
 · Presenta: Kike Calleja.
 · Productora: Zanskar Producciones.</desc>
 		<category lang="es">Ocio y Aficiones, Viajes</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4063679"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MC4P4084646"></icon>
 		<rating system="ES">
 			<value>7</value>
 		</rating>
@@ -8728,8 +8743,8 @@
 	</programme>
 	<programme start="20250727131500 +0200" stop="20250727150000 +0200" channel="Telecinco HD">
 		<title lang="es">Socialité T9 E126</title>
-		<desc lang="es">2025 | ⑯
- · Entretenimiento/Corazon y sociedad · Informativo en directo que repasa de forma amena las noticias de la crónica social y toda la actualidad sobre las 'celebrities' nacionales e internacionales. Además, analiza las últimas tendencias en moda, belleza y nutrición.
+		<desc lang="es">2025 | ⑯ | ★2.0/10
+ · Entretenimiento/Corazon y sociedad · Informativo en directo que repasa de forma amena las noticias de la crónica social y toda la actualidad sobre las 'celebrities' nacionales e internacionales. Además, analiza las últimas tendencias en moda, belleza y nutrición. Votos: 1.
 · País: España
 · Presenta: María Verdoy, Antonio Santana.
 · Productora: La Fábrica de la tele.</desc>
@@ -8738,6 +8753,9 @@
 		<rating system="ES">
 			<value>16</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727150000 +0200" stop="20250727153500 +0200" channel="Telecinco HD">
 		<title lang="es">Informativos Telecinco Fin de Semana</title>
@@ -8978,7 +8996,7 @@
 · País: España
 · Presenta: Ana Terradillos.</desc>
 		<category lang="es">Información, Informativo</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P3478535"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084653"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -8990,7 +9008,7 @@
 · País: España
 · Presenta: Adriana Dorronsoro, Alfonso Egea, Patricia Pardo.</desc>
 		<category lang="es">Entretenimiento, Magacín</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4069012"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084655"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -9015,7 +9033,7 @@
 · País: España
 · Presenta: Manu Carreño, Matías Prats (hijo).</desc>
 		<category lang="es">Deportes, Programa deportes</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P3899171"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084657"></icon>
 	</programme>
 	<programme start="20250728154000 +0200" stop="20250728154500 +0200" channel="Telecinco HD">
 		<title lang="es">El tiempo</title>
@@ -9037,7 +9055,7 @@
 · Presenta: Frank Blanco, Verónica Dulanto.
 · Productora: Mediaset España, Unicorn Content.</desc>
 		<category lang="es">Entretenimiento, Magacín</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P3919637"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084659"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -9050,7 +9068,7 @@
 · Presenta: Cristina Lasvignes.
 · Productora: Boomerang TV.</desc>
 		<category lang="es">Entretenimiento, Tertulia</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4078452"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084661"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -9063,7 +9081,7 @@
 · Presenta: Eugeni Alemany.
 · Productora: Bulldog TV.</desc>
 		<category lang="es">Entretenimiento, Concurso</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4074209"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084663"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -9088,7 +9106,7 @@
 · País: España
 · Presenta: Matías Prats (hijo).</desc>
 		<category lang="es">Deportes, Programa deportes</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P3899173"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084665"></icon>
 	</programme>
 	<programme start="20250728215000 +0200" stop="20250728220000 +0200" channel="Telecinco HD">
 		<title lang="es">El tiempo</title>
@@ -9110,7 +9128,7 @@
 · Presenta: Carlos Sobera.
 · Productora: Cuatro, Warner Bros ITVP.</desc>
 		<category lang="es">Entretenimiento, Telerrealidad</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4074456"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084667"></icon>
 		<rating system="ES">
 			<value>12</value>
 		</rating>
@@ -9123,7 +9141,7 @@
 · Reparto: Juan Echanove, Michelle Calvó, Maxi Iglesias, Elvira Mínguez, Chani Martín, Antonio Fagundes.
 · Productora: Plano a Plano Producciones, Telecinco.</desc>
 		<category lang="es">Series, Policíaca</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4074454"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MT5P4084651"></icon>
 		<rating system="ES">
 			<value>16</value>
 		</rating>
@@ -10866,7 +10884,7 @@
 	<programme start="20250727172500 +0200" stop="20250727200000 +0200" channel="La Sexta HD">
 		<title lang="es">El juez</title>
 		<desc lang="es">2014 | ⑫ | ★8.0/10
- · Cine/Drama · Un importante abogado regresa a su localidad natal donde su padre, el juez del pueblo, de quien está distanciado, es sospechoso de asesinato. Decidido a descubrir la verdad, durante el proceso vuelve a encontrarse con la familia que había dejado atrás. Votos: 1423.
+ · Cine/Drama · Un importante abogado regresa a su localidad natal donde su padre, el juez del pueblo, de quien está distanciado, es sospechoso de asesinato. Decidido a descubrir la verdad, durante el proceso vuelve a encontrarse con la familia que había dejado atrás. Votos: 1424.
 · País: EE.UU.
 · Dirección: David Dobkin.
 · Reparto: Robert Downey Jr., Robert Duvall, Vera Farmiga, Vincent D'Onofrio, Jeremy Strong, Billy Bob Thornton.
@@ -10962,7 +10980,7 @@
 	<programme start="20250728023000 +0200" stop="20250728031000 +0200" channel="La Sexta HD">
 		<title lang="es">Pokerstars casino</title>
 		<desc lang="es">2022 | ⑱ | ★6.0/10
- · Deportes/Programa deportes · El programa trae cada día toda la emoción de su ruleta en vivo, Spin &amp; Win, una versión exclusiva del clásico juego de casino. Votos: 113.
+ · Deportes/Programa deportes · El programa trae cada día toda la emoción de su ruleta en vivo, Spin &amp; Win, una versión exclusiva del clásico juego de casino. Votos: 114.
 · País: España
 · Presenta: Paco González.</desc>
 		<category lang="es">Deportes, Programa deportes</category>
@@ -12666,16 +12684,15 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727062200 +0200" stop="20250727080000 +0200" channel="Movistar Plus+ HD">
-		<title lang="es">Dario Argento. Pánico</title>
-		<desc lang="es">2023 | ⑫ | ★6.0/10
- · Documentales/Biografía · Dario Argento se encuentra en una habitación de hotel, lugar donde escribió sus películas más famosas, para concluir su último guion. Todo ello mientras participa en una entrevista íntima y es seguido por el equipo de producción que documenta su vida. Votos: 74.
-· País: Italia y R.U.
-· Dirección: Simone Scafidi.</desc>
-		<category lang="es">Documentales, Biografía</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4301719"></icon>
+	<programme start="20250727073300 +0200" stop="20250727080000 +0200" channel="Movistar Plus+ HD">
+		<title lang="es">Bakalá T24/25 E14</title>
+		<desc lang="es">2024 | TP | ★6.0/10
+ · Deportes/Programa deportes · Un programa que combina el deporte actual con lo mejor del archivo de la casa. Te contamos todo lo acontecido durante la semana, a la vez que recordamos imágenes míticas. Todo ello amenizado con la voz de Raúl Pérez y sus personajes. Votos: 23.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3791724"></icon>
 		<rating system="ES">
-			<value>12</value>
+			<value>TP</value>
 		</rating>
 		<star-rating system="ES">
 			<value>6.0/10</value>
@@ -12684,7 +12701,7 @@
 	<programme start="20250727080000 +0200" stop="20250727085300 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Animales súper pequeños</title>
 		<desc lang="es">2017 | TP | ★6.0/10
- · Documentales/Naturaleza · La naturaleza está plagada de animales diminutos con unas sorprendentes habilidades para sobrevivir. Con la última tecnología en filmación, se muestran las grandes ventajas que tienen estas criaturas gracias a su tamaño. Votos: 383.
+ · Documentales/Naturaleza · La naturaleza está plagada de animales diminutos con unas sorprendentes habilidades para sobrevivir. Con la última tecnología en filmación, se muestran las grandes ventajas que tienen estas criaturas gracias a su tamaño. Votos: 384.
 · País: R.U.
 · Dirección: Kirstine Davidson.
 · Producción: Kirstine Davidson.
@@ -12852,7 +12869,7 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727205000 +0200" stop="20250727212000 +0200" channel="Movistar Plus+ HD">
+	<programme start="20250727205000 +0200" stop="20250727212300 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">El consultorio de Berto T1</title>
 		<desc lang="es">Te lo agradecemos Yotuel | 2024 | TP | ★6.0/10
  · Entretenimiento/Humor · Con Yotuel Romero como faro de este programa, Berto responde a dudas animalísticas, porque no entienden por qué Goofy no se comporta como Pluto; o interrogantes culturales de la talla de si lanzar un diccionario contra alguien es una agresión verbal. Votos: 419.
@@ -12868,10 +12885,10 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727212000 +0200" stop="20250727230000 +0200" channel="Movistar Plus+ HD">
+	<programme start="20250727212300 +0200" stop="20250727230500 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Drazen</title>
 		<desc lang="es">2024 | ⑫ | ★10.0/10
- · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 3.
+ · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 4.
 · País: Croacia
 · Dirección: Danilo Serbedzija, Ljubo Zdjelarevic.
 · Reparto: Domagoj Nizic, Zrinka Cvitesic, Dragan Micanovic.
@@ -12885,10 +12902,10 @@
 			<value>10.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727230000 +0200" stop="20250728010000 +0200" channel="Movistar Plus+ HD">
-		<title lang="es">DIRECTO Final T2025</title>
+	<programme start="20250727230500 +0200" stop="20250728010000 +0200" channel="Movistar Plus+ HD">
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -13832,7 +13849,7 @@
 	<programme start="20250730114400 +0200" stop="20250730120900 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Mira lo que has hecho T2 E2</title>
 		<desc lang="es">El hijo de Beto | 2018 | ⑱ | ★8.0/10
- · Series/Comedia · Lucas participa en un festival musical de diferentes escuelas que comparten método educativo. Cuando llegan al festival, a más de una hora en coche, resulta que Berto se ha dejado las entradas en casa. Votos: 755.
+ · Series/Comedia · Lucas participa en un festival musical de diferentes escuelas que comparten método educativo. Cuando llegan al festival, a más de una hora en coche, resulta que Berto se ha dejado las entradas en casa. Votos: 756.
 · País: España
 · Dirección: Javier Ruiz Caldera.
 · Reparto: Berto Romero, Eva Ugarte, Fabio Cutaia, Carmen Esteban, Mariano Venancio, Anna Carreño, Inma Sancho, Chete Lera, Belén Cuesta, Núria Gago, Jordi Aguilar.</desc>
@@ -14484,7 +14501,7 @@
 	<programme start="20250801100200 +0200" stop="20250801102300 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Mira lo que has hecho T2 E5</title>
 		<desc lang="es">Piñata | 2018 | ⑱ | ★8.0/10
- · Series/Comedia · Las cosas se complican. Lucas se porta mal en el cole; la madre de Berto sufre un accidente doméstico; el rodaje está siendo emocionalmente intenso para Berto, cosa que Sandra no termina de entender, como si no tuvieran ya suficientes problemas reales. Votos: 642.
+ · Series/Comedia · Las cosas se complican. Lucas se porta mal en el cole; la madre de Berto sufre un accidente doméstico; el rodaje está siendo emocionalmente intenso para Berto, cosa que Sandra no termina de entender, como si no tuvieran ya suficientes problemas reales. Votos: 644.
 · País: España
 · Dirección: Javier Ruiz Caldera.
 · Reparto: Berto Romero, Eva Ugarte, Fabio Cutaia, Carmen Esteban, Mariano Venancio, Anna Carreño, Inma Sancho, Chete Lera, Belén Cuesta, Núria Gago, Jordi Aguilar.</desc>
@@ -15188,7 +15205,7 @@
 	</programme>
 	<programme start="20250727142500 +0200" stop="20250727151000 +0200" channel="TVG Europa HD">
 		<title lang="es">Telexornal fin de semana</title>
-		<desc lang="es">2014 | ★6.0/10
+		<desc lang="es">Telexornal Mediodía Fin de semana | 2014 | ★6.0/10
  · Información/Informativo · Edición de los fines de semana de los informativos del canal autonómico gallego. En "Telexornal" se ofrecen las noticias más recientes del ámbito tanto nacional como internacional. Votos: 325.
 · País: España
 · Presenta: Irene Lourido, Tomás Alonso, Alberto Mancebo.</desc>
@@ -17215,7 +17232,21 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727165500 +0200" stop="20250727185500 +0200" channel="M+ Vamos HD">
+	<programme start="20250727165500 +0200" stop="20250727172500 +0200" channel="M+ Vamos HD">
+		<title lang="es">Bakalá T24/25 E12</title>
+		<desc lang="es">2024 | TP | ★6.0/10
+ · Deportes/Programa deportes · Un programa que combina el deporte actual con lo mejor del archivo de la casa. Te contamos todo lo acontecido durante la semana, a la vez que recordamos imágenes míticas. Todo ello amenizado con la voz de Raúl Pérez y sus personajes. Votos: 19.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3791724"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727172500 +0200" stop="20250727185500 +0200" channel="M+ Vamos HD">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Davidovich - Shelton | 2025 | TP | ★8.0/10
  · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
@@ -17286,7 +17317,7 @@
 	<programme start="20250727232000 +0200" stop="20250728013000 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 1.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -17415,9 +17446,9 @@
 		</star-rating>
 	</programme>
 	<programme start="20250728104300 +0200" stop="20250728124300 +0200" channel="M+ Vamos HD">
-		<title lang="es">DIRECTO Final T2025</title>
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -17576,7 +17607,7 @@
 	<programme start="20250728220000 +0200" stop="20250728234000 +0200" channel="M+ Vamos HD">
 		<title lang="es">Drazen</title>
 		<desc lang="es">2024 | ⑫ | ★10.0/10
- · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 3.
+ · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 4.
 · País: Croacia
 · Dirección: Danilo Serbedzija, Ljubo Zdjelarevic.
 · Reparto: Domagoj Nizic, Zrinka Cvitesic, Dragan Micanovic.
@@ -17648,9 +17679,9 @@
 		</rating>
 	</programme>
 	<programme start="20250729045000 +0200" stop="20250729070000 +0200" channel="M+ Vamos HD">
-		<title lang="es">DIRECTO Final T2025</title>
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -17755,7 +17786,8 @@
 	<programme start="20250729132700 +0200" stop="20250729151700 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Semifinales: Semifinal 1 T2025</title>
 		<desc lang="es">Copa América Femenina | ★6.0/10
- · Deportes/Fútbol · La Copa América 2025 de fútbol femenino reúne en Ecuador a las mejores selecciones del continente. En juego no estará solo la corona continental sino las primeras plazas para los Juegos Panamericanos de Lima 2027. Votos: 1.</desc>
+ · Deportes/Fútbol · La Copa América 2025 de fútbol femenino reúne en Ecuador a las mejores selecciones del continente. En juego no estará solo la corona continental sino las primeras plazas para los Juegos Panamericanos de Lima 2027. Votos: 1.
+· País: &lt;span&gt;Selección de Argentina&lt;/span&gt;</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388642"></icon>
 		<star-rating system="ES">
@@ -17967,7 +17999,7 @@
 	<programme start="20250730064000 +0200" stop="20250730083000 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 1.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -24384,7 +24416,7 @@
 	<programme start="20250727232500 +0200" stop="20250728012500 +0200" channel="M+ Liga de Campeones HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 1.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -24563,7 +24595,7 @@
 	<programme start="20250728183000 +0200" stop="20250728203000 +0200" channel="M+ Liga de Campeones HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 1.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -26122,9 +26154,9 @@
 		</rating>
 	</programme>
 	<programme start="20250727230000 +0200" stop="20250728013000 +0200" channel="M+ Deportes HD">
-		<title lang="es">DIRECTO Final T2025</title>
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -26214,9 +26246,9 @@
 		</rating>
 	</programme>
 	<programme start="20250728093000 +0200" stop="20250728113000 +0200" channel="M+ Deportes HD">
-		<title lang="es">DIRECTO Final T2025</title>
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -26229,7 +26261,7 @@
 	<programme start="20250728113000 +0200" stop="20250728135000 +0200" channel="M+ Deportes HD">
 		<title lang="es">DIRECTO Carrera: Gran Prix Monterrey. Laguna Seca T2025</title>
 		<desc lang="es">Indycar | 2025 | TP | ★8.0/10
- · Deportes/Motor · El trazado californiano de Laguna Seca es el escenario de la decimocuarta prueba del IndyCar para la disputa del GP de Monterey. El español Álex Palou llega líder del campeonato con 99 puntos de ventaja sobre el mexicano Pato O'Ward. Votos: 3.</desc>
+ · Deportes/Motor · El trazado californiano de Laguna Seca es el escenario de la decimocuarta prueba del IndyCar para la disputa del GP de Monterey. El español Álex Palou llega líder del campeonato con 99 puntos de ventaja sobre el mexicano Pato O'Ward. Votos: 4.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4374579"></icon>
 		<rating system="ES">
@@ -26546,7 +26578,7 @@
 	<programme start="20250730053000 +0200" stop="20250730080000 +0200" channel="M+ Deportes HD">
 		<title lang="es">DIRECTO Carrera: Gran Prix Monterrey. Laguna Seca T2025</title>
 		<desc lang="es">Indycar | 2025 | TP | ★8.0/10
- · Deportes/Motor · El trazado californiano de Laguna Seca es el escenario de la decimocuarta prueba del IndyCar para la disputa del GP de Monterey. El español Álex Palou llega líder del campeonato con 99 puntos de ventaja sobre el mexicano Pato O'Ward. Votos: 3.</desc>
+ · Deportes/Motor · El trazado californiano de Laguna Seca es el escenario de la decimocuarta prueba del IndyCar para la disputa del GP de Monterey. El español Álex Palou llega líder del campeonato con 99 puntos de ventaja sobre el mexicano Pato O'Ward. Votos: 4.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4374579"></icon>
 		<rating system="ES">
@@ -27245,7 +27277,7 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727080000 +0200" stop="20250727183500 +0200" channel="M+ Deportes 2 HD">
+	<programme start="20250727080000 +0200" stop="20250727170500 +0200" channel="M+ Deportes 2 HD">
 		<title lang="es">M+ Deportes 2</title>
 		<desc lang="es">2019 | TP | ★6.0/10
  · Deportes/Otros deportes · M+ Deportes 2 - Votos: 157.</desc>
@@ -27258,8 +27290,8 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727183500 +0200" stop="20250727203000 +0200" channel="M+ Deportes 2 HD">
-		<title lang="es">DIRECTO TBC T2025</title>
+	<programme start="20250727170500 +0200" stop="20250727183000 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">DIRECTO 1ª Ronda: Walton - Bonzi (VO) T2025</title>
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
@@ -27268,8 +27300,8 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727203000 +0200" stop="20250727230000 +0200" channel="M+ Deportes 2 HD">
-		<title lang="es">DIRECTO TBC T2025</title>
+	<programme start="20250727183000 +0200" stop="20250727203000 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">DIRECTO 1ª Ronda: Ofner - Opelka T2025</title>
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
@@ -27278,7 +27310,17 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727230000 +0200" stop="20250728010000 +0200" channel="M+ Deportes 2 HD">
+	<programme start="20250727203000 +0200" stop="20250727223000 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">DIRECTO 1ª Ronda: Monfils T2025</title>
+		<desc lang="es">-Torneo de Toronto | 2025 | TP
+ · Deportes/Tenis · - Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
+		<category lang="es">Deportes, Tenis</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383895"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250727223000 +0200" stop="20250728010000 +0200" channel="M+ Deportes 2 HD">
 		<title lang="es">M+ Deportes 2</title>
 		<desc lang="es">2019 | TP | ★6.0/10
  · Deportes/Otros deportes · M+ Deportes 2 - Votos: 157.</desc>
@@ -27292,7 +27334,7 @@
 		</star-rating>
 	</programme>
 	<programme start="20250728010000 +0200" stop="20250728030000 +0200" channel="M+ Deportes 2 HD">
-		<title lang="es">DIRECTO TBC T2025</title>
+		<title lang="es">DIRECTO 1ª Ronda: - Pospisil (VO) T2025</title>
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
@@ -27301,8 +27343,8 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250728030000 +0200" stop="20250728053000 +0200" channel="M+ Deportes 2 HD">
-		<title lang="es">DIRECTO TBC T2025</title>
+	<programme start="20250728030000 +0200" stop="20250728053400 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">DIRECTO 1ª Ronda: - Fonseca (VO) T2025</title>
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
@@ -27311,7 +27353,7 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250728053000 +0200" stop="20250728080000 +0200" channel="M+ Deportes 2 HD">
+	<programme start="20250728053400 +0200" stop="20250728080000 +0200" channel="M+ Deportes 2 HD">
 		<title lang="es">M+ Deportes 2</title>
 		<desc lang="es">2019 | TP | ★6.0/10
  · Deportes/Otros deportes · M+ Deportes 2 - Votos: 157.</desc>
@@ -27791,7 +27833,7 @@
 	<programme start="20250727061500 +0200" stop="20250727070500 +0200" channel="DAZN F1 HD">
 		<title lang="es">Mundial F1 - GP de Bélgica T2025</title>
 		<desc lang="es">Sprint | 2025 | TP | ★10.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 6.</desc>
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 7.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389043"></icon>
 		<rating system="ES">
@@ -29420,13 +29462,16 @@
 	</programme>
 	<programme start="20250802160000 +0200" stop="20250802170000 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Clasificación T2025</title>
-		<desc lang="es">Mundial F1 - GP de Hungría | 2025 | TP
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca.</desc>
+		<desc lang="es">Mundial F1 - GP de Hungría | 2025 | TP | ★10.0/10
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 1.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389904"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250802170000 +0200" stop="20250802180000 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO El Post de la Clasificación T2025</title>
@@ -29500,13 +29545,16 @@
 	</programme>
 	<programme start="20250802220000 +0200" stop="20250802230000 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Clasificación T2025</title>
-		<desc lang="es">Mundial F1 - GP de Hungría | 2025 | TP
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca.</desc>
+		<desc lang="es">Mundial F1 - GP de Hungría | 2025 | TP | ★10.0/10
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 1.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389904"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250802230000 +0200" stop="20250803010000 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
@@ -29542,6 +29590,1278 @@
 		</rating>
 		<star-rating system="ES">
 			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727103500 +0200" stop="20250727113500 +0200" channel="DAZN 1 HD">
+		<title lang="es">DIRECTO Superpole Race T2025</title>
+		<desc lang="es">Mundial de Superbike - Balaton Park | 2025 | TP | ★10.0/10
+ · Deportes/Motociclismo · El Circuito de Balaton Park se incorpora al calendario del Mundial de Superbike. El nuevo trazado húngaro acoge la octava cita de este campeonato. Sus siete curvas a la derecha y diez a la izquierda conforman un trazado único. Votos: 1.
+· País: Hungría</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4351701"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727113500 +0200" stop="20250727121000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Decoded T2025</title>
+		<desc lang="es">Pecco Bagnaia | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · El programa analiza el estilo de Francesco Bagnaia, el piloto que ha devuelto la gloria a Ducati en el Mundial de MotoGP. Votos: 5.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4359748"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727121000 +0200" stop="20250727160600 +0200" channel="DAZN 1 HD">
+		<title lang="es">DIRECTO Carrera 2 T2025</title>
+		<desc lang="es">Mundial de Superbike - Balaton Park | 2025 | TP
+ · Deportes/Motociclismo · El Circuito de Balaton Park se incorpora al calendario del Mundial de Superbike. El nuevo trazado húngaro acoge la octava cita de este campeonato. Sus siete curvas a la derecha y diez a la izquierda conforman un trazado único.
+· País: Hungría</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESPP4075951"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250727160600 +0200" stop="20250727162700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Campeonato de España de Superbike T2025</title>
+		<desc lang="es">ESBK Circuito Navarra - Carrera SBK | 2025 | TP
+ · Deportes/Motociclismo · La Real Federación Motociclista Española organiza este campeonato de España de Superbike, una excelente cantera para los pilotos que quieren dar el salto al Mundial de motociclismo. En 2025, el certamen cuenta con siete pruebas.
+· País: España</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/M2335363V4077885"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250727162700 +0200" stop="20250727165800 +0200" channel="DAZN 1 HD">
+		<title lang="es">Cuatro Tiempos: Cuatro leyendas</title>
+		<desc lang="es">2022 | TP | ★10.0/10
+ · Documentales/Deportes · Cuatro leyendas del motociclismo español, Jorge Martínez 'Aspar', Àlex Crivillé, Dani Pedrosa y Jorge Lorenzo se reúnen para compartir sus vivencias en los circuitos y desvelarnos historias inéditas de sus años sobre la moto. Votos: 1.
+· País: España</desc>
+		<category lang="es">Documentales, Deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4242965"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727165800 +0200" stop="20250727173600 +0200" channel="DAZN 1 HD">
+		<title lang="es">Cuatro Tiempos: Héroes de su tiempo</title>
+		<desc lang="es">2022 | TP | ★6.0/10
+ · Documentales/Deportes · Cuatro leyendas del motociclismo español, Jorge Martínez 'Aspar', Àlex Crivillé, Dani Pedrosa y Jorge Lorenzo se reúnen para compartir sus vivencias en los circuitos. Votos: 6.
+· País: España</desc>
+		<category lang="es">Documentales, Deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4242962"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727173600 +0200" stop="20250727180700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Cuatro Tiempos: Otros tiempos</title>
+		<desc lang="es">2022 | TP | ★6.0/10
+ · Documentales/Deportes · Cuatro leyendas del motociclismo español, Jorge Martínez 'Aspar', Àlex Crivillé, Dani Pedrosa y Jorge Lorenzo se reúnen para compartir sus vivencias en los circuitos. Votos: 2.
+· País: España</desc>
+		<category lang="es">Documentales, Deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4242887"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727180700 +0200" stop="20250727183900 +0200" channel="DAZN 1 HD">
+		<title lang="es">Cuatro Tiempos: El futuro ya está aquí</title>
+		<desc lang="es">2022 | TP | ★6.0/10
+ · Documentales/Deportes · Cuatro leyendas del motociclismo español, Jorge Martínez 'Aspar', Àlex Crivillé, Dani Pedrosa y Jorge Lorenzo se reúnen para compartir sus vivencias en los circuitos. Votos: 8.
+· País: España</desc>
+		<category lang="es">Documentales, Deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4241659"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727183900 +0200" stop="20250727191200 +0200" channel="DAZN 1 HD">
+		<title lang="es">Mundial de MotoE - Países Bajos T2025</title>
+		<desc lang="es">Carrera 1 | 2025 | TP | ★6.0/10
+ · Deportes/Motociclismo · El Mundial de motos eléctricas cumple su séptima temporada como referente de de energía renovable. En esta campaña, el certamen cuenta con 14 carreras distribuidas en siete paradas. La primera de ellas, en el circuito francés de Le Mans. Votos: 1.
+· País: Países Bajos</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371802"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727191200 +0200" stop="20250727192800 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2025</title>
+		<desc lang="es">Guardiola | 2025 | TP | ★6.0/10
+ · Entretenimiento/Entrevista · Guardiola es uno de los entrenadores más reconocidos de la Premier League. En "Premier Corner", con Eneko Fernández, charlamos con el técnico catalán. Votos: 5.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4361498"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727192800 +0200" stop="20250727213500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 5: Manchester City - Arsenal | 2024 | TP | ★6.0/10
+ · Deportes/Fútbol · El desgaste europeo puede ser clave en un duelo titánico. La pasada Premier se la llevó el City pero los gunners pelearon hasta el final. Haaland vive un momento excelso y los de Arteta están sabiendo sobreponerse a bajas importantes. Gran partido. Votos: 23.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4274251"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727213500 +0200" stop="20250727221200 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League Features T2</title>
+		<desc lang="es">Rodrigo Hernández, excepcionalmente normal | 2023 | TP | ★6.0/10
+ · Deportes/Programa deportes · Repaso en general con todo lo relacionado con la Premier League. Votos: 20.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4134812"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727221200 +0200" stop="20250728002400 +0200" channel="DAZN 1 HD">
+		<title lang="es">A1 Padel: Open de Lanzarote T2025</title>
+		<desc lang="es">Final | 2025 | TP | ★6.0/10
+ · Deportes/Pádel · El circuito A1 Padel hace parada en la isla canaria de Lanzarote. Del 21 al 27 de abril, la Marina de Arrecife sirve de pista central de este abierto en el que compiten 32 parejas en busca del título. El torneo entrega 156.000 euros en premios. Votos: 16.
+· País: España</desc>
+		<category lang="es">Deportes, Pádel</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4368865"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728002400 +0200" stop="20250728005800 +0200" channel="DAZN 1 HD">
+		<title lang="es">Mundial de MotoE - Países Bajos T2025</title>
+		<desc lang="es">Carrera 2 | 2025 | TP
+ · Deportes/Motociclismo · El Mundial de motos eléctricas cumple su séptima temporada como referente de de energía renovable. En esta campaña, el certamen cuenta con 14 carreras distribuidas en siete paradas. La primera de ellas, en el circuito francés de Le Mans.
+· País: Países Bajos</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371802"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250728005800 +0200" stop="20250728011700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Boxeo: Usyk vs. Fury 2 T2024</title>
+		<desc lang="es">Usyk vs Fury 2 | 2024 | ⑱ | ★6.0/10
+ · Deportes/Boxeo · Oleksandr Usyk y Tyson Fury se enfrentan 21 de diciembre de 2024 en el Kingdom Arena de Riad, Arabia Saudita. Votos: 19.
+· País: Arabia Saudí</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4341010"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728011700 +0200" stop="20250728060000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250728060000 +0200" stop="20250728130000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250728130000 +0200" stop="20250728135600 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera Moto3 | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 6.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388247"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728135600 +0200" stop="20250728145400 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera Moto2 | 2025 | TP | ★10.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 1.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388249"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728145400 +0200" stop="20250728155700 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera MotoGP | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 4.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388251"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728155700 +0200" stop="20250728162200 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Chequia | 2025 | TP | ★2.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728162200 +0200" stop="20250728164500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Alemania | 2025 | TP | ★4.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>4.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728164500 +0200" stop="20250728171000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Países Bajos | 2025 | TP | ★8.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728171000 +0200" stop="20250728172400 +0200" channel="DAZN 1 HD">
+		<title lang="es">Pol Position T2025</title>
+		<desc lang="es">Quartararo | 2025 | TP
+ · Deportes/Programa deportes · El piloto del Monster Energy Yamaha y campeón del Mundo de MotoGP Fabio Quartararo, es el tercer invitado de Pol Espargaró en el espacio 'Pol Position'.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371802"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250728172400 +0200" stop="20250728174400 +0200" channel="DAZN 1 HD">
+		<title lang="es">Pol Position - Dr Charte</title>
+		<desc lang="es">2025 | TP
+ · Deportes/Programa deportes · Pol Espargaró mantiene una distendida charla con el doctor Ángel Charte, Director Médico del Campeonato del Mundo de MotoGP, para conocer de primera mano el espectacular mundo de esta competición.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371802"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250728174400 +0200" stop="20250728180700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Entrevista - Gigi Dall'igna</title>
+		<desc lang="es">2025 | TP | ★2.0/10
+ · Deportes/Programa deportes · Entrevista a Gigi Dall'Igna, jefe de Ducati. El italiano no deja ningún tema sin tratar y habla abiertamente de la situación del equipo. Votos: 1.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371802"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728180700 +0200" stop="20250728183000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Dream Team - Ducati</title>
+		<desc lang="es">2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El equipo Ducati Lenovo es un verdadero 'Dream Team' esta temporada 2025. Votos: 8.
+· País: España</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4359752"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728183000 +0200" stop="20250728193500 +0200" channel="DAZN 1 HD">
+		<title lang="es">La vida en rojo</title>
+		<desc lang="es">2024 | TP | ★6.0/10
+ · Deportes/Programa deportes · Documental sobre Ducati, la fuerza mayor de MotoGP. Votos: 36.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4331341"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728193500 +0200" stop="20250728210400 +0200" channel="DAZN 1 HD">
+		<title lang="es">E1 Series T2025</title>
+		<desc lang="es">Dubrovnik - Carrera final | 2025 | TP | ★6.0/10
+ · Deportes/Deporte acuático · Las E1 Series son una competición de lanchas eléctricas. En su segunda temporada, vuelve a contar con personalidades de la talla de Tom Brady, Will Smith, Marc Anthony o LeBron James como dueños de los equipos participantes. Votos: 7.</desc>
+		<category lang="es">Deportes, Deporte acuático</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4348342"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728210400 +0200" stop="20250728211700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2024</title>
+		<desc lang="es">Emery y Monchi, transformando el Aston Villa | 2024 | TP | ★6.0/10
+ · Entretenimiento/Entrevista · Eneko Fernández viaja hasta Birmingham para charlar con Unai Emery y Monchi. Desde su llegada al Aston Villa, el entrenador guipuzcoano y el director deportivo no han hecho más que consolidar al equipo de Birmimgham. Votos: 12.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4315931"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728211700 +0200" stop="20250728231400 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 16: Manchester City - Manchester United | 2024 | TP | ★8.0/10
+ · Deportes/Fútbol · El derby de la ciudad de Manchester mide a dos equipos envueltos en una crisis de resultados y muy lejos de sus objetivos a inicios de la temporada. Votos: 47.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4318995"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728231400 +0200" stop="20250728235100 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League Features T2</title>
+		<desc lang="es">Rodrigo Hernández, excepcionalmente normal | 2023 | TP | ★6.0/10
+ · Deportes/Programa deportes · Repaso en general con todo lo relacionado con la Premier League. Votos: 20.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4134812"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728235100 +0200" stop="20250729003600 +0200" channel="DAZN 1 HD">
+		<title lang="es">Boxeo: velada Till vs Stewart T2025</title>
+		<desc lang="es">Velada completa | 2025 | ⑱ | ★8.0/10
+ · Deportes/Boxeo · Misfits Boxing lleva a la localidad inglesa de Derby su velada número 21 de las X Series. Votos: 6.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4374194"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729003600 +0200" stop="20250729011100 +0200" channel="DAZN 1 HD">
+		<title lang="es">Boxeo: velada Fundora vs Badillo T2025</title>
+		<desc lang="es">Gabriela Fundora vs Marilyn Badillo | 2025 | ⑱ | ★6.0/10
+ · Deportes/Boxeo · Fundora y Badillo se enfrentan en el Frontwave Arena en Oceanside, California. Votos: 8.
+· País: EE.UU.</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4369872"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729011100 +0200" stop="20250729012800 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250729012800 +0200" stop="20250729060000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250729060000 +0200" stop="20250729130000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250729130000 +0200" stop="20250729150100 +0200" channel="DAZN 1 HD">
+		<title lang="es">FIM JuniorGP T2025</title>
+		<desc lang="es">Jerez - European Talent Cup | 2025 | TP
+ · Deportes/Motor · El FIM JuniorGP (el antiguo Campeonato de España de Velocidad) es una excelente cantera para los pilotos que quieren dar el salto al Mundial de motociclismo. El calendario de esta temporada tiene siete fechas, cuatro de ellas en España.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4378753"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250729150100 +0200" stop="20250729171100 +0200" channel="DAZN 1 HD">
+		<title lang="es">FIM JuniorGP T2025</title>
+		<desc lang="es">Jerez - Carreras de Moto2 y STK | 2025 | TP | ★6.0/10
+ · Deportes/Motor · El FIM JuniorGP (el antiguo Campeonato de España de Velocidad) es una excelente cantera para los pilotos que quieren dar el salto al Mundial de motociclismo. El calendario de esta temporada tiene siete fechas, cuatro de ellas en España. Votos: 1.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4378753"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729171100 +0200" stop="20250729191300 +0200" channel="DAZN 1 HD">
+		<title lang="es">FIM JuniorGP T2025</title>
+		<desc lang="es">Jerez - JuniorGP | 2025 | TP
+ · Deportes/Motor · El circuito de Jerez acoge la segunda carrera del calendario 2025 de JuniorGP. Disfruta de todas las carreras de este JuniorGP.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4378753"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250729191300 +0200" stop="20250729192400 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2025</title>
+		<desc lang="es">Raya y Merino, combinación ganadora | 2025 | TP | ★8.0/10
+ · Entretenimiento/Entrevista · Programa de entrevistas a los futbolistas más destacados de la Premier League. Los deportistas analizan sus trayectorias profesionales y repasan los mejores momentos de laliga. Votos: 1.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4361498"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729192400 +0200" stop="20250729211800 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 36: Liverpool - Arsenal | 2025 | TP | ★6.0/10
+ · Deportes/Fútbol · Para muchos, la Premier es el torneo más competitivo del mundo. Los equipos ingleses cuentan con una cantidad de talento descomunal y la mística de sus estadios hace de cada partido un evento único. Votos: 11.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4273756"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729211800 +0200" stop="20250729213900 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2025</title>
+		<desc lang="es">Santi Cazorla, magia en el Arsenal | 2025 | TP | ★6.0/10
+ · Entretenimiento/Entrevista · El programa habla con Santi Cazorla. El futbolista del Real Oviedo repasa su trayectoria en aquel Arsenal de Wenger donde alcanzó su mejor nivel. Votos: 23.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4361498"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729213900 +0200" stop="20250729232700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 24: Arsenal - Manchester City | 2025 | TP | ★8.0/10
+ · Deportes/Fútbol · Arsenal y Manchester City disputan un duelo clave para definir sus opciones en la Premier League. Amsbos equipos arracan el fin de semana en puestos Champions. Votos: 30.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4340183"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250729232700 +0200" stop="20250730002000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Asia Talent Cup T2025</title>
+		<desc lang="es">Catar - Carrera 1 | 2025 | TP | ★8.0/10
+ · Deportes/Motor · Una competición donde los jóvenes pilotos intentan destacar para lograr su sueño: alcanzar el Mundial de motociclismo. Se trata de un certamen con influencia en Asia y hace paradas en circuitos como el de Chang, Losail, Sepang o Motegi. Votos: 2.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4359606"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730002000 +0200" stop="20250730011500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Asia Talent Cup T2025</title>
+		<desc lang="es">Catar - Carrera 2 | 2025 | TP
+ · Deportes/Motor · Una competición donde los jóvenes pilotos intentan destacar para lograr su sueño: alcanzar el Mundial de motociclismo. Se trata de un certamen con influencia en Asia y hace paradas en circuitos como el de Chang, Losail, Sepang o Motegi.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4359606"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250730011500 +0200" stop="20250730060000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250730060000 +0200" stop="20250730130000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250730130000 +0200" stop="20250730133200 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">David vs. Goliath | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Desde superar la pérdida de ex campeones del mundo hasta tutelar a la próxima generación de finalistas del podio, superar retos insuperables es todo en un día de trabajo para el M-Sport Ford World Rally. Votos: 7.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730133200 +0200" stop="20250730140000 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Redención | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Conocido por su clima impredecible, el rally de asfalto altamente técnico de Croacia es uno de los más destacados de la temporada del WRC. Votos: 10.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730140000 +0200" stop="20250730143800 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Legado | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Con el peso de las expectativas de uno de los equipos de rally con más historia, Malcolm y la tripulación de M-Sport están decididos a dar la campanada a mediados de año en Portugal y Cerdeña. Votos: 11.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730143800 +0200" stop="20250730151200 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Sangre nueva | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Con el nuevo chico en el bloque, Martins Sesks, mostrando un ritmo impresionante, Adrien y Gregoire comienzan a sentir la presión mientras esta estrella en ascenso los lleva al límite. Votos: 2.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730151200 +0200" stop="20250730154700 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Unidad | 2025 | TP | ★8.0/10
+ · Deportes/Programa deportes · A medida que M-Sport se acerca al final de la temporada en Finlandia y Grecia, las tensiones comienzan a centrarse en asegurar pilotos para el próximo año. Votos: 8.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730154700 +0200" stop="20250730161900 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Presión | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Con la vista puesta en 2025, el equipo de M-Sport prueba a sus posibles pilotos para la próxima temporada, decidido a encontrar a su próximo contendiente principal. Votos: 16.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730161900 +0200" stop="20250730170300 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Punto de ebullición | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Las tensiones llegan a un punto de ebullición al final de la temporada, cuando el equipo M-Sport se enfrenta a Europa Central y Japón. Votos: 11.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730170300 +0200" stop="20250730180400 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera MotoGP | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 4.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388251"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730180400 +0200" stop="20250730183100 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Chequia | 2025 | TP | ★2.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730183100 +0200" stop="20250730202400 +0200" channel="DAZN 1 HD">
+		<title lang="es">6 Kings Slam T2024</title>
+		<desc lang="es">Nadal - Djokovic | 2024 | TP | ★6.0/10
+ · Deportes/Tenis · Arabia Saudí acoge el torneo de exhibición de la 'Riyadh Season'. Votos: 13.
+· País: Arabia Saudí</desc>
+		<category lang="es">Deportes, Tenis</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4307386"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730202400 +0200" stop="20250730205800 +0200" channel="DAZN 1 HD">
+		<title lang="es">El mentor de Rafa</title>
+		<desc lang="es">2024 | TP | ★6.0/10
+ · Deportes/Programa deportes · Toni Nadal, mentor de Rafa Nadal habla sobre la retirada del tenista balear, que culminará su carrera deportiva con este Six Kings Slam y la Copa Davis que se disputa en Málaga el próximo mes. Votos: 19.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4318610"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730205800 +0200" stop="20250730211000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Mastantuono, sobre la llamada de Xabi: ''Me motivó a dar el salto al Madrid''</title>
+		<desc lang="es">2025 | TP
+ · Documentales/Deportes · Franco Mastantuono está siendo una de las sensaciones de este Mundial de Clubes. El jugador de River Plate de tan solo 17 años analiza todo lo que le está viviendo en su corta pero intensa carrera profesional tras el salto al primer equipo de River.
+· País: España</desc>
+		<category lang="es">Documentales, Deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371802"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250730211000 +0200" stop="20250730230300 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 13: Liverpool - Manchester City | 2024 | TP | ★6.0/10
+ · Deportes/Fútbol · El Liverpool lidera la Premier con autoridad y Arne Slot sigue demostrando su gran impacto en los reds. Cinco derrotas oficiales consecutivas y a ocho puntos del primer puesto, el Man City vive una situación inédita que intentara revertir en Anfield. Votos: 49.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4316535"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730230300 +0200" stop="20250730231500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2025</title>
+		<desc lang="es">Raya y Merino, combinación ganadora | 2025 | TP | ★8.0/10
+ · Entretenimiento/Entrevista · Programa de entrevistas a los futbolistas más destacados de la Premier League. Los deportistas analizan sus trayectorias profesionales y repasan los mejores momentos de laliga. Votos: 1.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4361498"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250730231500 +0200" stop="20250731005300 +0200" channel="DAZN 1 HD">
+		<title lang="es">6 Kings Slam T2024</title>
+		<desc lang="es">Nadal - Alcaraz | 2024 | TP | ★6.0/10
+ · Deportes/Tenis · Arabia Saudí acoge el torneo de exhibición de la 'Riyadh Season'. Votos: 25.
+· País: Arabia Saudí</desc>
+		<category lang="es">Deportes, Tenis</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4307386"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250731005300 +0200" stop="20250731060000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250731060000 +0200" stop="20250731130000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250731130000 +0200" stop="20250731140200 +0200" channel="DAZN 1 HD">
+		<title lang="es">Goodwood Members' Meeting T2025</title>
+		<desc lang="es">Día 4 | 2025 | TP
+ · Deportes/Motor · Grandes debutantes, F1 clásicos, VR lunar en Future Lab, acrobacias aéreas y la icónica subida a la colina bajo un ambiente festivo.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4200847"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250731140200 +0200" stop="20250731142900 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Alemania | 2025 | TP | ★4.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>4.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250731142900 +0200" stop="20250731150500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Solo puede quedar uno T1</title>
+		<desc lang="es">El regreso | 2025 | TP | ★8.0/10
+ · Deportes/Programa deportes · La intrahistoria del viaje de Marc Márquez, desde su adaptación a una moto y un entorno nuevos hasta su regreso a la senda de la victoria 1043 días después. Votos: 2.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4350800"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250731150500 +0200" stop="20250731153900 +0200" channel="DAZN 1 HD">
+		<title lang="es">Solo puede quedar uno T1</title>
+		<desc lang="es">Negocios a 360 km/h | 2025 | TP | ★8.0/10
+ · Deportes/Programa deportes · La decisión de Ducati centró la atención del 'mercato' mientras se avivaba la 'guerra' entre constructores para intentar destronar a la fábrica de Bolonia. Votos: 6.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4350800"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250731153900 +0200" stop="20250731174000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Red Bull Rookies Cup T2025</title>
+		<desc lang="es">Sachsenring - Carrera 1 | 2025 | TP
+ · Deportes/Motociclismo · La Red Bull MotoGP Rookies Cup es una excelente cantera de pilotos. La competición se fundó en 2007 y, desde entonces, muchos de los participantes han progresado hacia el Mundial de motociclismo. Esta temporada cuenta con 7 rondas y 14 carreras.
+· País: Alemania</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371039"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250731174000 +0200" stop="20250731194100 +0200" channel="DAZN 1 HD">
+		<title lang="es">Red Bull Rookies Cup T2025</title>
+		<desc lang="es">Sachsenring - Carrera 2 | 2025 | TP
+ · Deportes/Motociclismo · La Red Bull MotoGP Rookies Cup es una excelente cantera de pilotos. La competición se fundó en 2007 y, desde entonces, muchos de los participantes han progresado hacia el Mundial de motociclismo. Esta temporada cuenta con 7 rondas y 14 carreras.
+· País: Alemania</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4371039"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250731194100 +0200" stop="20250731214200 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 10: Tottenham - Aston Villa | 2024 | TP | ★8.0/10
+ · Deportes/Fútbol · Para muchos, la Premier es el torneo más competitivo del mundo. Los equipos ingleses cuentan con una cantidad de talento descomunal y la mística de sus estadios hace de cada partido un evento único. Votos: 2.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4273958"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250731214200 +0200" stop="20250731220500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2024</title>
+		<desc lang="es">Unai Emery, maestro de la táctica y rey de Birmingham | 2024 | TP | ★6.0/10
+ · Entretenimiento/Entrevista · El entrenador español, reconocido por su habilidad táctica y éxito en competiciones europeas como la Europa League, llegó a la Premier League en 2018 para dirigir al Arsenal, alcanzando la final de la Europa League en 2019. Votos: 23.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4315931"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250731220500 +0200" stop="20250731232800 +0200" channel="DAZN 1 HD">
+		<title lang="es">DTM - Oschersleben T2025</title>
+		<desc lang="es">Carrera 2 | 2025 | TP
+ · Deportes/Automovilismo · La temporada 2025 del DTM arrancará del 25 al 27 de abril en la Motorsport Arena Oschersleben, destacando por su trazado técnico y excelente visibilidad para los espectadores. Este evento marcará el inicio de una intensa lucha por el título DTM.</desc>
+		<category lang="es">Deportes, Automovilismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4379984"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250731232800 +0200" stop="20250801003200 +0200" channel="DAZN 1 HD">
+		<title lang="es">Boxeo: velada Smith vs Germain T2025</title>
+		<desc lang="es">Dalton Smith vs Mathieu Germain | 2025 | ⑱ | ★6.0/10
+ · Deportes/Boxeo · Dalton Smith y Mathieu Germain se enfrentan en Sheffield. Votos: 7.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4368841"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801003200 +0200" stop="20250801060000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250801060000 +0200" stop="20250801130000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250801130000 +0200" stop="20250801133000 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">David vs. Goliath | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Desde superar la pérdida de ex campeones del mundo hasta tutelar a la próxima generación de finalistas del podio, superar retos insuperables es todo en un día de trabajo para el M-Sport Ford World Rally. Votos: 7.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801133000 +0200" stop="20250801140000 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Redención | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Conocido por su clima impredecible, el rally de asfalto altamente técnico de Croacia es uno de los más destacados de la temporada del WRC. Votos: 10.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801140000 +0200" stop="20250801144000 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Legado | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Con el peso de las expectativas de uno de los equipos de rally con más historia, Malcolm y la tripulación de M-Sport están decididos a dar la campanada a mediados de año en Portugal y Cerdeña. Votos: 11.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801144000 +0200" stop="20250801151500 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Sangre nueva | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Con el nuevo chico en el bloque, Martins Sesks, mostrando un ritmo impresionante, Adrien y Gregoire comienzan a sentir la presión mientras esta estrella en ascenso los lleva al límite. Votos: 2.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801151500 +0200" stop="20250801155000 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Unidad | 2025 | TP | ★8.0/10
+ · Deportes/Programa deportes · A medida que M-Sport se acerca al final de la temporada en Finlandia y Grecia, las tensiones comienzan a centrarse en asegurar pilotos para el próximo año. Votos: 8.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801155000 +0200" stop="20250801162500 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Presión | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Con la vista puesta en 2025, el equipo de M-Sport prueba a sus posibles pilotos para la próxima temporada, decidido a encontrar a su próximo contendiente principal. Votos: 16.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801162500 +0200" stop="20250801171000 +0200" channel="DAZN 1 HD">
+		<title lang="es">More Than Machine T2025</title>
+		<desc lang="es">Punto de ebullición | 2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Las tensiones llegan a un punto de ebullición al final de la temporada, cuando el equipo M-Sport se enfrenta a Europa Central y Japón. Votos: 11.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4367730"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801171000 +0200" stop="20250801181000 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera MotoGP | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 4.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388251"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801181000 +0200" stop="20250801183000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Chequia | 2025 | TP | ★2.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801183000 +0200" stop="20250801193000 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Alemania T2025</title>
+		<desc lang="es">Carrera MotoGP | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · Marc Márquez aterriza en uno de sus circuitos predilectos, Sachsenring, donde ha dominado en multitud de ocasiones. El GP de Alemania, undécima prueba del campeonato, marca el ecuador de la temporada. Votos: 13.
+· País: Alemania</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387680"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801193000 +0200" stop="20250801195000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Código MotoGP T2025</title>
+		<desc lang="es">Alemania | 2025 | TP | ★4.0/10
+ · Deportes/Programa deportes · Código MotoGP es un programa en el que Natacha Alfageme descubre todos los secretos de los Grandes Premios de MotoGP desde un punto de vista diferente y con imágenes en exclusiva. Votos: 1.
+· País: España
+· Presenta: Natacha Alfageme.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4357045"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>4.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250801195000 +0200" stop="20250801205000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Goodwood Members' Meeting T2025</title>
+		<desc lang="es">Día 4 | 2025 | TP
+ · Deportes/Motor · Grandes debutantes, F1 clásicos, VR lunar en Future Lab, acrobacias aéreas y la icónica subida a la colina bajo un ambiente festivo.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4200847"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250801205000 +0200" stop="20250801215500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Goodwood Members' Meeting T2025</title>
+		<desc lang="es">Día 3 | 2025 | TP
+ · Deportes/Motor · Grandes debutantes, F1 clásicos, VR lunar en Future Lab, acrobacias aéreas y la icónica subida a la colina bajo un ambiente festivo.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4200847"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+	</programme>
+	<programme start="20250801215500 +0200" stop="20250802000500 +0200" channel="DAZN 1 HD">
+		<title lang="es">A1 Padel: Open de Lanzarote T2025</title>
+		<desc lang="es">Final | 2025 | TP | ★6.0/10
+ · Deportes/Pádel · El circuito A1 Padel hace parada en la isla canaria de Lanzarote. Del 21 al 27 de abril, la Marina de Arrecife sirve de pista central de este abierto en el que compiten 32 parejas en busca del título. El torneo entrega 156.000 euros en premios. Votos: 16.
+· País: España</desc>
+		<category lang="es">Deportes, Pádel</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4368865"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802000500 +0200" stop="20250802002700 +0200" channel="DAZN 1 HD">
+		<title lang="es">Boxeo: velada Fisher vs. Babic T2024</title>
+		<desc lang="es">Fisher vs. Babic: Next Gen | 2024 | ⑱ | ★6.0/10
+ · Deportes/Boxeo · Johnny Fisher y Alen Babic miden sus fuerzas en el Copper Box Arena (Reino Unido). Votos: 6.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4240003"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802002700 +0200" stop="20250802060000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250802060000 +0200" stop="20250802130000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Disfruta de DAZN en Movistar Plus+</title>
+		<desc lang="es">· Programa por determinar...</desc>
+	</programme>
+	<programme start="20250802130000 +0200" stop="20250802145500 +0200" channel="DAZN 1 HD">
+		<title lang="es">6 Kings Slam T2024</title>
+		<desc lang="es">Nadal - Djokovic | 2024 | TP | ★6.0/10
+ · Deportes/Tenis · Arabia Saudí acoge el torneo de exhibición de la 'Riyadh Season'. Votos: 13.
+· País: Arabia Saudí</desc>
+		<category lang="es">Deportes, Tenis</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4307386"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802145500 +0200" stop="20250802155500 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera Moto3 | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 6.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388247"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802155500 +0200" stop="20250802165500 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera Moto2 | 2025 | TP | ★10.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 1.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388249"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802165500 +0200" stop="20250802175500 +0200" channel="DAZN 1 HD">
+		<title lang="es">MotoGP - GP de Chequia T2025</title>
+		<desc lang="es">Carrera MotoGP | 2025 | TP | ★8.0/10
+ · Deportes/Motociclismo · El Mundial de motociclismo regresa a uno de los circuitos más emblemáticos del calendario, el de Brno, donde no se corría desde 2020. Y lo hace justo antes del parón estival de la competición. El trazado, con 14 curvas, pone al límite a los pilotos. Votos: 4.
+· País: República Checa</desc>
+		<category lang="es">Deportes, Motociclismo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388251"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802175500 +0200" stop="20250802192500 +0200" channel="DAZN 1 HD">
+		<title lang="es">La caída de Maradona</title>
+		<desc lang="es">2023 | ⑦ | ★6.0/10
+ · Documentales/Deportes · El 30 de junio de 1994, Diego Maradona, la mayor estrella del fútbol mundial, fue expulsado de la Copa del Mundo de EE.UU. tras no superar un control antidopaje después de un partido. La expulsión del Diego sorprendió al mundo del deporte. Votos: 24.</desc>
+		<category lang="es">Documentales, Deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3986513"></icon>
+		<rating system="ES">
+			<value>7</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802192500 +0200" stop="20250802212500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier League T24/25</title>
+		<desc lang="es">Jornada 10: Tottenham - Aston Villa | 2024 | TP | ★8.0/10
+ · Deportes/Fútbol · Para muchos, la Premier es el torneo más competitivo del mundo. Los equipos ingleses cuentan con una cantidad de talento descomunal y la mística de sus estadios hace de cada partido un evento único. Votos: 2.
+· País: R.U.</desc>
+		<category lang="es">Deportes, Fútbol</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4273958"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802212500 +0200" stop="20250802213500 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2024</title>
+		<desc lang="es">Emery y Monchi, transformando el Aston Villa | 2024 | TP | ★6.0/10
+ · Entretenimiento/Entrevista · Eneko Fernández viaja hasta Birmingham para charlar con Unai Emery y Monchi. Desde su llegada al Aston Villa, el entrenador guipuzcoano y el director deportivo no han hecho más que consolidar al equipo de Birmimgham. Votos: 12.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4315931"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802213500 +0200" stop="20250802215000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Premier Corner by Guiness 0,0 T2025</title>
+		<desc lang="es">Guardiola | 2025 | TP | ★6.0/10
+ · Entretenimiento/Entrevista · Guardiola es uno de los entrenadores más reconocidos de la Premier League. En "Premier Corner", con Eneko Fernández, charlamos con el técnico catalán. Votos: 5.
+· País: España</desc>
+		<category lang="es">Entretenimiento, Entrevista</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4361498"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802215000 +0200" stop="20250802225000 +0200" channel="DAZN 1 HD">
+		<title lang="es">Boxeo: velada Melikuziev vs Fulghum T2025</title>
+		<desc lang="es">Bektemir Melikuziev vs Darius Fulghum | 2025 | ⑱ | ★4.0/10
+ · Deportes/Boxeo · El Virgin Hotels de Las Vegas acoge esta interesante velada de boxeo que tiene como combate estrella el enfrentamiento entre Bektemir Melikuziev y Darius Fulghum. Votos: 12.
+· País: EE.UU.</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4379020"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>4.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250802225000 +0200" stop="20250802235600 +0200" channel="DAZN 1 HD">
+		<title lang="es">Zurdo vs. Billam Smith: Riyadh Season Latinos Night T2024</title>
+		<desc lang="es">Gilberto Ramírez vs Chris Billam - Smith | 2024 | ⑱ | ★6.0/10
+ · Deportes/Boxeo · Gilberto 'Zurdo' Ramírez reta a Chris Billam-Smith por el título del peso crucero en una noche épica en Riyadh. Votos: 23.
+· País: Arabia Saudí</desc>
+		<category lang="es">Deportes, Boxeo</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4320776"></icon>
+		<rating system="ES">
+			<value>18</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250727100000 +0200" stop="20250727102000 +0200" channel="DAZN 2 HD">
@@ -29728,14 +31048,17 @@
 	</programme>
 	<programme start="20250727083000 +0200" stop="20250727093000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">Mundial de Superbike - Balaton Park T2025</title>
-		<desc lang="es">Carrera 1 | 2025 | TP
- · Deportes/Motociclismo · El Circuito de Balaton Park se incorpora al calendario del Mundial de Superbike. El nuevo trazado húngaro acoge la octava cita de este campeonato. Sus siete curvas a la derecha y diez a la izquierda conforman un trazado único.
+		<desc lang="es">Carrera 1 | 2025 | TP | ★10.0/10
+ · Deportes/Motociclismo · El Circuito de Balaton Park se incorpora al calendario del Mundial de Superbike. El nuevo trazado húngaro acoge la octava cita de este campeonato. Sus siete curvas a la derecha y diez a la izquierda conforman un trazado único. Votos: 1.
 · País: Hungría</desc>
 		<category lang="es">Deportes, Motociclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESPP4075947"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727093000 +0200" stop="20250727103000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">Mundial de Supersport - Balaton Park T2025</title>
@@ -29750,14 +31073,17 @@
 	</programme>
 	<programme start="20250727103000 +0200" stop="20250727113000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">Supertri League - Toronto T2025</title>
-		<desc lang="es">Carreras | 2025 | TP
- · Deportes/Triatlón · Una competición de triatlón que visita diferentes localizaciones del planeta y que cuenta con la participación de competidores del más alto nivel. En la apertura de la temporada, el certamen aterriza en Canadá por primera vez.
+		<desc lang="es">Carreras | 2025 | TP | ★10.0/10
+ · Deportes/Triatlón · Una competición de triatlón que visita diferentes localizaciones del planeta y que cuenta con la participación de competidores del más alto nivel. En la apertura de la temporada, el certamen aterriza en Canadá por primera vez. Votos: 1.
 · País: Canadá</desc>
 		<category lang="es">Deportes, Triatlón</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESPP4075054"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727113000 +0200" stop="20250727123000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
@@ -30234,7 +31560,7 @@
 	<programme start="20250729151500 +0200" stop="20250729174500 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -30313,7 +31639,7 @@
 	<programme start="20250729230000 +0200" stop="20250730000000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -30338,7 +31664,7 @@
 	<programme start="20250730020000 +0200" stop="20250730040000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -30423,7 +31749,7 @@
 	<programme start="20250730133000 +0200" stop="20250730151500 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -30700,14 +32026,17 @@
 	</programme>
 	<programme start="20250731203000 +0200" stop="20250731220000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Cuartos de final - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4077542"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250731220000 +0200" stop="20250801000000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 6 - Clermont-Ferrand - Ambert T2025</title>
@@ -30722,14 +32051,17 @@
 	</programme>
 	<programme start="20250801000000 +0200" stop="20250801020000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Cuartos de final - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4077542"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250801020000 +0200" stop="20250801040000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 6 - Clermont-Ferrand - Ambert T2025</title>
@@ -30769,14 +32101,17 @@
 	</programme>
 	<programme start="20250801060000 +0200" stop="20250801080000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Cuartos de final - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4077542"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250801080000 +0200" stop="20250801110000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Semifinales - Mesa 1 - Sesión 1 T25/26</title>
@@ -31196,14 +32531,17 @@
 	</programme>
 	<programme start="20250727133000 +0200" stop="20250727142000 +0200" channel="Eurosport 2">
 		<title lang="es">Supertri League - Toronto T2025</title>
-		<desc lang="es">Carreras | 2025 | TP
- · Deportes/Triatlón · Una competición de triatlón que visita diferentes localizaciones del planeta y que cuenta con la participación de competidores del más alto nivel. En la apertura de la temporada, el certamen aterriza en Canadá por primera vez.
+		<desc lang="es">Carreras | 2025 | TP | ★10.0/10
+ · Deportes/Triatlón · Una competición de triatlón que visita diferentes localizaciones del planeta y que cuenta con la participación de competidores del más alto nivel. En la apertura de la temporada, el certamen aterriza en Canadá por primera vez. Votos: 1.
 · País: Canadá</desc>
 		<category lang="es">Deportes, Triatlón</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESPP4075054"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727142000 +0200" stop="20250727162500 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Campo a través olímpico F T2025</title>
@@ -31271,14 +32609,17 @@
 	</programme>
 	<programme start="20250727194500 +0200" stop="20250727203000 +0200" channel="Eurosport 2">
 		<title lang="es">Mundial de Superbike - Balaton Park T2025</title>
-		<desc lang="es">Carrera 1 | 2025 | TP
- · Deportes/Motociclismo · El Circuito de Balaton Park se incorpora al calendario del Mundial de Superbike. El nuevo trazado húngaro acoge la octava cita de este campeonato. Sus siete curvas a la derecha y diez a la izquierda conforman un trazado único.
+		<desc lang="es">Carrera 1 | 2025 | TP | ★10.0/10
+ · Deportes/Motociclismo · El Circuito de Balaton Park se incorpora al calendario del Mundial de Superbike. El nuevo trazado húngaro acoge la octava cita de este campeonato. Sus siete curvas a la derecha y diez a la izquierda conforman un trazado único. Votos: 1.
 · País: Hungría</desc>
 		<category lang="es">Deportes, Motociclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESPP4075947"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727203000 +0200" stop="20250727220000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
@@ -31692,7 +33033,7 @@
 	<programme start="20250729200000 +0200" stop="20250729220000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -31717,7 +33058,7 @@
 	<programme start="20250730000000 +0200" stop="20250730020000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -31742,7 +33083,7 @@
 	<programme start="20250730040000 +0200" stop="20250730060000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -31800,7 +33141,7 @@
 	<programme start="20250730080000 +0200" stop="20250730093000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -31836,7 +33177,7 @@
 	<programme start="20250730113000 +0200" stop="20250730133000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -32046,14 +33387,17 @@
 	</programme>
 	<programme start="20250731133000 +0200" stop="20250731170000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Cuartos de final - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4077542"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250731170000 +0200" stop="20250731180000 +0200" channel="Eurosport 2">
 		<title lang="es">Mundial de Fórmula E T24/25</title>
@@ -32079,14 +33423,17 @@
 	</programme>
 	<programme start="20250731183000 +0200" stop="20250731193000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Cuartos de final - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4077542"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250731193000 +0200" stop="20250731203000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 6 - Clermont-Ferrand - Ambert T2025</title>
@@ -32156,14 +33503,17 @@
 	</programme>
 	<programme start="20250801020000 +0200" stop="20250801040000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Cuartos de final - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4077542"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250801040000 +0200" stop="20250801060000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 6 - Clermont-Ferrand - Ambert T2025</title>
@@ -32765,16 +34115,13 @@
 	</programme>
 	<programme start="20250727220000 +0200" stop="20250728000000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | TP | ★8.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 3.
+		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728000000 +0200" stop="20250728020000 +0200" channel="Teledeporte">
@@ -32978,16 +34325,13 @@
 	</programme>
 	<programme start="20250728174500 +0200" stop="20250728194500 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | TP | ★8.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 3.
+		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728194500 +0200" stop="20250728233000 +0200" channel="Teledeporte">
@@ -33214,7 +34558,7 @@
 	<programme start="20250729153500 +0200" stop="20250729180000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -33263,16 +34607,13 @@
 	</programme>
 	<programme start="20250729210000 +0200" stop="20250729230000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | TP | ★8.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 3.
+		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250729230000 +0200" stop="20250730000000 +0200" channel="Teledeporte">
@@ -33289,7 +34630,7 @@
 	<programme start="20250730000000 +0200" stop="20250730013500 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
 		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075062"></icon>
@@ -33734,7 +35075,7 @@
 	<programme start="20250727232000 +0200" stop="20250728013000 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 1.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -33865,7 +35206,7 @@
 	<programme start="20250728104300 +0200" stop="20250728124300 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Final T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -34024,7 +35365,7 @@
 	<programme start="20250728220000 +0200" stop="20250728234000 +0200" channel="Vamos BAR">
 		<title lang="es">Drazen</title>
 		<desc lang="es">2024 | ⑫ | ★10.0/10
- · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 3.
+ · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 4.
 · País: Croacia
 · Dirección: Danilo Serbedzija, Ljubo Zdjelarevic.
 · Reparto: Domagoj Nizic, Zrinka Cvitesic, Dragan Micanovic.
@@ -34098,7 +35439,7 @@
 	<programme start="20250729045000 +0200" stop="20250729070000 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Final T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
 		<rating system="ES">
@@ -34203,7 +35544,8 @@
 	<programme start="20250729132700 +0200" stop="20250729151700 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Semifinales: Semifinal 1 T2025</title>
 		<desc lang="es">Copa América Femenina | ★6.0/10
- · Deportes/Fútbol · La Copa América 2025 de fútbol femenino reúne en Ecuador a las mejores selecciones del continente. En juego no estará solo la corona continental sino las primeras plazas para los Juegos Panamericanos de Lima 2027. Votos: 1.</desc>
+ · Deportes/Fútbol · La Copa América 2025 de fútbol femenino reúne en Ecuador a las mejores selecciones del continente. En juego no estará solo la corona continental sino las primeras plazas para los Juegos Panamericanos de Lima 2027. Votos: 1.
+· País: &lt;span&gt;Selección de Argentina&lt;/span&gt;</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388642"></icon>
 		<star-rating system="ES">
@@ -34415,7 +35757,7 @@
 	<programme start="20250730064000 +0200" stop="20250730083000 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 1.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>

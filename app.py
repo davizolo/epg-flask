@@ -156,26 +156,6 @@ def escape_js_string(s):
         return ""
     return s.replace("'", "\\'").replace('"', '\\"').replace('\n', '\\n')
 
-def extract_categories(category_text):
-    """Extrae todas las categorías y subcategorías del texto de categoría"""
-    if not category_text:
-        return []
-    
-    # Lista de categorías principales conocidas
-    main_categories = ["Fútbol", "Baloncesto", "Tenis", "Motor", "Motociclismo", "Rugby", "Padel", "Ciclismo"]
-    
-    # Primero buscamos categorías principales
-    found_categories = []
-    for cat in main_categories:
-        if re.search(r'\b' + re.escape(cat) + r'\b', category_text, re.IGNORECASE):
-            found_categories.append(cat)
-    
-    # Si no encontramos categorías principales, usamos el texto completo como categoría
-    if not found_categories:
-        found_categories = [category_text.strip()]
-    
-    return found_categories
-
 @app.route("/")
 def mostrar_epg():
     canal_entrada = request.args.get("canal", "").strip()
@@ -197,11 +177,11 @@ def mostrar_epg():
         for d in dias
     )
 
-    # Generar channel_grid con solo logos, bien alineados, usando URL encoding
+    # Generar channel_grid con logos en liquid glass effect
     channel_grid = "".join(
-        f'<div class="w-full p-2">'
-        f'<a href="/?canal={urllib.parse.quote(nombre)}&dia={dia_entrada}" class="block w-full h-16 flex items-center justify-center bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-200">'
-        f'<img src="/static/img/{CANAL_TO_PNG.get(nombre, "default.png")}" alt="{nombre}" class="max-h-12 object-contain" onerror="this.style.display=\'none\';">'
+        f'<div class="glass-card p-3">'
+        f'<a href="/?canal={urllib.parse.quote(nombre)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center transition-transform duration-300 hover:scale-105">'
+        f'<img src="/static/img/{CANAL_TO_PNG.get(nombre, "default.png")}" alt="{nombre}" class="max-h-16 object-contain" onerror="this.style.display=\'none\';">'
         f'</a>'
         f'</div>'
         for nombre in CHANNELS_OFICIALES
@@ -218,14 +198,43 @@ def mostrar_epg():
     <title>Error - Guía EMBY TV</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: linear-gradient(to bottom, #f3f4f6, #e5e7eb); }
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.7);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        body {
+            background: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center p-4">
-    <div class="w-full max-w-md">
-        <img src="/static/img/logo.png" alt="Logo" class="w-28 mx-auto mb-4">
-        <h1 class="text-2xl font-bold text-center mb-6 text-cyan-600">Guía de Programación EMBY TV</h1>
-        <p class="text-center text-red-500 text-lg">Error al obtener la EPG: """ + str(e) + """</p>
+    <div class="glass-card w-full max-w-md p-6">
+        <img src="/static/img/logo.png" alt="Logo" class="w-28 mx-auto mb-4 rounded-lg">
+        <h1 class="text-2xl font-bold text-center mb-6 text-gray-900">Guía de Programación EMBY TV</h1>
+        <p class="text-center text-red-800 text-lg">Error al obtener la EPG: """ + str(e) + """</p>
     </div>
 </body>
 </html>"""
@@ -294,17 +303,10 @@ def mostrar_epg():
 
         if fecha_inicio <= inicio.date() <= fecha_fin:
             categoria = prog.get("category", {}).get("#text", "Sin categoría")
-            # Extraer todas las categorías del programa
-            categorias_programa = extract_categories(categoria)
-            
-            # Si hay categoría de entrada, comprobar si coincide con alguna de las categorías del programa
-            if categoria_entrada != "Todos" and not any(
-                re.search(r'\b' + re.escape(categoria_entrada) + r'\b', cat, re.IGNORECASE)
-                for cat in categorias_programa
-            ):
+            # Filtrar por categoría con límites de palabra
+            if categoria_entrada != "Todos" and not re.search(r'\b' + re.escape(categoria_entrada) + r'\b', categoria, re.IGNORECASE):
                 continue
-                
-            logger.debug(f"Programa incluido: {prog.get('title', {}).get('#text', 'Sin título')} con categorías '{categorias_programa}' para filtro '{categoria_entrada}'")
+            logger.debug(f"Programa incluido: {prog.get('title', {}).get('#text', 'Sin título')} con categoría '{categoria}' para filtro '{categoria_entrada}'")
 
             prog_key = (prog['@start'], prog['@stop'], prog.get("title", {}).get("#text", ""), canal_mapped)
             if prog_key in seen_programs:
@@ -316,11 +318,13 @@ def mostrar_epg():
             fecha = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%d/%m/%Y")
             titulo = prog.get("title", {}).get("#text", "Sin título")
             descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
+            # Mapear categoría a las predefinidas si coincide, sino usar la categoría del EPG
+            categoria_display = next((cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)), categoria)
+            categoria_display = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
             imagen = prog.get("icon", {}).get("@src", "")
             desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
             synopsis = desc_parts[0][:100] + "..." if len(desc_parts[0]) > 100 else desc_parts[0]
             details = ". ".join(desc_parts[1:])[:200] + "..." if len(". ".join(desc_parts[1:])) > 200 else ". ".join(desc_parts[1:])
-            
             eventos.append({
                 "inicio": inicio,
                 "fecha": fecha,
@@ -329,7 +333,7 @@ def mostrar_epg():
                 "titulo": titulo,
                 "synopsis": synopsis,
                 "details": details,
-                "categorias": categorias_programa,
+                "categoria": categoria_display,
                 "imagen": imagen,
                 "canal": canal_mapped
             })
@@ -342,27 +346,24 @@ def mostrar_epg():
         eventos = [e for e in eventos if e["canal"] == canal]
         if not eventos:
             logger.warning(f"No se encontraron eventos para {canal} en el rango {fecha_inicio} a {fecha_fin}")
-            lista_html = f'<p class="text-center text-red-500 text-lg font-semibold">No hay programas disponibles para {canal}. Verifique la fuente de datos EPG.</p>'
+            lista_html = f'<p class="text-center text-red-800 text-lg font-semibold glass-card p-4">No hay programas disponibles para {canal}. Verifique la fuente de datos EPG.</p>'
         else:
             lista_html = "".join(
-                f'<div class="event-item relative bg-gradient-to-r from-gray-200 to-gray-300 p-4 rounded-lg cursor-pointer hover:scale-105 transition-transform duration-200 shadow-lg mb-4" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(",".join(evento["categorias"]))}\', \'{escape_js_string(evento["imagen"])}\')">'
-                f'<div class="absolute left-0 top-0 h-full w-2 bg-cyan-500 rounded-l-lg"></div>'
+                f'<div class="event-item glass-card p-4 cursor-pointer transition-transform duration-300 mb-4" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["imagen"])}\')">'
+                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-gray-800 to-black"></div>'
                 f'<div class="ml-4">'
-                f'<p class="event-title font-bold text-gray-800 text-lg leading-tight mb-2 break-words">{evento["titulo"]}</p>'
-                f'<p class="event-time font-mono text-gray-600 text-sm mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]}</p>'
-                f'<div class="flex flex-wrap gap-1">' +
-                "".join(
-                    f'<a href="/?categoria={urllib.parse.quote(cat)}&dia={dia_entrada}" class="event-category inline-block px-2 py-1 text-xs font-semibold rounded-full category-{cat.replace(" ", "_")}">{cat}</a>'
-                    for cat in evento["categorias"]
-                ) +
-                f'</div>'
+                f'<p class="event-title font-bold text-black text-xl leading-tight mb-2 break-words">{evento["titulo"]}</p>'
+                f'<p class="event-time font-mono text-gray-900 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]}</p>'
+                f'<a href="/?categoria={urllib.parse.quote(evento["categoria"].replace("_", " "))}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria"].replace("_", " ")}</a>'
                 f'</div>'
                 f'</div>'
                 for evento in eventos
             )
         channel_logo_html = (
             f'<div class="flex justify-center mb-6">'
+            f'<div class="glass-card p-3">'
             f'<img src="/static/img/{CANAL_TO_PNG.get(canal, "default.png")}" alt="{canal}" class="max-h-16 object-contain" onerror="this.style.display=\'none\';">'
+            f'</div>'
             f'</div>'
         )
         page_title = canal
@@ -371,22 +372,21 @@ def mostrar_epg():
         # Modo categoría o general
         if not eventos:
             logger.warning(f"No se encontraron eventos para categoría {categoria_entrada} en el rango {fecha_inicio} a {fecha_fin}")
-            lista_html = f'<p class="text-center text-red-500 text-lg font-semibold">No hay programas disponibles para la categoría {categoria_entrada}. Verifique la fuente de datos EPG.</p>'
+            lista_html = f'<p class="text-center text-red-800 text-lg font-semibold glass-card p-4">No hay programas disponibles para la categoría {categoria_entrada}. Verifique la fuente de datos EPG.</p>'
         else:
             lista_html = "".join(
-                f'<div class="event-item relative bg-gradient-to-r from-gray-200 to-gray-300 p-4 rounded-lg cursor-pointer hover:scale-105 transition-transform duration-200 shadow-lg mb-4" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(",".join(evento["categorias"]))}\', \'{escape_js_string(evento["imagen"])}\')">'
-                f'<div class="absolute left-0 top-0 h-full w-2 bg-cyan-500 rounded-l-lg"></div>'
+                f'<div class="event-item glass-card p-4 cursor-pointer transition-transform duration-300 mb-4" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["imagen"])}\')">'
+                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-gray-800 to-black"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
+                f'<div class="glass-card p-2">'
+                f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                 f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-12 object-contain" onerror="this.style.display=\'none\';">'
-                f'<div>'
-                f'<p class="event-title font-bold text-gray-800 text-lg leading-tight mb-2 break-words">{evento["titulo"]}</p>'
-                f'<p class="event-time font-mono text-gray-600 text-sm mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]} | {evento["canal"]}</p>'
-                f'<div class="flex flex-wrap gap-1">' +
-                "".join(
-                    f'<a href="/?categoria={urllib.parse.quote(cat)}&dia={dia_entrada}" class="event-category inline-block px-2 py-1 text-xs font-semibold rounded-full category-{cat.replace(" ", "_")}">{cat}</a>'
-                    for cat in evento["categorias"]
-                ) +
+                f'</a>'
                 f'</div>'
+                f'<div>'
+                f'<p class="event-title font-bold text-black text-xl leading-tight mb-2 break-words">{evento["titulo"]}</p>'
+                f'<p class="event-time font-mono text-gray-900 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]} | {evento["canal"]}</p>'
+                f'<a href="/?categoria={urllib.parse.quote(evento["categoria"].replace("_", " "))}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria"].replace("_", " ")}</a>'
                 f'</div>'
                 f'</div>'
                 f'</div>'
@@ -409,91 +409,232 @@ def mostrar_epg():
     <title>""" + page_title + """</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .category-Fútbol { background-color: #22c55e; box-shadow: 0 0 8px #22c55e; color: white; }
-        .category-Baloncesto { background-color: #3b82f6; box-shadow: 0 0 8px #3b82f6; color: white; }
-        .category-Tenis { background-color: #d946ef; box-shadow: 0 0 8px #d946ef; color: white; }
-        .category-Motor { background-color: #f43f5e; box-shadow: 0 0 8px #f43f5e; color: white; }
-        .category-Motociclismo { background-color: #f97316; box-shadow: 0 0 8px #f97316; color: white; }
-        .category-Rugby { background-color: #059669; box-shadow: 0 0 8px #059669; color: white; }
-        .category-Padel { background-color: #f59e0b; box-shadow: 0 0 8px #f59e0b; color: white; }
-        .category-Ciclismo { background-color: #10b981; box-shadow: 0 0 8px #10b981; color: white; }
-        .category-Sin_categoría { background-color: #6b7280; box-shadow: 0 0 8px #6b7280; color: white; }
-        body { background: linear-gradient(to bottom, #f3f4f6, #e5e7eb); }
-        .event-item { position: relative; overflow: hidden; }
-        .event-title { word-break: break-word; }
-        .event-time { word-break: break-word; }
-        .event-category { white-space: nowrap; cursor: pointer; }
-        .event-category:hover { opacity: 0.8; }
-        .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
+        :root {
+            --primary-color: #111827;
+            --glass-bg: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.7);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --highlight: rgba(255, 255, 255, 0.5);
+        }
+
+        body {
+            background: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, var(--highlight), transparent);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .category-Fútbol { 
+            background: linear-gradient(45deg, #22c55e, #14532d); 
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); 
+            color: white; 
+        }
+        .category-Baloncesto { 
+            background: linear-gradient(45deg, #3b82f6, #1e3a8a); 
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.8); 
+            color: white; 
+        }
+        .category-Tenis { 
+            background: linear-gradient(45deg, #d946ef, #86198f); 
+            box-shadow: 0 0 12px rgba(217, 70, 239, 0.8); 
+            color: white; 
+        }
+        .category-Motor { 
+            background: linear-gradient(45deg, #f43f5e, #9f1239); 
+            box-shadow: 0 0 12px rgba(244, 63, 94, 0.8); 
+            color: white; 
+        }
+        .category-Motociclismo { 
+            background: linear-gradient(45deg, #f97316, #c2410c); 
+            box-shadow: 0 0 12px rgba(249, 115, 22, 0.8); 
+            color: white; 
+        }
+        .category-Rugby { 
+            background: linear-gradient(45deg, #059669, #064e3b); 
+            box-shadow: 0 0 12px rgba(5, 150, 105, 0.8); 
+            color: white; 
+        }
+        .category-Padel { 
+            background: linear-gradient(45deg, #f59e0b, #b45309); 
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.8); 
+            color: white; 
+        }
+        .category-Ciclismo { 
+            background: linear-gradient(45deg, #10b981, #065f46); 
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.8); 
+            color: white; 
+        }
+        .category-Sin_categoría { 
+            background: linear-gradient(45deg, #6b7280, #374151); 
+            box-shadow: 0 0 12px rgba(107, 114, 128, 0.8); 
+            color: white; 
+        }
+
+        .event-item {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+            padding: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .channel-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 8px;
+                padding: 8px;
+            }
+            .event-item {
+                padding: 12px;
+            }
+            .event-title {
+                font-size: 1.125rem;
+            }
+            .event-time {
+                font-size: 0.875rem;
+            }
+            .event-category {
+                font-size: 0.75rem;
+                padding: 2px 6px;
+            }
+            .glass-card {
+                border-radius: 8px;
+            }
+        }
+
+        .event-title, .event-time {
+            word-break: break-word;
+        }
+
+        .event-category {
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .event-category:hover {
+            opacity: 0.9;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23333'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em;
+            padding-right: 2rem;
+        }
+
+        header, select, .event-item {
+            -webkit-tap-highlight-color: transparent;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    <header class="sticky top-0 bg-gray-100 shadow-lg z-10 p-4">
+    <header class="sticky top-0 glass-card z-10 p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-4">
-                <img src="/static/img/logo.png" alt="Logo" class="w-20">
-                <h1 class="text-xl font-bold text-cyan-600">Guía EMBY TV - """ + page_title + """</h1>
+                <div class="glass-card p-2">
+                    <img src="/static/img/logo.png" alt="Logo" class="w-20 rounded-lg">
+                </div>
+                <h1 class="text-xl font-bold text-gray-900">Guía EMBY TV - """ + page_title + """</h1>
             </div>
-            """ + ('<a href="/" class="text-cyan-500 hover:text-cyan-400 text-sm font-semibold">Volver a Canales</a>' if show_back_link else '') + """
+            """ + ('<a href="/" class="text-gray-900 hover:text-gray-800 text-sm font-semibold glass-card px-3 py-1">Volver a Canales</a>' if show_back_link else '') + """
         </div>
     </header>
     <main class="flex-1 w-full max-w-7xl mx-auto p-4">
         <form id="filterForm" method="get" class="flex flex-col gap-4 mb-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <select name="dia" onchange="document.getElementById('filterForm').submit();" class="w-full max-w-xs p-2 bg-gray-200 border border-gray-400 rounded-lg text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                <select name="dia" onchange="document.getElementById('filterForm').submit();" class="glass-card w-full max-w-xs p-3 text-black text-center focus:outline-none focus:ring-2 focus:ring-gray-900">
                     """ + selector_dias + """
                 </select>
-                <select name="categoria" onchange="document.getElementById('filterForm').submit();" class="w-full max-w-xs p-2 bg-gray-200 border border-gray-400 rounded-lg text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                <select name="categoria" onchange="document.getElementById('filterForm').submit();" class="glass-card w-full max-w-xs p-3 text-black text-center focus:outline-none focus:ring-2 focus:ring-gray-900">
                     """ + selector_categorias + """
                 </select>
             </div>
         </form>
         <div class="w-full">
-            """ + channel_logo_html + lista_html + """
+            """ + channel_logo_html + """
+            <div class="event-list space-y-4">
+                """ + lista_html + """
+            </div>
         </div>
     </main>
-    <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-20">
-        <div class="bg-gray-200 rounded-xl p-6 w-full max-w-md shadow-2xl" onclick="event.stopPropagation()">
+    <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-20">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-4">
-                <h2 id="modalTitle" class="text-xl font-bold text-cyan-600 break-words"></h2>
-                <button onclick="closeModal()" class="text-cyan-500 text-2xl hover:text-cyan-400">&times;</button>
+                <h2 id="modalTitle" class="text-xl font-bold text-orange-600 break-words"></h2>
+                <button onclick="closeModal()" class="text-blue-900 text-2xl hover:text-blue-800">&times;</button>
             </div>
             <div class="space-y-4">
-                <img id="modalImage" alt="Event" class="w-full max-h-64 object-contain rounded-lg cursor-pointer hidden" onclick="openFullScreenImage(this.src)">
+            <img id="modalImage" alt="Event" class="w-full max-h-64 object-contain rounded-lg cursor-pointer hidden" onclick="openFullScreenImage(this.src)">
                 <div class="grid grid-cols-1 gap-3">
-                    <p class="text-sm"><strong class="text-cyan-600">Fecha y Hora:</strong> <span id="modalDateTime" class="text-gray-800 ml-2 break-words"></span></p>
-                    <p class="text-sm"><strong class="text-cyan-600">Categoría:</strong> <span id="modalCategory" class="ml-2 break-words"></span></p>
-                    <p class="text-sm"><strong class="text-cyan-600">Sinopsis:</strong> <span id="modalSynopsis" class="text-gray-800 ml-2 break-words"></span></p>
-                    <p class="text-sm"><strong class="text-cyan-600">Detalles:</strong> <span id="modalDetails" class="text-gray-800 ml-2 break-words"></span></p>
+                    <p class="text-sm"><strong class="text-green-800 font-bold">Fecha y Hora:</strong> <span id="modalDateTime" class="text-black font-bold ml-2 break-words"></span></p>
+                    <p class="text-sm"><strong class="text-green-800 font-bold">Categoría:</strong> <span id="modalCategory" class="ml-2 break-words"></span></p>
+                    <p class="text-sm"><strong class="text-green-800 font-bold">Sinopsis:</strong> <span id="modalSynopsis" class="text-black font-bold ml-2 break-words"></span></p>
+                    <p class="text-sm"><strong class="text-green-800 font-bold">Detalles:</strong> <span id="modalDetails" class="text-black font-bold ml-2 break-words"></span></p>
                 </div>
             </div>
         </div>
     </div>
     <div id="fullScreenImageModal" class="fixed inset-0 bg-black flex items-center justify-center hidden z-30">
         <img id="fullScreenImage" alt="Full Screen Event" class="max-w-full max-h-full object-contain">
-        <button onclick="closeFullScreenImage()" class="absolute top-4 right-4 text-white text-3xl bg-gray-800 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-700">&times;</button>
+        <button onclick="closeFullScreenImage()" class="absolute top-4 right-4 text-white text-3xl bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-800">&times;</button>
     </div>
     <script>
-        function openModal(title, date, startTime, endTime, synopsis, details, categories, image) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDateTime').textContent = `${date} ${startTime} - ${endTime}`;
-            
-            // Mostrar todas las categorías con sus colores
-            const modalCategory = document.getElementById('modalCategory');
-            modalCategory.innerHTML = categories.split(',').map(cat => 
-                `<span class="px-2 py-1 text-xs font-semibold rounded-full category-${cat.replace(' ', '_')}">${cat}</span>`
-            ).join(' ');
-            
-            document.getElementById('modalSynopsis').textContent = synopsis;
-            document.getElementById('modalDetails').textContent = details;
-            const modalImage = document.getElementById('modalImage');
-            if (image) {
-                modalImage.src = image;
-                modalImage.classList.remove('hidden');
-            } else {
-                modalImage.classList.add('hidden');
+        function openModal(title, date, startTime, endTime, synopsis, details, category, image) {
+            try {
+                document.getElementById('modalTitle').textContent = title || 'Sin título';
+                document.getElementById('modalDateTime').textContent = `${date} ${startTime} - ${endTime}` || 'Sin horario';
+                document.getElementById('modalCategory').innerHTML = `<span class="px-3 py-1 text-xs font-semibold rounded-full category-${category}">${category.replace("_", " ") || 'Sin categoría'}</span>`;
+                document.getElementById('modalSynopsis').textContent = synopsis || 'Sin sinopsis';
+                document.getElementById('modalDetails').textContent = details || 'Sin detalles';
+                const modalImage = document.getElementById('modalImage');
+                if (image) {
+                    modalImage.src = image;
+                    modalImage.classList.remove('hidden');
+                } else {
+                    modalImage.classList.add('hidden');
+                }
+                document.getElementById('eventModal').classList.remove('hidden');
+            } catch (error) {
+                console.error('Error opening modal:', error);
             }
-            document.getElementById('eventModal').classList.remove('hidden');
         }
 
         function closeModal() {
