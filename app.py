@@ -8,6 +8,7 @@ import logging
 import re
 import os
 import urllib.parse
+import unicodedata # Import for accent handling
 
 # Configuración de logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -189,6 +190,13 @@ def escape_js_string(s):
     # Escapa comillas simples, comillas dobles y saltos de línea
     return s.replace("'", "\\'").replace('"', '\\"').replace('\n', '\\n').replace('\r', '')
 
+def normalize_text(text):
+    """Normaliza el texto quitando acentos y convirtiendo a minúsculas."""
+    if not text:
+        return ""
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
+    return text.lower()
+
 @app.route("/")
 def mostrar_epg():
     """
@@ -198,10 +206,11 @@ def mostrar_epg():
     canal_entrada = request.args.get("canal", "").strip()
     dia_entrada = request.args.get("dia", "hoy").strip()
     categoria_entrada = request.args.get("categoria", "Todos").strip()
+    search_query = request.args.get("search_query", "").strip()
     
     # Mapear el canal de entrada a su nombre oficial si existe un alias
     canal = ALIAS_CANAL.get(canal_entrada, canal_entrada)
-    logger.debug(f"Canal de entrada: '{canal_entrada}', Mapeado a: '{canal}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}'")
+    logger.debug(f"Canal de entrada: '{canal_entrada}', Mapeado a: '{canal}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}', Búsqueda: '{search_query}'")
 
     # Generar opciones del selector de días
     now = datetime.now(pytz.timezone("Europe/Madrid"))
@@ -454,8 +463,8 @@ def mostrar_epg():
             logger.warning(f"Error al parsear fecha/hora para un programa: {prog.get('title', 'N/A')}")
             continue
 
-        # Filtrar por rango de fechas
-        if not (fecha_inicio <= inicio.date() <= fecha_fin):
+        # Filtrar por rango de fechas solo si no hay una búsqueda activa
+        if not search_query and not (fecha_inicio <= inicio.date() <= fecha_fin):
             continue
 
         categoria = prog.get("category", {}).get("#text", "Sin categoría")
@@ -463,7 +472,19 @@ def mostrar_epg():
         if categoria_entrada != "Todos" and not re.search(r'\b' + re.escape(categoria_entrada) + r'\b', categoria, re.IGNORECASE):
             continue
         
-        prog_key = (prog['@start'], prog['@stop'], prog.get("title", {}).get("#text", ""), canal_mapped)
+        titulo = prog.get("title", {}).get("#text", "Sin título")
+        descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
+
+        # Filtrar por búsqueda si hay una query
+        if search_query:
+            normalized_search_query = normalize_text(search_query)
+            normalized_title = normalize_text(titulo)
+            normalized_description = normalize_text(descripcion)
+            if normalized_search_query not in normalized_title and \
+               normalized_search_query not in normalized_description:
+                continue
+
+        prog_key = (prog['@start'], prog['@stop'], titulo, canal_mapped)
         if prog_key in seen_programs:
             continue # Evitar programas duplicados
         seen_programs.add(prog_key)
@@ -471,8 +492,6 @@ def mostrar_epg():
         hora_inicio = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
         hora_fin = fin.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
         fecha = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%d/%m/%Y")
-        titulo = prog.get("title", {}).get("#text", "Sin título")
-        descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
         
         # Mapear categoría a las predefinidas si coincide, sino usar la categoría del EPG
         categoria_display = next((cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)), categoria)
@@ -507,7 +526,32 @@ def mostrar_epg():
     page_title = "Guía de Programación"
     show_back_link = False
 
-    if canal_entrada and canal_entrada != "Todos":
+    if search_query:
+        eventos_filtrados_search = eventos # eventos ya está filtrado por la búsqueda
+        if not eventos_filtrados_search:
+            lista_html = f'<p class="text-center text-red-700 light-mode:text-red-800 text-lg font-semibold card p-4">No se encontraron resultados para "{search_query}".</p>'
+        else:
+            lista_html = "".join(
+                f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
+                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
+                f'<div class="ml-4 flex items-start space-x-4">'
+                f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
+                f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
+                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'</a>'
+                f'</div>'
+                f'<div>'
+                f'<p class="event-title font-bold text-lg leading-tight mb-2 break-words text-white light-mode:text-gray-900">{evento["titulo"]}</p>'
+                f'<p class="event-time font-mono text-gray-300 light-mode:text-gray-800 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]} | {evento["canal"]}</p>'
+                f'<a href="/?categoria={urllib.parse.quote(evento["categoria_text"])}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria_text"]}</a>'
+                f'</div>'
+                f'</div>'
+                f'</div>'
+                for evento in eventos_filtrados_search
+            )
+        page_title = f"Resultados para \"{search_query}\""
+        show_back_link = True
+    elif canal_entrada and canal_entrada != "Todos":
         # Modo canal específico
         eventos_filtrados_canal = [e for e in eventos if e["canal"] == canal]
         if not eventos_filtrados_canal:
@@ -570,7 +614,7 @@ def mostrar_epg():
                 f'<div class="ml-4 flex items-start space-x-4">'
                 f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
-                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                    f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                 f'</a>'
                 f'</div>'
                 f'<div>'
@@ -752,6 +796,10 @@ def mostrar_epg():
             color: var(--text-dark) !important;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); /* Asegura que la flecha sea oscura */
         }}
+        /* Estilo para el texto del input de búsqueda en modo día */
+        .light-mode .search-input {{
+            color: var(--text-dark) !important;
+        }}
 
 
         header, select, .event-item {{
@@ -759,7 +807,7 @@ def mostrar_epg():
         }}
 
         /* Estilos para el tema */
-        .theme-toggle {{
+        .theme-toggle, .search-toggle, .back-button, .search-button-header {{
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 8px;
@@ -771,41 +819,61 @@ def mostrar_epg():
             transition: all 0.3s ease;
         }}
 
-        .light-mode .theme-toggle {{
+        .light-mode .theme-toggle, .light-mode .search-toggle, .light-mode .back-button, .light-mode .search-button-header {{
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }}
 
-        .theme-toggle:hover {{
+        .theme-toggle:hover, .search-toggle:hover, .back-button:hover, .search-button-header:hover {{
             background: var(--bg-darker);
             transform: translateY(-2px);
         }}
 
-        .light-mode .theme-toggle:hover {{
+        .light-mode .theme-toggle:hover, .light-mode .search-toggle:hover, .light-mode .back-button:hover, .light-mode .search-button-header:hover {{
             background: rgba(229, 231, 235, 0.5);
         }}
 
-        .theme-toggle svg {{
+        .theme-toggle svg, .search-toggle svg, .search-button-header svg {{
             width: 24px;
             height: 24px;
             fill: var(--text-primary);
             stroke: var(--text-primary); /* Para iconos stroke */
         }}
 
-        .light-mode .theme-toggle svg {{
+        .light-mode .theme-toggle svg, .light-mode .search-toggle svg, .light-mode .search-button-header svg {{
             fill: var(--text-dark);
             stroke: var(--text-dark); /* Para iconos stroke */
         }}
 
-        .theme-toggle span {{
+        .theme-toggle span, .search-toggle span, .back-button span, .search-button-header span {{
             color: var(--text-primary);
             font-size: 0.875rem;
             font-weight: 600;
         }}
 
-        .light-mode .theme-toggle span {{
+        .light-mode .theme-toggle span, .light-mode .search-toggle span, .light-mode .back-button span, .light-mode .search-button-header span {{
             color: var(--text-dark);
         }}
+        .search-input {{
+            color: white; /* Default text color for search input in dark mode */
+        }}
+
+        /* Specific styles for search section buttons in light mode */
+        .light-mode .search-section-button-blue {{
+            background-color: #2563eb !important; /* blue-600 */
+            color: white !important;
+        }}
+        .light-mode .search-section-button-blue:hover {{
+            background-color: #1d4ed8 !important; /* blue-700 */
+        }}
+        .light-mode .search-section-button-gray {{
+            background-color: #4b5563 !important; /* gray-700 */
+            color: white !important;
+        }}
+        .light-mode .search-section-button-gray:hover {{
+            background-color: #374151 !important; /* gray-600 */
+        }}
+
 
         /* Media queries para responsividad */
         @media (max-width: 640px) {{
@@ -843,31 +911,52 @@ def mostrar_epg():
 <body class="min-h-screen flex flex-col">
     <div class="w-full text-center py-0"> <img src="/static/img/logo.png" alt="Logo" class="max-w-xs h-auto mx-auto object-contain"> </div>
 
-    <div class="flex justify-center items-center gap-4 mb-2">
-        {'<a href="/" class="text-white hover:text-gray-300 light-mode:text-gray-900 light-mode:hover:text-gray-600 text-sm font-semibold bg-gray-800 light-mode:bg-gray-200 px-3 py-1 rounded-lg transition-colors">Canales</a>' if show_back_link else ''}
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-            </svg>
-            <span id="theme-text">Noche</span>
-        </button>
+    <div class="flex flex-col items-center gap-2 mb-2">
+        <div class="flex justify-center items-center gap-4">
+            {'<a href="/" class="text-white hover:text-gray-300 light-mode:text-gray-900 light-mode:hover:text-gray-600 text-sm font-semibold bg-gray-800 light-mode:bg-gray-200 px-3 py-1 rounded-lg transition-colors">Canales</a>' if show_back_link else ''}
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                <span id="theme-text">Noche</span>
+            </button>
+             <button class="search-button-header" onclick="toggleSearchMode()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+                <span>Buscar</span>
+            </button>
+        </div>
     </div>
 
     <main class="flex-1 w-full max-w-7xl mx-auto p-4">
-        <form id="filterForm" method="get" class="flex flex-col gap-4 mb-2">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <select name="dia" onchange="document.getElementById('filterForm').submit();" class="card w-full max-w-xs p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
-                    {selector_dias}
-                </select>
-                <select name="categoria" onchange="document.getElementById('filterForm').submit();" class="card w-full max-w-xs p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
-                    {selector_categorias}
-                </select>
+        <div id="mainContent" class="{'hidden' if search_query else ''}">
+            <form id="filterForm" method="get" class="flex flex-col gap-4 mb-2">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <select name="dia" onchange="document.getElementById('filterForm').submit();" class="card w-full max-w-xs p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                        {selector_dias}
+                    </select>
+                    <select name="categoria" onchange="document.getElementById('filterForm').submit();" class="card w-full max-w-xs p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                        {selector_categorias}
+                    </select>
+                </div>
+            </form>
+            <div class="w-full">
+                {channel_logo_html}
+                <div class="event-list space-y-4">
+                    {lista_html}
+                </div>
             </div>
-        </form>
-        <div class="w-full">
-            {channel_logo_html}
-            <div class="event-list space-y-4">
-                {lista_html}
+        </div>
+
+        <div id="searchSection" class="{'block' if search_query else 'hidden'}">
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="searchInput" class="search-input card flex-1 p-3 rounded-lg bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Buscar programas..." value="{search_query}">
+                <button onclick="performSearch()" class="card px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors search-section-button-blue">Buscar</button>
+                <button onclick="exitSearchMode()" class="back-button card px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white font-semibold transition-colors search-section-button-gray">Volver</button>
+            </div>
+            <div id="searchResults" class="event-list space-y-4">
+                {lista_html if search_query else ''}
             </div>
         </div>
     </main>
@@ -959,7 +1048,13 @@ def mostrar_epg():
                 document.getElementById('theme-icon').innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
                 document.getElementById('theme-text').textContent = 'Día';
             }}
-            // Se ha eliminado la llamada a applyThemeStyles() ya que Tailwind CSS maneja los colores con light-mode:
+            // If there's a search query in the URL, show the search section
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('search_query')) {{
+                document.getElementById('mainContent').classList.add('hidden');
+                document.getElementById('searchSection').classList.remove('hidden');
+                document.getElementById('searchInput').value = urlParams.get('search_query');
+            }}
         }});
 
         // Cerrar modales al hacer clic fuera de ellos
@@ -973,6 +1068,24 @@ def mostrar_epg():
                 fullScreenModal.classList.add('hidden');
             }}
         }};
+
+        // Funciones para el modo de búsqueda
+        function toggleSearchMode() {{
+            document.getElementById('mainContent').classList.toggle('hidden');
+            document.getElementById('searchSection').classList.toggle('hidden');
+            if (!document.getElementById('searchSection').classList.contains('hidden')) {{
+                document.getElementById('searchInput').focus();
+            }}
+        }}
+
+        function performSearch() {{
+            const query = document.getElementById('searchInput').value;
+            window.location.href = `/?search_query=${{encodeURIComponent(query)}}`;
+        }}
+
+        function exitSearchMode() {{
+            window.location.href = '/'; // Go back to the main page without any filters
+        }}
     </script>
 </body>
 </html>
