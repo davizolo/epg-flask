@@ -9,12 +9,13 @@ import re
 import os
 import urllib.parse
 
-# Set up logging
+# Configuración de logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 
+# Lista de canales oficiales que se mostrarán en la guía
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
     "M. LaLiga", "DAZN LaLiga", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD",
@@ -22,10 +23,11 @@ CHANNELS_OFICIALES = [
     "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
 ]
 
+# Diccionario de alias para mapear nombres de canales de la EPG a nombres oficiales
 ALIAS_CANAL = {
-    "La 1": "La 1 HD", "La 2": "La 2", "Antena 3": "Antena 3 HD", "Cuatro HD": "Cuatro HD", "Telecinco HD": "Telecinco HD",
-    "La Sexta HD": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte", "Movistar LaLiga": "M. LaLiga",
-    "Movistar La Liga": "M. LaLiga", "M LaLiga": "M. LaLiga", "M+ LaLiga TV HD": "M. LaLiga", "DAZN LaLiga": "DAZN LaLiga",
+    "La 1": "La 1 HD", "La 2": "La 2", "Antena 3": "Antena 3 HD", "Cuatro": "Cuatro HD", "Telecinco": "Telecinco HD",
+    "La Sexta": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte", "Movistar LaLiga": "M. LaLiga",
+    "Movistar La Liga": "M. LaLiga", "M LaLiga": "M. LaLiga", "M+ LaLiga TV HD": "M. LaLiga",
     "Dazn Laliga": "DAZN LaLiga", "DAZN LaLiga HD": "DAZN LaLiga", "vamos": "#Vamos por M+", "#vamos": "#Vamos por M+",
     "M+ Vamos HD": "#Vamos por M+", "Vamos BAR": "#Vamos por M+", "Movistar Vamos": "#Vamos por M+",
     "M+ Vamos": "#Vamos por M+", "M+ Vamos.TV": "#Vamos por M+", "M+ Vamos SD": "#Vamos por M+",
@@ -33,8 +35,8 @@ ALIAS_CANAL = {
     "M+ Vamos 1080": "#Vamos por M+", "Movistar Plus": "Movistar Plus+", "Movistar+": "Movistar Plus+",
     "Movistar Plus+ HD": "Movistar Plus+", "Dazn 1": "DAZN 1", "DAZN 1 HD": "DAZN 1", "Dazn 2": "DAZN 2",
     "DAZN 2 HD": "DAZN 2", "Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga Hypermotion": "LaLiga TV Hypermotion HD",
-    "LaLiga TV Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion HD": "LaLiga TV Hypermotion HD",
-    "Dazn F1": "DAZN F1", "DAZN F1": "DAZN F1", "DAZN F1 HD": "DAZN F1", "Eurosport1": "Eurosport 1",
+    "LaLiga TV Hypermotion": "LaLiga TV Hypermotion HD",
+    "Dazn F1": "DAZN F1", "DAZN F1 HD": "DAZN F1", "Eurosport1": "Eurosport 1",
     "Eurosport 1 HD": "Eurosport 1", "Eurosport2": "Eurosport 2", "Eurosport 2 HD": "Eurosport 2",
     "Movistar Deportes": "M. Deportes", "M Deportes": "M. Deportes", "M+ Deportes HD": "M. Deportes",
     "Movistar Deportes 2": "M. Deportes 2", "M Deportes 2": "M. Deportes 2", "M+ Deportes 2 HD": "M. Deportes 2",
@@ -46,6 +48,7 @@ ALIAS_CANAL = {
     "LigaCampeones4": "Liga de Campeones 4", "M+ Liga de Campeones 4 HD": "Liga de Campeones 4"
 }
 
+# Mapeo de canales a nombres de archivo PNG para los logos
 CANAL_TO_PNG = {
     "M. LaLiga": "mlaliga.png",
     "DAZN LaLiga": "daznlaliga.png",
@@ -73,38 +76,46 @@ CANAL_TO_PNG = {
     "Teledeporte": "teledeporte.png"
 }
 
+# URL de la guía EPG
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
 
 def create_temp_epg_file(data, temp_file="epg_temp.xml"):
+    """
+    Filtra los datos de la EPG para incluir solo los canales oficiales y crea un archivo XML temporal.
+    """
     filtered_data = {
         'tv': {
             'channel': [],
             'programme': []
         }
     }
+    
+    # Filtrar canales
     if 'channel' in data['tv']:
         channels = data['tv']['channel']
         if isinstance(channels, dict):
-            channels = [channels]
+            channels = [channels] # Asegura que sea una lista
         filtered_channels = []
         for ch in channels:
             channel_id = ch.get('@id', '')
             mapped_channel = ALIAS_CANAL.get(channel_id, channel_id)
-            logger.debug(f"Channel ID in EPG: {channel_id}, Mapped to: {mapped_channel}")
             if mapped_channel in CHANNELS_OFICIALES:
                 filtered_channels.append(ch)
         filtered_data['tv']['channel'] = filtered_channels
 
+    # Filtrar programas
     if 'programme' in data['tv']:
         programmes = data['tv']['programme']
         if isinstance(programmes, dict):
-            programmes = [programmes]
+            programmes = [programmes] # Asegura que sea una lista
         filtered_programmes = []
         for prog in programmes:
             channel_id = prog.get('@channel', '')
             mapped_channel = ALIAS_CANAL.get(channel_id, channel_id)
-            if mapped_channel == "#Vamos por M+":
-                logger.debug(f"Programa encontrado para canal_xml: {channel_id}, mapeado a: {mapped_channel}")
+            # Manejo especial para "#Vamos por M+" debido a variaciones en el XML
+            if mapped_channel == "#Vamos por M+" and not re.search(r'vamos|m\+ vamos|#vamos', channel_id, re.IGNORECASE):
+                continue # Si es #Vamos pero el ID original no coincide con los patrones, lo saltamos
+            
             if mapped_channel in CHANNELS_OFICIALES:
                 filtered_programmes.append(prog)
         filtered_data['tv']['programme'] = filtered_programmes
@@ -119,69 +130,116 @@ def create_temp_epg_file(data, temp_file="epg_temp.xml"):
     return filtered_data
 
 def get_epg_data():
+    """
+    Obtiene los datos de la EPG, utilizando caché local si está disponible y actualizada.
+    Descarga y descomprime si es necesario.
+    """
     cache_file = "epg_cache.xml"
     temp_file = "epg_temp.xml"
-    today = datetime.now(pytz.timezone("Europe/Madrid")).date()
+    madrid_tz = pytz.timezone("Europe/Madrid")
+    today = datetime.now(madrid_tz).date()
     
+    # 1. Intentar usar el archivo temporal (ya filtrado) si es de hoy
     if os.path.exists(temp_file):
-        file_mtime = datetime.fromtimestamp(os.path.getmtime(temp_file), tz=pytz.timezone("Europe/Madrid")).date()
+        file_mtime = datetime.fromtimestamp(os.path.getmtime(temp_file), tz=madrid_tz).date()
         if file_mtime == today:
-            with open(temp_file, "r", encoding="utf-8") as f:
-                logger.debug("Usando archivo temporal EPG existente")
-                return xmltodict.parse(f.read())
-    
+            try:
+                with open(temp_file, "r", encoding="utf-8") as f:
+                    logger.debug("Usando archivo temporal EPG existente (filtrado y actualizado)")
+                    return xmltodict.parse(f.read())
+            except Exception as e:
+                logger.error(f"Error al leer el archivo temporal EPG: {e}. Reintentando con caché.")
+                os.remove(temp_file) # Eliminar archivo corrupto
+
+    # 2. Intentar usar el archivo de caché (sin filtrar) si es de hoy
     if os.path.exists(cache_file):
-        file_mtime = datetime.fromtimestamp(os.path.getmtime(cache_file), tz=pytz.timezone("Europe/Madrid")).date()
+        file_mtime = datetime.fromtimestamp(os.path.getmtime(cache_file), tz=madrid_tz).date()
         if file_mtime == today:
-            with open(cache_file, "rb") as f:
-                data = xmltodict.parse(f.read())
-                logger.debug("Usando archivo cache EPG existente")
-                return create_temp_epg_file(data, temp_file)
+            try:
+                with open(cache_file, "rb") as f:
+                    data = xmltodict.parse(f.read())
+                    logger.debug("Usando archivo caché EPG existente (sin filtrar)")
+                    return create_temp_epg_file(data, temp_file) # Filtrar y guardar en temp
+            except Exception as e:
+                logger.error(f"Error al leer el archivo caché EPG: {e}. Reintentando descargar.")
+                os.remove(cache_file) # Eliminar archivo corrupto
     
+    # 3. Descargar, descomprimir y cachear la EPG
     try:
-        respuesta = requests.get(URL_Guia, timeout=10)
-        respuesta.raise_for_status()
+        logger.info(f"Descargando EPG desde: {URL_Guia}")
+        respuesta = requests.get(URL_Guia, timeout=15) # Aumentar timeout
+        respuesta.raise_for_status() # Lanza excepción para códigos de estado HTTP erróneos
         xml = gzip.decompress(respuesta.content)
         with open(cache_file, "wb") as f:
             f.write(xml)
         data = xmltodict.parse(xml)
         logger.debug("Datos EPG descargados y cacheados")
         return create_temp_epg_file(data, temp_file)
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Error de red al obtener la EPG: {e}")
+        raise # Propagar la excepción para que la ruta principal la maneje
     except Exception as e:
-        logger.error(f"Error al obtener la EPG: {e}")
-        raise Exception(f"Error al obtener la EPG: {e}")
+        logger.error(f"Error inesperado al obtener o procesar la EPG: {e}")
+        raise # Propagar la excepción
 
 def escape_js_string(s):
+    """Escapa caracteres especiales para usar una cadena Python en JavaScript."""
     if not s:
         return ""
-    return s.replace("'", "\\'").replace('"', '\\"').replace('\n', '\\n')
+    # Escapa comillas simples, comillas dobles y saltos de línea
+    return s.replace("'", "\\'").replace('"', '\\"').replace('\n', '\\n').replace('\r', '')
 
 @app.route("/")
 def mostrar_epg():
+    """
+    Ruta principal para mostrar la guía de programación.
+    Permite filtrar por canal, día y categoría.
+    """
     canal_entrada = request.args.get("canal", "").strip()
     dia_entrada = request.args.get("dia", "hoy").strip()
     categoria_entrada = request.args.get("categoria", "Todos").strip()
+    
+    # Mapear el canal de entrada a su nombre oficial si existe un alias
     canal = ALIAS_CANAL.get(canal_entrada, canal_entrada)
-    logger.debug(f"Canal de entrada: {canal_entrada}, Mapeado a: {canal}, Categoría: {categoria_entrada}, Día: {dia_entrada}")
+    logger.debug(f"Canal de entrada: '{canal_entrada}', Mapeado a: '{canal}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}'")
 
-    # Generar opciones del selector con fecha para "hoy"
+    # Generar opciones del selector de días
     now = datetime.now(pytz.timezone("Europe/Madrid"))
-    hoy = now.strftime("%d de %B").lower()
-    dias = [
-        f"hoy - {hoy}",
-        "mañana",
-        "fin de semana"
+    meses_es = {
+        1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio",
+        7: "julio", 8: "agosto", 9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"
+    }
+    hoy_str = f"{now.day} de {meses_es[now.month]}"
+    
+    # Determinar las fechas para los filtros
+    hoy_date = now.date()
+    mañana_date = hoy_date + timedelta(days=1)
+    
+    # Calcular fin de semana (próximo sábado y domingo)
+    if now.weekday() >= 5:  # Si es sábado (5) o domingo (6), usar fin de semana actual
+        sabado_date = hoy_date if now.weekday() == 5 else hoy_date - timedelta(days=1)
+        domingo_date = sabado_date + timedelta(days=1)
+    else:  # Si es de lunes a viernes, usar próximo fin de semana
+        dias_hasta_sabado = (5 - now.weekday()) % 7
+        sabado_date = hoy_date + timedelta(days=dias_hasta_sabado)
+        domingo_date = sabado_date + timedelta(days=1)
+
+    dias_opciones = [
+        {"value": "hoy", "text": f"Hoy - {hoy_str}", "date_start": hoy_date, "date_end": hoy_date},
+        {"value": "mañana", "text": f"Mañana - {mañana_date.day} de {meses_es[mañana_date.month]}", "date_start": mañana_date, "date_end": mañana_date},
+        {"value": "fin de semana", "text": f"Fin de Semana - {sabado_date.day} de {meses_es[sabado_date.month]} y {domingo_date.day} de {meses_es[domingo_date.month]}", "date_start": sabado_date, "date_end": domingo_date}
     ]
+    
     selector_dias = "".join(
-        f'<option value="{d.split(" - ")[0]}" {"selected" if d.split(" - ")[0] == dia_entrada else ""}>{d.capitalize()}</option>'
-        for d in dias
+        f'<option value="{d["value"]}" {"selected" if d["value"] == dia_entrada else ""}>{d["text"]}</option>'
+        for d in dias_opciones
     )
 
-    # Generar channel_grid con logos en liquid glass effect
+    # Generar el grid de canales con logos
     channel_grid = "".join(
-        f'<div class="glass-card p-3">'
-        f'<a href="/?canal={urllib.parse.quote(nombre)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center transition-transform duration-300 hover:scale-105">'
-        f'<img src="/static/img/{CANAL_TO_PNG.get(nombre, "default.png")}" alt="{nombre}" class="max-h-16 object-contain" onerror="this.style.display=\'none\';">'
+        f'<div class="logo-tile-wrapper">'
+        f'<a href="/?canal={urllib.parse.quote(nombre)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center">'
+        f'<img src="/static/img/{CANAL_TO_PNG.get(nombre, "default.png")}" alt="{nombre}" class="max-h-32 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
         f'</a>'
         f'</div>'
         for nombre in CHANNELS_OFICIALES
@@ -190,57 +248,160 @@ def mostrar_epg():
     try:
         data = get_epg_data()
     except Exception as e:
-        html = """<!DOCTYPE html>
+        # HTML de error en caso de fallo al obtener la EPG
+        error_html_content = f"""
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error - Guía EMBY TV</title>
+    <title>Error - Guía de Programación</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.5);
-            --glass-border: rgba(255, 255, 255, 0.7);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        body {
-            background: #f5f5f5;
+        :root {{
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #3b82f6;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --bg-light: #ffffff;
+            --text-dark: #111827;
+            --text-dark-secondary: #4b5563;
+        }}
+        body {{
+            background: var(--bg-dark);
+            color: var(--text-primary);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-        }
-        .glass-card {
-            background: var(--glass-bg);
+            transition: background 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }}
+        body.light-mode {{
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }}
+        .card {{
+            background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent);
-            transform: rotate(45deg);
-            pointer-events: none;
-        }
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 42rem;
+        }}
+        .light-mode .card {{
+            background: rgba(255, 255, 255, 0.9) !important; /* Asegura fondo blanco */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }}
+        .error-icon {{
+            width: 6rem;
+            height: 6rem;
+            margin: 0 auto 1.5rem;
+            color: #ef4444; /* red-500 */
+        }}
+        .light-mode .error-icon {{
+            color: #dc2626; /* red-600 */
+        }}
+        .theme-toggle {{
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }}
+        .light-mode .theme-toggle {{
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }}
+        .theme-toggle:hover {{
+            background: var(--bg-darker);
+            transform: translateY(-2px);
+        }}
+        .light-mode .theme-toggle:hover {{
+            background: rgba(229, 231, 235, 0.5);
+        }}
+        .theme-toggle svg {{
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            stroke: var(--text-primary);
+        }}
+        .light-mode .theme-toggle svg {{
+            fill: var(--text-dark);
+            stroke: var(--text-dark);
+        }}
+        .theme-toggle span {{
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }}
+        .light-mode .theme-toggle span {{
+            color: var(--text-dark);
+        }}
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4">
-    <div class="glass-card w-full max-w-md p-6">
-        <img src="/static/img/logo.png" alt="Logo" class="w-28 mx-auto mb-4 rounded-lg">
-        <h1 class="text-2xl font-bold text-center mb-6 text-gray-900">Guía de Programación EMBY TV</h1>
-        <p class="text-center text-red-800 text-lg">Error al obtener la EPG: """ + str(e) + """</p>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="fixed top-4 right-4 flex space-x-2 z-50">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <span id="theme-text">Noche</span>
+        </button>
     </div>
+    <div class="card">
+        <svg class="error-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h1 class="text-2xl font-bold mb-2 text-red-400 light-mode:text-red-600">¡Oops! Algo salió mal.</h1>
+        <p class="text-lg text-text-primary light-mode:text-text-dark mb-4">No se pudo cargar la guía de programación.</p>
+        <p class="text-sm text-text-secondary light-mode:text-text-dark-secondary">Detalles del error: {str(e)}</p>
+        <p class="text-sm text-text-secondary light-mode:text-text-dark-secondary mt-2">Por favor, inténtalo de nuevo más tarde.</p>
+    </div>
+    <script>
+        function toggleTheme() {{
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {{
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                themeText.textContent = 'Día';
+                localStorage.setItem('theme', 'light');
+            }} else {{
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                themeText.textContent = 'Noche';
+                localStorage.setItem('theme', 'dark');
+            }}
+        }}
+        document.addEventListener('DOMContentLoaded', () => {{
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {{
+                document.body.classList.add('light-mode');
+                document.getElementById('theme-icon').innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                document.getElementById('theme-text').textContent = 'Día';
+            }}
+        }});
+    </script>
 </body>
-</html>"""
-        return Response(html, mimetype="text/html")
+</html>
+        """
+        return Response(error_html_content, mimetype="text/html")
 
-    # Definir categorías fijas para el selector
+    # Definir categorías fijas y ordenadas para el selector
     categorias_ordenadas = ["Fútbol", "Baloncesto", "Tenis", "Motor", "Motociclismo", "Rugby", "Padel", "Ciclismo"]
     logger.debug(f"Categorías ordenadas para el selector: {categorias_ordenadas}")
     
@@ -252,117 +413,122 @@ def mostrar_epg():
         )
     )
 
-    now = datetime.now(pytz.timezone("Europe/Madrid"))
-    hoy = now.date()
-    mañana = hoy + timedelta(days=1)
-    
-    # Calcular fin de semana (July 27, 2025, is Sunday, so use July 26-27)
-    if now.weekday() >= 5:  # Si es sábado (5) o domingo (6), usar fin de semana actual
-        sabado = hoy if now.weekday() == 5 else hoy - timedelta(days=1)
-        domingo = sabado + timedelta(days=1)
-    else:  # Si es de lunes a viernes, usar próximo fin de semana
-        dias_hasta_sabado = (5 - now.weekday()) % 7
-        sabado = hoy + timedelta(days=dias_hasta_sabado)
-        domingo = sabado + timedelta(days=1)
-    fin_semana = [sabado, domingo]
-
-    if dia_entrada == "hoy":
-        fecha_inicio = hoy
-        fecha_fin = hoy
-    elif dia_entrada == "mañana":
-        fecha_inicio = mañana
-        fecha_fin = mañana
-    else:
-        fecha_inicio = fin_semana[0]
-        fecha_fin = fin_semana[1]
+    # Determinar el rango de fechas para filtrar eventos
+    fecha_inicio = None
+    fecha_fin = None
+    for d in dias_opciones:
+        if d["value"] == dia_entrada:
+            fecha_inicio = d["date_start"]
+            fecha_fin = d["date_end"]
+            break
 
     eventos = []
     seen_programs = set()
 
-    # Procesar todos los programas
+    # Procesar todos los programas de la EPG
     for prog in data['tv']['programme']:
         canal_xml = prog.get('@channel', '')
         canal_mapped = ALIAS_CANAL.get(canal_xml, canal_xml)
-        if canal in CHANNELS_OFICIALES and canal_mapped != canal:
-            # Fallback para coincidencias parciales con "Vamos"
-            if canal == "#Vamos por M+" and re.search(r'vamos|m\+ vamos|#vamos', canal_xml, re.IGNORECASE):
-                canal_mapped = "#Vamos por M+"
-                logger.debug(f"Fallback aplicado: {canal_xml} mapeado a #Vamos por M+")
-            else:
-                continue
-        elif canal not in CHANNELS_OFICIALES:
-            # Para modo categoría o general, incluir todos los canales oficiales
-            if canal_mapped not in CHANNELS_OFICIALES:
-                continue
+        
+        # Si se ha seleccionado un canal específico, filtrar por él
+        if canal_entrada and canal_entrada != "Todos" and canal_mapped != canal:
+             continue # Si el canal no coincide con el filtro, saltar
+
+        # Si no se ha seleccionado un canal específico, asegurar que sea un canal oficial
+        if not canal_entrada and canal_mapped not in CHANNELS_OFICIALES:
+            continue
+        
+        # Si se ha seleccionado un canal específico y es oficial, pero el mapeo no es exacto
+        # (ej. "Vamos" variantes), asegurar que el canal mapeado sea el que se espera.
+        if canal_entrada and canal_entrada != "Todos" and canal_mapped == canal and canal not in CHANNELS_OFICIALES:
+            # Esto maneja el caso donde el usuario busca un alias que no está en CHANNELS_OFICIALES
+            # pero sí en ALIAS_CANAL y el mapeo es correcto.
+            pass
+        elif canal_mapped not in CHANNELS_OFICIALES:
+            continue # Si no es un canal oficial y no se está buscando un alias específico, saltar
 
         try:
             inicio = datetime.strptime(prog['@start'], "%Y%m%d%H%M%S %z")
             fin = datetime.strptime(prog['@stop'], "%Y%m%d%H%M%S %z")
         except Exception:
+            logger.warning(f"Error al parsear fecha/hora para un programa: {prog.get('title', 'N/A')}")
             continue
 
-        if fecha_inicio <= inicio.date() <= fecha_fin:
-            categoria = prog.get("category", {}).get("#text", "Sin categoría")
-            # Filtrar por categoría con límites de palabra
-            if categoria_entrada != "Todos" and not re.search(r'\b' + re.escape(categoria_entrada) + r'\b', categoria, re.IGNORECASE):
-                continue
-            logger.debug(f"Programa incluido: {prog.get('title', {}).get('#text', 'Sin título')} con categoría '{categoria}' para filtro '{categoria_entrada}'")
+        # Filtrar por rango de fechas
+        if not (fecha_inicio <= inicio.date() <= fecha_fin):
+            continue
 
-            prog_key = (prog['@start'], prog['@stop'], prog.get("title", {}).get("#text", ""), canal_mapped)
-            if prog_key in seen_programs:
-                continue
-            seen_programs.add(prog_key)
+        categoria = prog.get("category", {}).get("#text", "Sin categoría")
+        # Filtrar por categoría con límites de palabra para evitar coincidencias parciales no deseadas
+        if categoria_entrada != "Todos" and not re.search(r'\b' + re.escape(categoria_entrada) + r'\b', categoria, re.IGNORECASE):
+            continue
+        
+        prog_key = (prog['@start'], prog['@stop'], prog.get("title", {}).get("#text", ""), canal_mapped)
+        if prog_key in seen_programs:
+            continue # Evitar programas duplicados
+        seen_programs.add(prog_key)
 
-            hora_inicio = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
-            hora_fin = fin.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
-            fecha = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%d/%m/%Y")
-            titulo = prog.get("title", {}).get("#text", "Sin título")
-            descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
-            # Mapear categoría a las predefinidas si coincide, sino usar la categoría del EPG
-            categoria_display = next((cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)), categoria)
-            categoria_display = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
-            imagen = prog.get("icon", {}).get("@src", "")
-            desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
-            synopsis = desc_parts[0][:100] + "..." if len(desc_parts[0]) > 100 else desc_parts[0]
-            details = ". ".join(desc_parts[1:])[:200] + "..." if len(". ".join(desc_parts[1:])) > 200 else ". ".join(desc_parts[1:])
-            eventos.append({
-                "inicio": inicio,
-                "fecha": fecha,
-                "hora_inicio": hora_inicio,
-                "hora_fin": hora_fin,
-                "titulo": titulo,
-                "synopsis": synopsis,
-                "details": details,
-                "categoria": categoria_display,
-                "imagen": imagen,
-                "canal": canal_mapped
-            })
+        hora_inicio = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
+        hora_fin = fin.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
+        fecha = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%d/%m/%Y")
+        titulo = prog.get("title", {}).get("#text", "Sin título")
+        descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
+        
+        # Mapear categoría a las predefinidas si coincide, sino usar la categoría del EPG
+        categoria_display = next((cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)), categoria)
+        categoria_display_class = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
+        categoria_display_text = categoria_display.replace("_", " ") if categoria_display else "Sin categoría"
+        
+        imagen = prog.get("icon", {}).get("@src", "")
+        
+        # Generar sinopsis y detalles para el modal
+        desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
+        synopsis = desc_parts[0][:200] + "..." if len(desc_parts[0]) > 200 else desc_parts[0]
+        details = ". ".join(desc_parts[1:])[:400] + "..." if len(". ".join(desc_parts[1:])) > 400 else ". ".join(desc_parts[1:])
+
+        eventos.append({
+            "inicio": inicio,
+            "fecha": fecha,
+            "hora_inicio": hora_inicio,
+            "hora_fin": hora_fin,
+            "titulo": titulo,
+            "synopsis": synopsis,
+            "details": details,
+            "categoria": categoria_display_class, # Para la clase CSS
+            "categoria_text": categoria_display_text, # Para el texto visible
+            "imagen": imagen,
+            "canal": canal_mapped
+        })
 
     eventos.sort(key=lambda x: x["inicio"])
 
-    # Determinar el modo de visualización
-    if canal in CHANNELS_OFICIALES:
+    lista_html = ""
+    channel_logo_html = ""
+    page_title = "Guía de Programación"
+    show_back_link = False
+
+    if canal_entrada and canal_entrada != "Todos":
         # Modo canal específico
-        eventos = [e for e in eventos if e["canal"] == canal]
-        if not eventos:
+        eventos_filtrados_canal = [e for e in eventos if e["canal"] == canal]
+        if not eventos_filtrados_canal:
             logger.warning(f"No se encontraron eventos para {canal} en el rango {fecha_inicio} a {fecha_fin}")
-            lista_html = f'<p class="text-center text-red-800 text-lg font-semibold glass-card p-4">No hay programas disponibles para {canal}. Verifique la fuente de datos EPG.</p>'
+            lista_html = f'<p class="text-center text-red-700 light-mode:text-red-800 text-lg font-semibold card p-4">No hay programas disponibles para {canal} en las fechas seleccionadas.</p>'
         else:
             lista_html = "".join(
-                f'<div class="event-item glass-card p-4 cursor-pointer transition-transform duration-300 mb-4" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["imagen"])}\')">'
-                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-gray-800 to-black"></div>'
+                f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
+                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4">'
-                f'<p class="event-title font-bold text-black text-xl leading-tight mb-2 break-words">{evento["titulo"]}</p>'
-                f'<p class="event-time font-mono text-gray-900 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]}</p>'
-                f'<a href="/?categoria={urllib.parse.quote(evento["categoria"].replace("_", " "))}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria"].replace("_", " ")}</a>'
+                f'<p class="event-title font-bold text-lg leading-tight mb-2 break-words text-white light-mode:text-gray-900">{evento["titulo"]}</p>'
+                f'<p class="event-time font-mono text-gray-300 light-mode:text-gray-800 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]}</p>'
+                f'<a href="/?categoria={urllib.parse.quote(evento["categoria_text"])}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria_text"]}</a>'
                 f'</div>'
                 f'</div>'
-                for evento in eventos
+                for evento in eventos_filtrados_canal
             )
         channel_logo_html = (
             f'<div class="flex justify-center mb-6">'
-            f'<div class="glass-card p-3">'
-            f'<img src="/static/img/{CANAL_TO_PNG.get(canal, "default.png")}" alt="{canal}" class="max-h-16 object-contain" onerror="this.style.display=\'none\';">'
+            f'<div class="logo-tile p-2">'
+            f'<img src="/static/img/{CANAL_TO_PNG.get(canal, "default.png")}" alt="{canal}" class="max-h-20 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
             f'</div>'
             f'</div>'
         )
@@ -370,301 +536,450 @@ def mostrar_epg():
         show_back_link = True
     else:
         # Modo categoría o general
-        if not eventos:
-            logger.warning(f"No se encontraron eventos para categoría {categoria_entrada} en el rango {fecha_inicio} a {fecha_fin}")
-            lista_html = f'<p class="text-center text-red-800 text-lg font-semibold glass-card p-4">No hay programas disponibles para la categoría {categoria_entrada}. Verifique la fuente de datos EPG.</p>'
+        if categoria_entrada != "Todos":
+            eventos_filtrados_categoria = [e for e in eventos if e["categoria_text"] == categoria_entrada]
+            if not eventos_filtrados_categoria:
+                logger.warning(f"No se encontraron eventos para categoría {categoria_entrada} en el rango {fecha_inicio} a {fecha_fin}")
+                lista_html = f'<p class="text-center text-red-700 light-mode:text-red-800 text-lg font-semibold card p-4">No hay programas disponibles para la categoría {categoria_entrada} en las fechas seleccionadas.</p>'
+            else:
+                lista_html = "".join(
+                    f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
+                    f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
+                    f'<div class="ml-4 flex items-start space-x-4">'
+                    f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
+                    f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
+                    f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                    f'</a>'
+                    f'</div>'
+                    f'<div>'
+                    f'<p class="event-title font-bold text-lg leading-tight mb-2 break-words text-white light-mode:text-gray-900">{evento["titulo"]}</p>'
+                    f'<p class="event-time font-mono text-gray-300 light-mode:text-gray-800 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]} | {evento["canal"]}</p>'
+                    f'<span class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria_text"]}</span>'
+                    f'</div>'
+                    f'</div>'
+                    f'</div>'
+                    for evento in eventos_filtrados_categoria
+                )
+            page_title = f"Categoría: {categoria_entrada}"
+            show_back_link = True
         else:
-            lista_html = "".join(
-                f'<div class="event-item glass-card p-4 cursor-pointer transition-transform duration-300 mb-4" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["imagen"])}\')">'
-                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-gray-800 to-black"></div>'
+            # Modo general (mostrar grid de canales y luego eventos de todos)
+            lista_html = f'<div class="channel-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 mb-6">{channel_grid}</div>' + "".join(
+                f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
+                f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="glass-card p-2">'
+                f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
-                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-12 object-contain" onerror="this.style.display=\'none\';">'
+                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                 f'</a>'
                 f'</div>'
                 f'<div>'
-                f'<p class="event-title font-bold text-black text-xl leading-tight mb-2 break-words">{evento["titulo"]}</p>'
-                f'<p class="event-time font-mono text-gray-900 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]} | {evento["canal"]}</p>'
-                f'<a href="/?categoria={urllib.parse.quote(evento["categoria"].replace("_", " "))}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria"].replace("_", " ")}</a>'
+                f'<p class="event-title font-bold text-lg leading-tight mb-2 break-words text-white light-mode:text-gray-900">{evento["titulo"]}</p>'
+                f'<p class="event-time font-mono text-gray-300 light-mode:text-gray-800 text-base mb-2">{evento["fecha"]} {evento["hora_inicio"]} - {evento["hora_fin"]} | {evento["canal"]}</p>'
+                f'<a href="/?categoria={urllib.parse.quote(evento["categoria_text"])}&dia={dia_entrada}" class="event-category inline-block px-3 py-1 text-sm font-semibold rounded-full category-{evento["categoria"]}">{evento["categoria_text"]}</a>'
                 f'</div>'
                 f'</div>'
                 f'</div>'
                 for evento in eventos
             )
-        channel_logo_html = ""
-        page_title = f"Categoría: {categoria_entrada}"
-        show_back_link = categoria_entrada != "Todos"
-        # Para el modo general, incluir el channel_grid
-        if categoria_entrada == "Todos":
-            lista_html = f'<div class="channel-grid mb-6">{channel_grid}</div>' + lista_html
-            page_title = "Guía de Programación EMBY TV"
+            page_title = "Guía de Programación"
             show_back_link = False
 
-    html = """<!DOCTYPE html>
+    # HTML principal de la aplicación
+    html_content = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>""" + page_title + """</title>
+    <title>{page_title}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary-color: #111827;
-            --glass-bg: rgba(255, 255, 255, 0.5);
-            --glass-border: rgba(255, 255, 255, 0.7);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            --highlight: rgba(255, 255, 255, 0.5);
-        }
+        :root {{
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #3b82f6;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --bg-light: #ffffff;
+            --text-dark: #111827;
+            --text-dark-secondary: #4b5563;
+        }}
 
-        body {
-            background: #f5f5f5;
+        body {{
+            background: var(--bg-dark);
+            color: var(--text-primary);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+            transition: background 0.3s ease, color 0.3s ease;
+        }}
 
-        .glass-card {
-            background: var(--glass-bg);
+        body.light-mode {{
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }}
+
+        .card {{
+            background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--card-border);
             border-radius: 12px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }}
+
+        .light-mode .card {{
+            background: rgba(255, 255, 255, 0.9) !important; /* Asegura fondo blanco para las tarjetas en modo día */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }}
+
+        .card:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }}
+
+        .light-mode .card:hover {{
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }}
+
+        .logo-tile-wrapper {{
+            background: white; /* Siempre blanco para la baldosa del logo */
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }}
+
+        .logo-tile-wrapper:hover {{
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }}
+        
+        /* Estilo específico para la baldosa del logo en los eventos individuales */
+        .logo-tile {{
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white; /* Asegura que la baldosa sea blanca en modo día y noche */
+        }}
+
+
+        /* Estilos para las categorías */
+        .category-Fútbol {{ 
+            background: linear-gradient(45deg, #166534, #22c55e); 
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.5); 
+            color: white; 
+        }}
+        .category-Baloncesto {{ 
+            background: linear-gradient(45deg, #1e40af, #3b82f6); 
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5); 
+            color: white; 
+        }}
+        .category-Tenis {{ 
+            background: linear-gradient(45deg, #86198f, #d946ef); 
+            box-shadow: 0 0 12px rgba(217, 70, 239, 0.5); 
+            color: white; 
+        }}
+        .category-Motor {{ 
+            background: linear-gradient(45deg, #9f1239, #f43f5e); 
+            box-shadow: 0 0 12px rgba(244, 63, 94, 0.5); 
+            color: white; 
+        }}
+        .category-Motociclismo {{ 
+            background: linear-gradient(45deg, #9a3412, #f97316); 
+            box-shadow: 0 0 12px rgba(249, 115, 22, 0.5); 
+            color: white; 
+        }}
+        .category-Rugby {{ 
+            background: linear-gradient(45deg, #065f46, #10b981); 
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.5); 
+            color: white; 
+        }}
+        .category-Padel {{ 
+            background: linear-gradient(45deg, #92400e, #f59e0b); 
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.5); 
+            color: white; 
+        }}
+        .category-Ciclismo {{ 
+            background: linear-gradient(45deg, #065f46, #10b981); 
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.5); 
+            color: white; 
+        }}
+        .category-Sin_categoría {{ 
+            background: linear-gradient(45deg, #374151, #6b7280); 
+            box-shadow: 0 0 12px rgba(107, 114, 128, 0.5); 
+            color: white; 
+        }}
+
+        .event-item {{
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-        }
+        }}
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, var(--highlight), transparent);
-            transform: rotate(45deg);
-            pointer-events: none;
-        }
+        .light-mode .event-item:hover {{
+            background: rgba(229, 231, 235, 0.5);
+        }}
 
-        .glass-card:hover {
+        /* Asegurar que el texto sea oscuro en modo día */
+        body.light-mode .event-title {{
+            color: var(--text-dark) !important;
+        }}
+        body.light-mode .event-time {{
+            color: var(--text-dark-secondary) !important;
+        }}
+        /* Modal text color in light mode - now white */
+        .light-mode #modalTitle,
+        .light-mode #modalDateTime,
+        .light-mode #modalSynopsis,
+        .light-mode #modalDetails {{
+            color: white !important; /* Changed to white */
+        }}
+        .light-mode strong {{
+            color: white !important; /* Changed to white */
+        }}
+        /* Estilo para el texto de los selectores en modo día */
+        .light-mode select {{
+            color: var(--text-dark) !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); /* Asegura que la flecha sea oscura */
+        }}
+
+
+        header, select, .event-item {{
+            -webkit-tap-highlight-color: transparent;
+        }}
+
+        /* Estilos para el tema */
+        .theme-toggle {{
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }}
+
+        .light-mode .theme-toggle {{
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }}
+
+        .theme-toggle:hover {{
+            background: var(--bg-darker);
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-        }
+        }}
 
-        .category-Fútbol { 
-            background: linear-gradient(45deg, #22c55e, #14532d); 
-            box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); 
-            color: white; 
-        }
-        .category-Baloncesto { 
-            background: linear-gradient(45deg, #3b82f6, #1e3a8a); 
-            box-shadow: 0 0 12px rgba(59, 130, 246, 0.8); 
-            color: white; 
-        }
-        .category-Tenis { 
-            background: linear-gradient(45deg, #d946ef, #86198f); 
-            box-shadow: 0 0 12px rgba(217, 70, 239, 0.8); 
-            color: white; 
-        }
-        .category-Motor { 
-            background: linear-gradient(45deg, #f43f5e, #9f1239); 
-            box-shadow: 0 0 12px rgba(244, 63, 94, 0.8); 
-            color: white; 
-        }
-        .category-Motociclismo { 
-            background: linear-gradient(45deg, #f97316, #c2410c); 
-            box-shadow: 0 0 12px rgba(249, 115, 22, 0.8); 
-            color: white; 
-        }
-        .category-Rugby { 
-            background: linear-gradient(45deg, #059669, #064e3b); 
-            box-shadow: 0 0 12px rgba(5, 150, 105, 0.8); 
-            color: white; 
-        }
-        .category-Padel { 
-            background: linear-gradient(45deg, #f59e0b, #b45309); 
-            box-shadow: 0 0 12px rgba(245, 158, 11, 0.8); 
-            color: white; 
-        }
-        .category-Ciclismo { 
-            background: linear-gradient(45deg, #10b981, #065f46); 
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.8); 
-            color: white; 
-        }
-        .category-Sin_categoría { 
-            background: linear-gradient(45deg, #6b7280, #374151); 
-            box-shadow: 0 0 12px rgba(107, 114, 128, 0.8); 
-            color: white; 
-        }
+        .light-mode .theme-toggle:hover {{
+            background: rgba(229, 231, 235, 0.5);
+        }}
 
-        .event-item {
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .theme-toggle svg {{
+            width: 24px;
+            height: 24px;
+            fill: var(--text-primary);
+            stroke: var(--text-primary); /* Para iconos stroke */
+        }}
 
-        .channel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 12px;
-            padding: 12px;
-        }
+        .light-mode .theme-toggle svg {{
+            fill: var(--text-dark);
+            stroke: var(--text-dark); /* Para iconos stroke */
+        }}
 
-        @media (max-width: 640px) {
-            .channel-grid {
+        .theme-toggle span {{
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }}
+
+        .light-mode .theme-toggle span {{
+            color: var(--text-dark);
+        }}
+
+        /* Media queries para responsividad */
+        @media (max-width: 640px) {{
+            .channel-grid {{
                 grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap: 8px;
                 padding: 8px;
-            }
-            .event-item {
+            }}
+            .event-item {{
                 padding: 12px;
-            }
-            .event-title {
+            }}
+            .event-title {{
                 font-size: 1.125rem;
-            }
-            .event-time {
+            }}
+            .event-time {{
                 font-size: 0.875rem;
-            }
-            .event-category {
+            }}
+            .event-category {{
                 font-size: 0.75rem;
                 padding: 2px 6px;
-            }
-            .glass-card {
+            }}
+            .card {{
                 border-radius: 8px;
-            }
-        }
-
-        .event-title, .event-time {
-            word-break: break-word;
-        }
-
-        .event-category {
-            white-space: nowrap;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        .event-category:hover {
-            opacity: 0.9;
-        }
-
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23333'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
-            background-size: 1.5em;
-            padding-right: 2rem;
-        }
-
-        header, select, .event-item {
-            -webkit-tap-highlight-color: transparent;
-        }
+            }}
+            header .max-w-7xl {{
+                padding: 0 8px;
+            }}
+            header img {{
+                width: 112px;
+                height: 112px;
+            }}
+        }}
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    <header class="sticky top-0 glass-card z-10 p-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <div class="glass-card p-2">
-                    <img src="/static/img/logo.png" alt="Logo" class="w-20 rounded-lg">
-                </div>
-                <h1 class="text-xl font-bold text-gray-900">Guía EMBY TV - """ + page_title + """</h1>
-            </div>
-            """ + ('<a href="/" class="text-gray-900 hover:text-gray-800 text-sm font-semibold glass-card px-3 py-1">Volver a Canales</a>' if show_back_link else '') + """
-        </div>
-    </header>
+    <div class="w-full text-center py-0"> <img src="/static/img/logo.png" alt="Logo" class="max-w-xs h-auto mx-auto object-contain"> </div>
+
+    <div class="flex justify-center items-center gap-4 mb-2">
+        {'<a href="/" class="text-white hover:text-gray-300 light-mode:text-gray-900 light-mode:hover:text-gray-600 text-sm font-semibold bg-gray-800 light-mode:bg-gray-200 px-3 py-1 rounded-lg transition-colors">Canales</a>' if show_back_link else ''}
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <span id="theme-text">Noche</span>
+        </button>
+    </div>
+
     <main class="flex-1 w-full max-w-7xl mx-auto p-4">
-        <form id="filterForm" method="get" class="flex flex-col gap-4 mb-6">
+        <form id="filterForm" method="get" class="flex flex-col gap-4 mb-2">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <select name="dia" onchange="document.getElementById('filterForm').submit();" class="glass-card w-full max-w-xs p-3 text-black text-center focus:outline-none focus:ring-2 focus:ring-gray-900">
-                    """ + selector_dias + """
+                <select name="dia" onchange="document.getElementById('filterForm').submit();" class="card w-full max-w-xs p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                    {selector_dias}
                 </select>
-                <select name="categoria" onchange="document.getElementById('filterForm').submit();" class="glass-card w-full max-w-xs p-3 text-black text-center focus:outline-none focus:ring-2 focus:ring-gray-900">
-                    """ + selector_categorias + """
+                <select name="categoria" onchange="document.getElementById('filterForm').submit();" class="card w-full max-w-xs p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                    {selector_categorias}
                 </select>
             </div>
         </form>
         <div class="w-full">
-            """ + channel_logo_html + """
+            {channel_logo_html}
             <div class="event-list space-y-4">
-                """ + lista_html + """
+                {lista_html}
             </div>
         </div>
     </main>
-    <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-20">
-        <div class="bg-white rounded-xl p-6 w-full max-w-md" onclick="event.stopPropagation()">
+    
+    <div id="eventModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 hidden z-20">
+        <div class="bg-gray-800 light-mode:bg-white rounded-xl p-6 w-full max-w-md border border-gray-700 light-mode:border-gray-200 shadow-lg" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-4">
-                <h2 id="modalTitle" class="text-xl font-bold text-orange-600 break-words"></h2>
-                <button onclick="closeModal()" class="text-blue-900 text-2xl hover:text-blue-800">&times;</button>
+                <h2 id="modalTitle" class="text-xl font-bold text-blue-400 light-mode:text-white break-words pr-4"></h2> <button onclick="closeModal()" class="text-white light-mode:text-gray-900 text-2xl hover:text-gray-300 light-mode:hover:text-gray-600 transition-colors">&times;</button>
             </div>
             <div class="space-y-4">
-            <img id="modalImage" alt="Event" class="w-full max-h-64 object-contain rounded-lg cursor-pointer hidden" onclick="openFullScreenImage(this.src)">
-                <div class="grid grid-cols-1 gap-3">
-                    <p class="text-sm"><strong class="text-green-800 font-bold">Fecha y Hora:</strong> <span id="modalDateTime" class="text-black font-bold ml-2 break-words"></span></p>
-                    <p class="text-sm"><strong class="text-green-800 font-bold">Categoría:</strong> <span id="modalCategory" class="ml-2 break-words"></span></p>
-                    <p class="text-sm"><strong class="text-green-800 font-bold">Sinopsis:</strong> <span id="modalSynopsis" class="text-black font-bold ml-2 break-words"></span></p>
-                    <p class="text-sm"><strong class="text-green-800 font-bold">Detalles:</strong> <span id="modalDetails" class="text-black font-bold ml-2 break-words"></span></p>
-                </div>
+                <img id="modalImage" alt="Event" class="w-full max-h-64 object-contain rounded-lg cursor-pointer hidden border border-gray-700 light-mode:border-gray-200" onclick="openFullScreenImage(this.src)">
+                <div class="grid grid-cols-1 gap-3 text-sm">
+                    <p><strong class="text-blue-400 light-mode:text-white font-bold">Fecha y Hora:</strong> <span id="modalDateTime" class="text-white light-mode:text-white ml-2 break-words"></span></p> <p><strong class="text-blue-400 light-mode:text-white font-bold">Categoría:</strong> <span id="modalCategory" class="ml-2 break-words"></span></p> <p><strong class="text-blue-400 light-mode:text-white font-bold">Sinopsis:</strong> <span id="modalSynopsis" class="text-white light-mode:text-white ml-2 break-words"></span></p> <p><strong class="text-blue-400 light-mode:text-white font-bold">Detalles:</strong> <span id="modalDetails" class="text-white light-mode:text-white ml-2 break-words"></span></p> </div>
             </div>
         </div>
     </div>
-    <div id="fullScreenImageModal" class="fixed inset-0 bg-black flex items-center justify-center hidden z-30">
-        <img id="fullScreenImage" alt="Full Screen Event" class="max-w-full max-h-full object-contain">
-        <button onclick="closeFullScreenImage()" class="absolute top-4 right-4 text-white text-3xl bg-gray-900 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-800">&times;</button>
+
+    <div id="fullScreenImageModal" class="fixed inset-0 bg-black light-mode:bg-white flex items-center justify-center hidden z-30 p-4">
+        <img id="fullScreenImage" alt="Full Screen Event" class="max-w-full max-h-full object-contain rounded-lg shadow-xl">
+        <button onclick="closeFullScreenImage()" class="absolute top-4 right-4 text-white light-mode:text-gray-900 text-3xl bg-gray-900 light-mode:bg-gray-200 rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-800 light-mode:hover:bg-gray-300 transition-colors">&times;</button>
     </div>
+
     <script>
-        function openModal(title, date, startTime, endTime, synopsis, details, category, image) {
-            try {
+        // Función para abrir el modal de detalles del evento
+        function openModal(title, date, startTime, endTime, synopsis, details, category, categoryText, image) {{
+            try {{
                 document.getElementById('modalTitle').textContent = title || 'Sin título';
-                document.getElementById('modalDateTime').textContent = `${date} ${startTime} - ${endTime}` || 'Sin horario';
-                document.getElementById('modalCategory').innerHTML = `<span class="px-3 py-1 text-xs font-semibold rounded-full category-${category}">${category.replace("_", " ") || 'Sin categoría'}</span>`;
+                document.getElementById('modalDateTime').textContent = `${{date}} ${{startTime}} - ${{endTime}}` || 'Sin horario';
+                // Usar innerHTML para aplicar la clase de categoría
+                document.getElementById('modalCategory').innerHTML = `<span class="px-3 py-1 text-xs font-semibold rounded-full category-${{category}}">${{categoryText}}</span>`;
                 document.getElementById('modalSynopsis').textContent = synopsis || 'Sin sinopsis';
                 document.getElementById('modalDetails').textContent = details || 'Sin detalles';
+                
                 const modalImage = document.getElementById('modalImage');
-                if (image) {
+                if (image) {{
                     modalImage.src = image;
                     modalImage.classList.remove('hidden');
-                } else {
+                }} else {{
                     modalImage.classList.add('hidden');
-                }
+                }}
                 document.getElementById('eventModal').classList.remove('hidden');
-            } catch (error) {
-                console.error('Error opening modal:', error);
-            }
-        }
+            }} catch (error) {{
+                console.error('Error al abrir el modal:', error);
+            }}
+        }}
 
-        function closeModal() {
+        // Función para cerrar el modal de detalles del evento
+        function closeModal() {{
             document.getElementById('eventModal').classList.add('hidden');
-        }
+        }}
 
-        function openFullScreenImage(src) {
+        // Función para abrir la imagen a pantalla completa
+        function openFullScreenImage(src) {{
             const fullScreenImage = document.getElementById('fullScreenImage');
             fullScreenImage.src = src;
             document.getElementById('fullScreenImageModal').classList.remove('hidden');
-        }
+        }}
 
-        function closeFullScreenImage() {
+        // Función para cerrar la imagen a pantalla completa
+        function closeFullScreenImage() {{
             document.getElementById('fullScreenImageModal').classList.add('hidden');
-        }
+        }}
 
-        window.onclick = function(event) {
+        // Función para alternar el tema (claro/oscuro)
+        function toggleTheme() {{
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            body.classList.toggle('light-mode'); // Alternar la clase en el body
+
+            // Actualizar el icono y texto del botón
+            if (body.classList.contains('light-mode')) {{
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                themeText.textContent = 'Día';
+                localStorage.setItem('theme', 'light'); // Guardar preferencia
+            }} else {{
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                themeText.textContent = 'Noche';
+                localStorage.setItem('theme', 'dark'); // Guardar preferencia
+            }}
+        }}
+
+        // Aplicar el tema guardado al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {{
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {{
+                document.body.classList.add('light-mode');
+                // Asegurarse de que el icono y texto del botón se actualicen al cargar
+                document.getElementById('theme-icon').innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+                document.getElementById('theme-text').textContent = 'Día';
+            }}
+            // Se ha eliminado la llamada a applyThemeStyles() ya que Tailwind CSS maneja los colores con light-mode:
+        }});
+
+        // Cerrar modales al hacer clic fuera de ellos
+        window.onclick = function(event) {{
             const eventModal = document.getElementById('eventModal');
             const fullScreenModal = document.getElementById('fullScreenImageModal');
-            if (event.target === eventModal) {
+            if (event.target === eventModal) {{
                 eventModal.classList.add('hidden');
-            }
-            if (event.target === fullScreenModal) {
+            }}
+            if (event.target === fullScreenModal) {{
                 fullScreenModal.classList.add('hidden');
-            }
-        }
+            }}
+        }};
     </script>
 </body>
-</html>"""
-    return Response(html, mimetype="text/html")
+</html>
+
+
+"""
+    return Response(html_content, mimetype="text/html")
 
 if __name__ == "__main__":
     print("🔵 Servidor EPG en: http://0.0.0.0:5053/")

@@ -349,7 +349,7 @@
 	<programme start="20250727155000 +0200" stop="20250727173500 +0200" channel="La 1 HD">
 		<title lang="es">El diablo viste de Prada</title>
 		<desc lang="es">2006 | ⑫ | ★8.0/10
- · Cine/Comedia · Una joven se muda a Nueva York para convertirse en escritora, pero termina trabajando como asistente de la tiránica y legendaria redactora jefe de una importante revista de moda. Votos: 807.
+ · Cine/Comedia · Una joven se muda a Nueva York para convertirse en escritora, pero termina trabajando como asistente de la tiránica y legendaria redactora jefe de una importante revista de moda. Votos: 809.
 · País: EE.UU. y Francia
 · Dirección: David Frankel.
 · Reparto: Meryl Streep, Anne Hathaway, Emily Blunt, Stanley Tucci, Simon Baker, Adrian Grenier.
@@ -365,13 +365,13 @@
 	</programme>
 	<programme start="20250727173500 +0200" stop="20250727202500 +0200" channel="La 1 HD">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
+		<desc lang="es">Eurocopa F | 2025 | ★8.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 30.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
 		<star-rating system="ES">
-			<value>6.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250727202500 +0200" stop="20250727210000 +0200" channel="La 1 HD">
@@ -391,16 +391,13 @@
 	</programme>
 	<programme start="20250727210000 +0200" stop="20250727215500 +0200" channel="La 1 HD">
 		<title lang="es">Telediario 2 Fin de Semana</title>
-		<desc lang="es">2017 | TP | ★4.0/10
+		<desc lang="es">2017 | ★4.0/10
  · Información/Informativo · Informativo de Televisión Española de los fines de semana. Lara Siscar y Diego Losada se encargan de presentar las últimas noticias de ámbito nacional e internacional surgidas durante el día. Mientras, Marcos López, introduce el bloque de deportes. Votos: 2276.
 · País: España
 · Presenta: Lara Siscar, Igor Gómez, Marcos López.
 · Productora: Televisión Española (TVE).</desc>
 		<category lang="es">Información, Informativo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MTVEP1114180"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
 		<star-rating system="ES">
 			<value>4.0/10</value>
 		</star-rating>
@@ -420,7 +417,7 @@
 	<programme start="20250727220000 +0200" stop="20250727235500 +0200" channel="La 1 HD">
 		<title lang="es">Despierta la furia</title>
 		<desc lang="es">2021 | ⑯ | ★8.0/10
- · Cine/Acción · Un hombre misterioso, llamado H, trabaja en una empresa de camiones que se dedica a trasladar, cada semana, cientos de millones de dólares por Los Ángeles. Votos: 905.
+ · Cine/Acción · Un hombre misterioso, llamado H, trabaja en una empresa de camiones que se dedica a trasladar, cada semana, cientos de millones de dólares por Los Ángeles. Votos: 906.
 · País: EE.UU. y R.U.
 · Dirección: Guy Ritchie.
 · Reparto: Jason Statham, Holt McCallany, Josh Hartnett, Scott Eastwood, Darrell D'Silva, Jeffrey Donovan, Laz Alonso.
@@ -438,8 +435,8 @@
 	</programme>
 	<programme start="20250727235500 +0200" stop="20250728013000 +0200" channel="La 1 HD">
 		<title lang="es">Herido</title>
-		<desc lang="es">2024 | ⑯ | ★10.0/10
- · Cine/Drama · Dan Lawson, un detective de Chicago, viaja a Escocia para reunirse con el detective escocés Glen Boyd, tras el regreso de un asesino en serie cuyos crímenes coinciden con un caso sin resolver. Votos: 1.
+		<desc lang="es">2024 | ⑯ | ★8.0/10
+ · Cine/Drama · Dan Lawson, un detective de Chicago, viaja a Escocia para reunirse con el detective escocés Glen Boyd, tras el regreso de un asesino en serie cuyos crímenes coinciden con un caso sin resolver. Votos: 2.
 · País: EE.UU. y R.U.
 · Dirección: Terry McDonough.
 · Reparto: Samuel L. Jackson, Vincent Cassel, Gianni Capaldi, Kate Dickie, John Hannah.
@@ -451,7 +448,7 @@
 			<value>16</value>
 		</rating>
 		<star-rating system="ES">
-			<value>10.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728013000 +0200" stop="20250728030000 +0200" channel="La 1 HD">
@@ -485,13 +482,16 @@
 	</programme>
 	<programme start="20250728070000 +0200" stop="20250728083000 +0200" channel="La 1 HD">
 		<title lang="es">Telediario Matinal</title>
-		<desc lang="es">2023 | ★6.0/10
+		<desc lang="es">2023 | TP | ★6.0/10
  · Información/Informativo · Sirun Demirjian y Álex Barreiro conducen este rápido y exhaustivo repaso de todas las noticias de interés general. Además, se ofrece la actualidad meteorológica de España y de Europa y el estado de la mar. Rubén Briones presenta la información deportiva. Votos: 900.
 · País: España
 · Presenta: Álex Barreiro, Sirun Demirjian, Rubén Briones.
 · Productora: Televisión Española (TVE).</desc>
 		<category lang="es">Información, Informativo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/M24HP518404"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
 		<star-rating system="ES">
 			<value>6.0/10</value>
 		</star-rating>
@@ -638,13 +638,16 @@
 	</programme>
 	<programme start="20250728210000 +0200" stop="20250728214000 +0200" channel="La 1 HD">
 		<title lang="es">Telediario 2</title>
-		<desc lang="es">2021 | ★6.0/10
+		<desc lang="es">2021 | TP | ★6.0/10
  · Información/Informativo · Cientos de profesionales de TVE salen cada día a la calle en busca de noticias. El resultado, un completo repaso a la actualidad nacional e internacional conducido por Ana Roldán. También hay espacio para la parcela deportiva. Votos: 1684.
 · País: España
 · Presenta: Ana Roldán.
 · Productora: Televisión Española (TVE).</desc>
 		<category lang="es">Información, Informativo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/M24HP518466"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
 		<star-rating system="ES">
 			<value>6.0/10</value>
 		</star-rating>
@@ -1964,7 +1967,7 @@
 	<programme start="20250727092500 +0200" stop="20250727094500 +0200" channel="La 2">
 		<title lang="es">Shalom</title>
 		<desc lang="es">2017 | TP | ★6.0/10
- · Cultural/Educativo/Religión · Programa semanal dirigido a la comunidad judía en España. Votos: 317.
+ · Cultural/Educativo/Religión · Programa semanal dirigido a la comunidad judía en España. Votos: 318.
 · País: España
 · Presenta: Coty Aserín, Gemma Ruth Lazovsky.</desc>
 		<category lang="es">Cultural/Educativo, Religión</category>
@@ -2191,13 +2194,13 @@
 	</programme>
 	<programme start="20250727173500 +0200" stop="20250727195500 +0200" channel="La 2">
 		<title lang="es">DIRECTO Llegada Etapa 21 - Mantes-la-Ville - París T2025</title>
-		<desc lang="es">Tour de Francia | 2025 | ★2.0/10
- · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 1.
+		<desc lang="es">Tour de Francia | 2025 | ★6.0/10
+ · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MLA2P4058154"></icon>
 		<star-rating system="ES">
-			<value>2.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250727195500 +0200" stop="20250727204500 +0200" channel="La 2">
@@ -2279,7 +2282,7 @@
 	<programme start="20250728015000 +0200" stop="20250728023700 +0200" channel="La 2">
 		<title lang="es">El asesino de la baraja: Tambores de guerra</title>
 		<desc lang="es">2022 | ⑯ | ★8.0/10
- · Documentales/Historia · En el año 2003, la violencia azota Madrid. Cada tres días se produce un asesinato. Votos: 4.
+ · Documentales/Historia · En el año 2003, la violencia azota Madrid. Cada tres días se produce un asesinato. Votos: 5.
 · País: España
 · Productora: RTVE Play.</desc>
 		<category lang="es">Documentales, Historia</category>
@@ -5046,7 +5049,7 @@
 	<programme start="20250727160000 +0200" stop="20250727174500 +0200" channel="Antena 3 HD">
 		<title lang="es">Pesadilla en el vecindario</title>
 		<desc lang="es">2022 | ⑫ | ★8.0/10
- · Cine para televisión/Cine TV thriller · Cuando Bonnie descubre que su marido es el amante de su vecina, la asesinan simulando un robo en su casa. Desde entonces, Bonnie se ha vuelto patológicamente celosa. Votos: 2.
+ · Cine para televisión/Cine TV thriller · Cuando Bonnie descubre que su marido es el amante de su vecina, la asesinan simulando un robo en su casa. Desde entonces, Bonnie se ha vuelto patológicamente celosa. Votos: 3.
 · País: EE.UU.
 · Dirección: Linden Ashby, Susan Walters.
 · Reparto: Gina Simms, April Hale, Summer Madison, Johnathan Gorman, Coley Campany.
@@ -5064,7 +5067,7 @@
 	<programme start="20250727174500 +0200" stop="20250727191500 +0200" channel="Antena 3 HD">
 		<title lang="es">El verano de mi vida</title>
 		<desc lang="es">2018 | TP | ★6.0/10
- · Cine para televisión/Comedia romántica · La doctora Jessica Tucker por fin puede tomarse las vacaciones que le prometió a su hija en un lujoso hotel de las islas Fiji. Allí conoce a Will, el encantador copropietario del complejo. Votos: 24.
+ · Cine para televisión/Comedia romántica · La doctora Jessica Tucker por fin puede tomarse las vacaciones que le prometió a su hija en un lujoso hotel de las islas Fiji. Allí conoce a Will, el encantador copropietario del complejo. Votos: 25.
 · País: EE.UU.
 · Dirección: Martin Wood.
 · Reparto: Catherine Bell, Cameron Mathison, Samantha MacGillivray, Paul O'Brien.
@@ -6817,7 +6820,7 @@
 · Música: Christophe Beck.
 · Productora: Berlanti Productions, 20th Century Studios, Twenty One Laps, Maximum Effort, Lit Entertainment Group.</desc>
 		<category lang="es">Cine, Acción</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3963407"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MFOXGEP1713926"></icon>
 		<rating system="ES">
 			<value>12</value>
 		</rating>
@@ -6825,7 +6828,7 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727175500 +0200" stop="20250727200000 +0200" channel="Cuatro HD">
+	<programme start="20250727175500 +0200" stop="20250727195800 +0200" channel="Cuatro HD">
 		<title lang="es">Men in Black 3</title>
 		<desc lang="es">2012 | ⑦ | ★8.0/10
  · Cine/Comedia · En sus 15 años de servicio, el agente J ha visto cosas inexplicables, pero nada le produce tanta perplejidad como su compañero, el agente K. Cuando el destino del planeta y la vida de K son puestos en peligro, J tendrá que hacer un viaje al pasado. Votos: 680.
@@ -6845,7 +6848,7 @@
 			<value>8.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727200000 +0200" stop="20250727205000 +0200" channel="Cuatro HD">
+	<programme start="20250727195800 +0200" stop="20250727205000 +0200" channel="Cuatro HD">
 		<title lang="es">Noticias Cuatro fin de semana</title>
 		<desc lang="es">2025 | ★6.0/10
  · Información/Informativo · Roberto Arce presenta el informativo de Cuatro durante el fin de semana, repasando las últimas noticias sucedidas en todos los ámbitos. Votos: 34.
@@ -10866,7 +10869,7 @@
 	<programme start="20250727153000 +0200" stop="20250727172500 +0200" channel="La Sexta HD">
 		<title lang="es">Asalto en París</title>
 		<desc lang="es">2016 | ⑯ | ★6.0/10
- · Cine para televisión/Cine TV acción · Un carterista estadounidense provoca accidentalmente una explosión en París. El agente que investiga el caso decide reclutarle para que le ayude a llegar hasta los responsables. Votos: 102.
+ · Cine para televisión/Cine TV acción · Un carterista estadounidense provoca accidentalmente una explosión en París. El agente que investiga el caso decide reclutarle para que le ayude a llegar hasta los responsables. Votos: 103.
 · País: EE.UU., Francia y R.U.
 · Dirección: James Watkins.
 · Reparto: Idris Elba, Richard Madden, Charlotte Le Bon, Kelly Reilly, José García.
@@ -10995,7 +10998,7 @@
 	<programme start="20250728031000 +0200" stop="20250728032500 +0200" channel="La Sexta HD">
 		<title lang="es">Vivara: gestionamos tu alquiler</title>
 		<desc lang="es">2025 | TP | ★6.0/10
- · Ocio y Aficiones/Televenta · Vivara: gestionamos tu alquiler. Votos: 3.
+ · Ocio y Aficiones/Televenta · Vivara: gestionamos tu alquiler. Votos: 4.
 · País: España</desc>
 		<category lang="es">Ocio y Aficiones, Televenta</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MSEXTAP4023619"></icon>
@@ -12803,7 +12806,7 @@
 	<programme start="20250727154800 +0200" stop="20250727170600 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Agente contrainteligente</title>
 		<desc lang="es">2016 | ⑯ | ★8.0/10
- · Cine/Comedia · Nobby tiene todo lo que un inglés de clase obrera puede desear: una familia disfuncional de 9 hijos, una chica a la que no se puede resistir y mucho fútbol. Lo único que Nobby echa de menos es a su hermano pequeño, al que perdió la pista hace 28 años. Votos: 1271.
+ · Cine/Comedia · Nobby tiene todo lo que un inglés de clase obrera puede desear: una familia disfuncional de 9 hijos, una chica a la que no se puede resistir y mucho fútbol. Lo único que Nobby echa de menos es a su hermano pequeño, al que perdió la pista hace 28 años. Votos: 1272.
 · País: Australia, EE.UU. y R.U.
 · Dirección: Louis Leterrier.
 · Reparto: Sacha Baron Cohen, Mark Strong, Isla Fisher, Rebel Wilson, Penélope Cruz, Gabourey Sidibe.
@@ -12888,7 +12891,7 @@
 	<programme start="20250727212300 +0200" stop="20250727230500 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Drazen</title>
 		<desc lang="es">2024 | ⑫ | ★10.0/10
- · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 4.
+ · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 13.
 · País: Croacia
 · Dirección: Danilo Serbedzija, Ljubo Zdjelarevic.
 · Reparto: Domagoj Nizic, Zrinka Cvitesic, Dragan Micanovic.
@@ -12905,9 +12908,9 @@
 	<programme start="20250727230500 +0200" stop="20250728010000 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -13109,7 +13112,7 @@
 	<programme start="20250728110500 +0200" stop="20250728115800 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Hiroshima. Cuando todo cambió E1</title>
 		<desc lang="es">2025 | ⑫ | ★10.0/10
- · Documentales/Historia · Hiroshima simboliza el fin de la IIGM y el inicio de una era marcada por la ansiedad nuclear. Este documental viaja en el tiempo para analizar las decisiones que llevaron a la creación y lanzamiento de la bomba atómica y sus profundas consecuencias. Votos: 2.
+ · Documentales/Historia · Hiroshima simboliza el fin de la IIGM y el inicio de una era marcada por la ansiedad nuclear. Este documental viaja en el tiempo para analizar las decisiones que llevaron a la creación y lanzamiento de la bomba atómica y sus profundas consecuencias. Votos: 3.
 · País: Francia
 · Dirección: David Korn-Brzoza, Olivier Wieviorka.</desc>
 		<category lang="es">Documentales, Historia</category>
@@ -13475,7 +13478,7 @@
 	<programme start="20250729104200 +0200" stop="20250729110700 +0200" channel="Movistar Plus+ HD">
 		<title lang="es">Mira lo que has hecho T1 E5</title>
 		<desc lang="es">Seguimos vivos | 2018 | ⑱ | ★8.0/10
- · Series/Comedia · Sandra y Berto necesitan contratar a una canguro que les eche una mano con Lucas. A la vuelta de un bolo y con tiempo libre, la exposición de la hermana de Sandra será una buena ocasión para saber buenas y malas noticias. Votos: 880.
+ · Series/Comedia · Sandra y Berto necesitan contratar a una canguro que les eche una mano con Lucas. A la vuelta de un bolo y con tiempo libre, la exposición de la hermana de Sandra será una buena ocasión para saber buenas y malas noticias. Votos: 883.
 · País: España
 · Dirección: Carlos Therón.
 · Reparto: Berto Romero, Chete Lera, Mariano Venancio, Eva Ugarte, Carmen Esteban.</desc>
@@ -15504,7 +15507,7 @@
 	</programme>
 	<programme start="20250728154500 +0200" stop="20250728185500 +0200" channel="TVG Europa HD">
 		<title lang="es">Quen anda aí? verán</title>
-		<desc lang="es">2022 | TP | ★6.0/10
+		<desc lang="es">Quen anda aí verán | 2022 | TP | ★6.0/10
  · Entretenimiento · Contidos frescos e sorprendentes, na edición de verán do magazine 'Quen anda aí?', que presentan Eva Iglesias, Fran Cañotas e Marcial Mouzo. Votos: 18.
 · País: España
 · Presenta: Eva Iglesias, Fran Cañotas, Marcial Mouzo.</desc>
@@ -17140,7 +17143,7 @@
 	<programme start="20250727091500 +0200" stop="20250727110000 +0200" channel="M+ Vamos HD">
 		<title lang="es">LeMond: un americano en París</title>
 		<desc lang="es">2022 | ⑫ | ★6.0/10
- · Documentales/Deportes · Tras un accidente de caza, el ciclista Greg LeMond estuvo al borde de la muerte. Nadie podía presagiar que, tras ese suceso, ganaría uno de los Tour de Francia más reñidos que se recuerden. Votos: 346.
+ · Documentales/Deportes · Tras un accidente de caza, el ciclista Greg LeMond estuvo al borde de la muerte. Nadie podía presagiar que, tras ese suceso, ganaría uno de los Tour de Francia más reñidos que se recuerden. Votos: 347.
 · País: R.U.
 · Dirección: Alex Holmes.
 · Productora: New Black Films.</desc>
@@ -17166,7 +17169,7 @@
 	<programme start="20250727120000 +0200" stop="20250727135000 +0200" channel="M+ Vamos HD">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Moutet - De Minaur | 2025 | TP | ★6.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 5.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383891"></icon>
 		<rating system="ES">
@@ -17249,7 +17252,7 @@
 	<programme start="20250727172500 +0200" stop="20250727185500 +0200" channel="M+ Vamos HD">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Davidovich - Shelton | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383891"></icon>
 		<rating system="ES">
@@ -17259,7 +17262,7 @@
 			<value>8.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727185500 +0200" stop="20250727195500 +0200" channel="M+ Vamos HD">
+	<programme start="20250727185500 +0200" stop="20250727195400 +0200" channel="M+ Vamos HD">
 		<title lang="es">Carreras de Caballos- Turf T2025</title>
 		<desc lang="es">27/07/2025 Hipódromo de San Sebastián | 2025 | TP | ★2.0/10
  · Deportes/Programa deportes · Las carreras de caballos son un espectáculo extendido por todo el mundo y generan multitud de apuestas. Monturas y jinetes se exprimen al máximo para llegar a la meta en el menor tiempo posible. Votos: 1.</desc>
@@ -17272,19 +17275,31 @@
 			<value>2.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727195500 +0200" stop="20250727205500 +0200" channel="M+ Vamos HD">
-		<title lang="es">CD Mirandés, cada partido me vuelvo a enamorar</title>
-		<desc lang="es">2025 | TP | ★8.0/10
- · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 73.
-· País: España</desc>
+	<programme start="20250727195400 +0200" stop="20250727203700 +0200" channel="M+ Vamos HD">
+		<title lang="es">Informe Plus+. Eternas</title>
+		<desc lang="es">2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · La selección española femenina de waterpolo nunca se había clasificado para los Juegos Olímpicos y nunca se había subido al podio en los Campeonatos del mundo. Con la llegada de Miki Oca como seleccionador arrancó un ciclo ganador. Votos: 2501.
+· País: España
+· Productora: Movistar Plus+.</desc>
 		<category lang="es">Deportes, Programa deportes</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387009"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4353582"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
+	</programme>
+	<programme start="20250727203700 +0200" stop="20250727205500 +0200" channel="M+ Vamos HD">
+		<title lang="es">Lo mejor de Bakalá T24/25 E35</title>
+		<desc lang="es">TP
+ · Deportes/Programa deportes · Un programa que combina el deporte actual con lo mejor del archivo de la casa. Te contamos todo lo acontecido durante la semana, a la vez que recordamos imágenes míticas. Todo ello amenizado con la voz de Raúl Pérez y sus personajes.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3791724"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
 	</programme>
 	<programme start="20250727205500 +0200" stop="20250727230000 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Jornada 17: Cruzeiro - Ceará T2025</title>
@@ -17317,7 +17332,7 @@
 	<programme start="20250727232000 +0200" stop="20250728013000 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 3.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -17390,7 +17405,7 @@
 	<programme start="20250728065500 +0200" stop="20250728083500 +0200" channel="M+ Vamos HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -17448,9 +17463,9 @@
 	<programme start="20250728104300 +0200" stop="20250728124300 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -17548,7 +17563,7 @@
 	<programme start="20250728180000 +0200" stop="20250728190000 +0200" channel="M+ Vamos HD">
 		<title lang="es">CD Mirandés, cada partido me vuelvo a enamorar</title>
 		<desc lang="es">2025 | TP | ★8.0/10
- · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 73.
+ · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 74.
 · País: España</desc>
 		<category lang="es">Deportes, Programa deportes</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387009"></icon>
@@ -17607,7 +17622,7 @@
 	<programme start="20250728220000 +0200" stop="20250728234000 +0200" channel="M+ Vamos HD">
 		<title lang="es">Drazen</title>
 		<desc lang="es">2024 | ⑫ | ★10.0/10
- · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 4.
+ · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 13.
 · País: Croacia
 · Dirección: Danilo Serbedzija, Ljubo Zdjelarevic.
 · Reparto: Domagoj Nizic, Zrinka Cvitesic, Dragan Micanovic.
@@ -17681,9 +17696,9 @@
 	<programme start="20250729045000 +0200" stop="20250729070000 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -17999,7 +18014,7 @@
 	<programme start="20250730064000 +0200" stop="20250730083000 +0200" channel="M+ Vamos HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 3.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -18261,7 +18276,7 @@
 	<programme start="20250731023500 +0200" stop="20250731043500 +0200" channel="M+ Vamos HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -23641,7 +23656,7 @@
 	<programme start="20250731181500 +0200" stop="20250731190000 +0200" channel="DAZN LaLiga HD">
 		<title lang="es">LALIGA VS T2</title>
 		<desc lang="es">Carolina Marín y Manu Carreño | 2025 | TP | ★4.0/10
- · Deportes/Programa deportes · LALIGA VS es un proyecto que tiene el objetivo de erradicar el odio en el fútbol. Votos: 2.
+ · Deportes/Programa deportes · LALIGA VS es un proyecto que tiene el objetivo de erradicar el odio en el fútbol. Votos: 3.
 · País: España</desc>
 		<category lang="es">Deportes, Programa deportes</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4295779"></icon>
@@ -24416,7 +24431,7 @@
 	<programme start="20250727232500 +0200" stop="20250728012500 +0200" channel="M+ Liga de Campeones HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 3.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -24595,7 +24610,7 @@
 	<programme start="20250728183000 +0200" stop="20250728203000 +0200" channel="M+ Liga de Campeones HD">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 3.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -25998,7 +26013,7 @@
 	<programme start="20250727062000 +0200" stop="20250727080000 +0200" channel="M+ Deportes HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -26050,10 +26065,10 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727112500 +0200" stop="20250727134800 +0200" channel="M+ Deportes HD">
+	<programme start="20250727112500 +0200" stop="20250727131500 +0200" channel="M+ Deportes HD">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Moutet - De Minaur | 2025 | TP | ★6.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 5.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383891"></icon>
 		<rating system="ES">
@@ -26063,7 +26078,7 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727134800 +0200" stop="20250727143800 +0200" channel="M+ Deportes HD">
+	<programme start="20250727131500 +0200" stop="20250727140500 +0200" channel="M+ Deportes HD">
 		<title lang="es">Informe Plus+. Nil Riudavets. De las heridas, la fuerza</title>
 		<desc lang="es">2025 | TP | ★6.0/10
  · Deportes/Programa deportes · El bronce ganado en los Juegos Paralímpicos de París 2024 es un gran triunfo para el triatleta menorquín Nil Riudavets, pero no el mayor. Votos: 1216.
@@ -26078,7 +26093,7 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727143800 +0200" stop="20250727150800 +0200" channel="M+ Deportes HD">
+	<programme start="20250727140500 +0200" stop="20250727143500 +0200" channel="M+ Deportes HD">
 		<title lang="es">World of free sports T2025 E29</title>
 		<desc lang="es">2025 | TP
  · Deportes/Programa deportes · World of free sports (2025): Ep.29 -.</desc>
@@ -26088,10 +26103,10 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727150800 +0200" stop="20250727173300 +0200" channel="M+ Deportes HD">
+	<programme start="20250727143500 +0200" stop="20250727160500 +0200" channel="M+ Deportes HD">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Davidovich - Shelton | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383891"></icon>
 		<rating system="ES">
@@ -26101,7 +26116,36 @@
 			<value>8.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727173300 +0200" stop="20250727185500 +0200" channel="M+ Deportes HD">
+	<programme start="20250727160500 +0200" stop="20250727163500 +0200" channel="M+ Deportes HD">
+		<title lang="es">Planeta Tenis T2025 E10</title>
+		<desc lang="es">2025 | TP | ★10.0/10
+ · Deportes/Programa deportes · Espacio dedicado al mundo del tenis, donde sus principales protagonistas y toda la información relacionada con los Grand Slams mantendrá viva la pasión por este deporte. Votos: 1.
+· País: España
+· Presenta: Lidia Blanco, Roberto Carretero.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4369921"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727163500 +0200" stop="20250727173500 +0200" channel="M+ Deportes HD">
+		<title lang="es">Informe Plus+. Ilia Topuria, El Matador</title>
+		<desc lang="es">2023 | ⑯ | ★6.0/10
+ · Deportes/Programa deportes · Las artes marciales mixtas son una disciplina emergente dentro de los deportes de lucha, en esta suma de especialidades de combate la élite se concentra en la UFC, ahí, empieza a asomar el español de origen georgiano Ilia Topuria. Votos: 1329.
+· País: España</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4335268"></icon>
+		<rating system="ES">
+			<value>16</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727173500 +0200" stop="20250727185500 +0200" channel="M+ Deportes HD">
 		<title lang="es">NCAA T24/25</title>
 		<desc lang="es">2ª Ronda: New Mexico - Michigan St | 2024 | TP
  · Deportes/Baloncesto · Arranca la NCAA, la competición que nos hace disfrutar del mejor baloncesto universitario del mundo. 68 equipos luchan por llegar a la gran final de esta 80ª edición, donde North Carolina defiende título.
@@ -26126,7 +26170,7 @@
 	<programme start="20250727194800 +0200" stop="20250727213000 +0200" channel="M+ Deportes HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -26138,12 +26182,15 @@
 	</programme>
 	<programme start="20250727213000 +0200" stop="20250727223000 +0200" channel="M+ Deportes HD">
 		<title lang="es">DIRECTO Balaton Park Circuit. Carrera 2 T2025</title>
-		<desc lang="es">Cto. del Mundo de Motociclismo Femenino | 
- · Deportes/Motor · Hungría (Balaton Park...: Balaton Park Circuit. Carrera 2 -.</desc>
+		<desc lang="es">Cto. del Mundo de Motociclismo Femenino | ★10.0/10
+ · Deportes/Motor · Hungría (Balaton Park...: Balaton Park Circuit. Carrera 2 - Votos: 1.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4365758"></icon>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
-	<programme start="20250727223000 +0200" stop="20250727230000 +0200" channel="M+ Deportes HD">
+	<programme start="20250727223000 +0200" stop="20250727230500 +0200" channel="M+ Deportes HD">
 		<title lang="es">ATP Tour This Week T2025 E28</title>
 		<desc lang="es">2025 | TP
  · Deportes/Programa deportes · ATP Tour This Week.</desc>
@@ -26153,12 +26200,12 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727230000 +0200" stop="20250728013000 +0200" channel="M+ Deportes HD">
+	<programme start="20250727230500 +0200" stop="20250728013000 +0200" channel="M+ Deportes HD">
 		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -26177,10 +26224,10 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250728030500 +0200" stop="20250728050500 +0200" channel="M+ Deportes HD">
+	<programme start="20250728030500 +0200" stop="20250728044500 +0200" channel="M+ Deportes HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -26188,6 +26235,19 @@
 		</rating>
 		<star-rating system="ES">
 			<value>8.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250728044500 +0200" stop="20250728050500 +0200" channel="M+ Deportes HD">
+		<title lang="es">VKS T2025 E247</title>
+		<desc lang="es">2025 | TP | ★6.0/10
+ · Deportes/Programa deportes · Las mejores imágenes de los eventos deportivos nacionales e internacionales, entrevistas y seguimientos a los atletas del momento. Actualidad, dinamismo, fuerza y sobre todo, deportividad. Votos: 4.</desc>
+		<category lang="es">Deportes, Programa deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F3359249"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728050500 +0200" stop="20250728060000 +0200" channel="M+ Deportes HD">
@@ -26201,7 +26261,7 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250728060000 +0200" stop="20250728063100 +0200" channel="M+ Deportes HD">
+	<programme start="20250728060000 +0200" stop="20250728063000 +0200" channel="M+ Deportes HD">
 		<title lang="es">World of free sports T2025 E29</title>
 		<desc lang="es">2025 | TP
  · Deportes/Programa deportes · World of free sports (2025): Ep.29 -.</desc>
@@ -26211,7 +26271,7 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250728063100 +0200" stop="20250728065000 +0200" channel="M+ Deportes HD">
+	<programme start="20250728063000 +0200" stop="20250728065000 +0200" channel="M+ Deportes HD">
 		<title lang="es">En estado puro T2025 E8</title>
 		<desc lang="es">2024 | TP
  · Deportes/Programa deportes · Únete a nosotros en un emocionante viaje a través de los deportes de acción y el turismo de aventura. En nuestro programa, los amantes de los deportes extremos y la naturaleza explorarán nuevos destinos de la mano de los mejores expertos.</desc>
@@ -26248,9 +26308,9 @@
 	<programme start="20250728093000 +0200" stop="20250728113000 +0200" channel="M+ Deportes HD">
 		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -26274,7 +26334,7 @@
 	<programme start="20250728135000 +0200" stop="20250728155000 +0200" channel="M+ Deportes HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -26348,10 +26408,13 @@
 	</programme>
 	<programme start="20250728235000 +0200" stop="20250729004500 +0200" channel="M+ Deportes HD">
 		<title lang="es">DIRECTO Balaton Park Circuit. Carrera 2 T2025</title>
-		<desc lang="es">Cto. del Mundo de Motociclismo Femenino | 
- · Deportes/Motor · Hungría (Balaton Park...: Balaton Park Circuit. Carrera 2 -.</desc>
+		<desc lang="es">Cto. del Mundo de Motociclismo Femenino | ★10.0/10
+ · Deportes/Motor · Hungría (Balaton Park...: Balaton Park Circuit. Carrera 2 - Votos: 1.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4365758"></icon>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250729004500 +0200" stop="20250729010000 +0200" channel="M+ Deportes HD">
 		<title lang="es">Lo mejor de Indycar T2025</title>
@@ -26659,7 +26722,7 @@
 	<programme start="20250730160500 +0200" stop="20250730180500 +0200" channel="M+ Deportes HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -27131,7 +27194,7 @@
 	<programme start="20250802060000 +0200" stop="20250802080000 +0200" channel="M+ Deportes HD">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -27295,32 +27358,45 @@
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383895"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383899"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727183000 +0200" stop="20250727203000 +0200" channel="M+ Deportes 2 HD">
-		<title lang="es">DIRECTO 1ª Ronda: Ofner - Opelka T2025</title>
+	<programme start="20250727183000 +0200" stop="20250727203500 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">M+ Deportes 2</title>
+		<desc lang="es">2019 | TP | ★6.0/10
+ · Deportes/Otros deportes · M+ Deportes 2 - Votos: 157.</desc>
+		<category lang="es">Deportes, Otros deportes</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/M1853455V1621453"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727203500 +0200" stop="20250727223500 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">DIRECTO 1ª Ronda: - Munar T2025</title>
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383895"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383899"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727203000 +0200" stop="20250727223000 +0200" channel="M+ Deportes 2 HD">
-		<title lang="es">DIRECTO 1ª Ronda: Monfils T2025</title>
-		<desc lang="es">-Torneo de Toronto | 2025 | TP
- · Deportes/Tenis · - Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
+	<programme start="20250727223500 +0200" stop="20250728003500 +0200" channel="M+ Deportes 2 HD">
+		<title lang="es">DIRECTO 1ª Ronda: - Etcheverry T2025</title>
+		<desc lang="es">Torneo de Toronto | 2025 | TP
+ · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383895"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383899"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727223000 +0200" stop="20250728010000 +0200" channel="M+ Deportes 2 HD">
+	<programme start="20250728003500 +0200" stop="20250728010000 +0200" channel="M+ Deportes 2 HD">
 		<title lang="es">M+ Deportes 2</title>
 		<desc lang="es">2019 | TP | ★6.0/10
  · Deportes/Otros deportes · M+ Deportes 2 - Votos: 157.</desc>
@@ -27338,7 +27414,7 @@
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383895"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383899"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -27348,7 +27424,7 @@
 		<desc lang="es">Torneo de Toronto | 2025 | TP
  · Deportes/Tenis · Los Masters 1000 son los torneos más importantes después de los Grand Slam y forman parte del ATP Tour. Se celebran en Norteamérica, Europa y Asia y se juegan en pista rápida y tierra batida. El Campeón consigue 1000 puntos para el ranking ATP.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383895"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383899"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -27767,15 +27843,15 @@
 	</programme>
 	<programme start="20250802120000 +0200" stop="20250802140000 +0200" channel="M+ Deportes 2 HD">
 		<title lang="es">DIRECTO Semifinal Femenina 1 T2025</title>
-		<desc lang="es">Premier Padel. Tarragona | TP | ★2.0/10
- · Deportes/Pádel · Vive en Movistar Plus cómo se desarrolla el deporte de raqueta de más rápido crecimiento del mundo en 25 torneos y 18 países durante la temporada Premier Padel 2024, que comienza con la Ronda de Riad, en Arabia Saudí. Votos: 1.</desc>
+		<desc lang="es">Premier Padel. Tarragona | TP | ★6.0/10
+ · Deportes/Pádel · Vive en Movistar Plus cómo se desarrolla el deporte de raqueta de más rápido crecimiento del mundo en 25 torneos y 18 países durante la temporada Premier Padel 2024, que comienza con la Ronda de Riad, en Arabia Saudí. Votos: 2.</desc>
 		<category lang="es">Deportes, Pádel</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4390764"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 		<star-rating system="ES">
-			<value>2.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250802140000 +0200" stop="20250802160000 +0200" channel="M+ Deportes 2 HD">
@@ -27856,14 +27932,14 @@
 			<value>8.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727082500 +0200" stop="20250727093000 +0200" channel="DAZN F1 HD">
+	<programme start="20250727082500 +0200" stop="20250727092500 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
 		<desc lang="es">Campeonato F3 de la FIA - Bélgica | 2025
  · Deportes/Motor · La F3 Series es un campeonato de automovilismo de velocidad por debajo de la F2.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4356686"></icon>
 	</programme>
-	<programme start="20250727093000 +0200" stop="20250727095500 +0200" channel="DAZN F1 HD">
+	<programme start="20250727092500 +0200" stop="20250727095500 +0200" channel="DAZN F1 HD">
 		<title lang="es">F2 Chase the dream E3</title>
 		<desc lang="es">2025 | TP | ★6.0/10
  · Deportes/Fórmula 1 · F2 Chase the dream Votos: 4.</desc>
@@ -27935,21 +28011,8 @@
 	</programme>
 	<programme start="20250727130000 +0200" stop="20250727145500 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Previo Carrera T2025</title>
-		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★2.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 1.</desc>
-		<category lang="es">Deportes, Motor</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389047"></icon>
-		<rating system="ES">
-			<value>TP</value>
-		</rating>
-		<star-rating system="ES">
-			<value>2.0/10</value>
-		</star-rating>
-	</programme>
-	<programme start="20250727145500 +0200" stop="20250727170500 +0200" channel="DAZN F1 HD">
-		<title lang="es">DIRECTO Carrera T2025</title>
 		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★8.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 5.</desc>
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 4.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389047"></icon>
 		<rating system="ES">
@@ -27959,7 +28022,20 @@
 			<value>8.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727170500 +0200" stop="20250727180300 +0200" channel="DAZN F1 HD">
+	<programme start="20250727145500 +0200" stop="20250727181100 +0200" channel="DAZN F1 HD">
+		<title lang="es">DIRECTO Carrera T2025</title>
+		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★6.0/10
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 10.</desc>
+		<category lang="es">Deportes, Motor</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389047"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
+	</programme>
+	<programme start="20250727181100 +0200" stop="20250727190600 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO El Post de la Fórmula 1 T2025</title>
 		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP
  · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca.</desc>
@@ -27969,7 +28045,7 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727180300 +0200" stop="20250727183800 +0200" channel="DAZN F1 HD">
+	<programme start="20250727190600 +0200" stop="20250727194100 +0200" channel="DAZN F1 HD">
 		<title lang="es">Gearbox T2025 E15</title>
 		<desc lang="es">2025 | TP | ★6.0/10
  · Deportes/Fórmula 1 · Los fanáticos de la conducción tienen una cita en Gearbox, donde los volantes del presente, del pasado y del futuro se ponen en las manos de los mejores expertos. Votos: 2.</desc>
@@ -27982,14 +28058,17 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727183800 +0200" stop="20250727195000 +0200" channel="DAZN F1 HD">
+	<programme start="20250727194100 +0200" stop="20250727210100 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
-		<desc lang="es">Campeonato F3 de la FIA - Bélgica | 2025
- · Deportes/Motor · La F3 Series es un campeonato de automovilismo de velocidad por debajo de la F2.</desc>
+		<desc lang="es">Campeonato F2 de la FIA - Bélgica | 2025 | TP
+ · Deportes/Motor · Emisión de las carreras de la F2 Series, una de las canteras para la Fórmula 1.</desc>
 		<category lang="es">Deportes, Motor</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4356686"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388687"></icon>
+		<rating system="ES">
+			<value>TP</value>
+		</rating>
 	</programme>
-	<programme start="20250727195000 +0200" stop="20250727200500 +0200" channel="DAZN F1 HD">
+	<programme start="20250727210100 +0200" stop="20250727211600 +0200" channel="DAZN F1 HD">
 		<title lang="es">Todo sobre Fernando</title>
 		<desc lang="es">2025 | TP | ★6.0/10
  · Deportes/Fórmula 1 · Todo sobre Fernando Votos: 5.</desc>
@@ -28002,17 +28081,20 @@
 			<value>6.0/10</value>
 		</star-rating>
 	</programme>
-	<programme start="20250727200500 +0200" stop="20250727213500 +0200" channel="DAZN F1 HD">
+	<programme start="20250727211600 +0200" stop="20250727231600 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
-		<desc lang="es">Campeonato F2 de la FIA - Bélgica | 2025 | TP
- · Deportes/Motor · Emisión de las carreras de la F2 Series, una de las canteras para la Fórmula 1.</desc>
+		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★6.0/10
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 10.</desc>
 		<category lang="es">Deportes, Motor</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4388687"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389047"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>6.0/10</value>
+		</star-rating>
 	</programme>
-	<programme start="20250727213500 +0200" stop="20250727215000 +0200" channel="DAZN F1 HD">
+	<programme start="20250727231600 +0200" stop="20250727233100 +0200" channel="DAZN F1 HD">
 		<title lang="es">F2 Chase the dream E6</title>
 		<desc lang="es">2025 | TP
  · Deportes/Fórmula 1 · F2 Chase the dream.</desc>
@@ -28022,7 +28104,7 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727215000 +0200" stop="20250727221000 +0200" channel="DAZN F1 HD">
+	<programme start="20250727233100 +0200" stop="20250727235100 +0200" channel="DAZN F1 HD">
 		<title lang="es">Bienvenido Mr. Vowles</title>
 		<desc lang="es">2025 | TP
  · Deportes/Fórmula 1 · Bienvenido Mr. Vowles -.</desc>
@@ -28032,17 +28114,17 @@
 			<value>TP</value>
 		</rating>
 	</programme>
-	<programme start="20250727221000 +0200" stop="20250728001000 +0200" channel="DAZN F1 HD">
-		<title lang="es">DIRECTO Carrera T2025</title>
-		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★8.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 5.</desc>
-		<category lang="es">Deportes, Motor</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389047"></icon>
+	<programme start="20250727235100 +0200" stop="20250728001000 +0200" channel="DAZN F1 HD">
+		<title lang="es">F2 Chase the dream E3</title>
+		<desc lang="es">2025 | TP | ★6.0/10
+ · Deportes/Fórmula 1 · F2 Chase the dream Votos: 4.</desc>
+		<category lang="es">Deportes, Fórmula 1</category>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/M2279893V4022549"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728001000 +0200" stop="20250728022500 +0200" channel="DAZN F1 HD">
@@ -28074,7 +28156,7 @@
 	<programme start="20250728044500 +0200" stop="20250728070000 +0200" channel="DAZN F1 HD">
 		<title lang="es">Mundial de Fórmula 1 T2024</title>
 		<desc lang="es">GP de Hungría: Carrera | 2024 | TP | ★6.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2024 promete más emoción y espectáculo que nunca. Votos: 43.</desc>
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2024 promete más emoción y espectáculo que nunca. Votos: 44.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4246250"></icon>
 		<rating system="ES">
@@ -28178,7 +28260,7 @@
 	<programme start="20250728133500 +0200" stop="20250728144500 +0200" channel="DAZN F1 HD">
 		<title lang="es">Campeonato F3 de la FIA - Baréin T2025</title>
 		<desc lang="es">Carrera | 2025 | ★6.0/10
- · Deportes/Motor · La F3 Series es un campeonato de automovilismo de velocidad por debajo de la F2. Votos: 10.</desc>
+ · Deportes/Motor · La F3 Series es un campeonato de automovilismo de velocidad por debajo de la F2. Votos: 11.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4356686"></icon>
 		<star-rating system="ES">
@@ -28704,7 +28786,7 @@
 	<programme start="20250730165500 +0200" stop="20250730172500 +0200" channel="DAZN F1 HD">
 		<title lang="es">Código F1 T2025</title>
 		<desc lang="es">Emilia Romagna | 2025 | TP | ★6.0/10
- · Deportes/Programa deportes · Descubrimos todos los detalles del Campeonato Mundial de Fórmula 1, conocemos con profundidad a sus protagonistas y repasamos los mejores momentos de la competición. Votos: 9.</desc>
+ · Deportes/Programa deportes · Descubrimos todos los detalles del Campeonato Mundial de Fórmula 1, conocemos con profundidad a sus protagonistas y repasamos los mejores momentos de la competición. Votos: 10.</desc>
 		<category lang="es">Deportes, Programa deportes</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4364453"></icon>
 		<rating system="ES">
@@ -29162,7 +29244,7 @@
 	<programme start="20250801150000 +0200" stop="20250801154500 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Clasificación T2025</title>
 		<desc lang="es">Campeonato F3 de la FIA - Hungría | 2025 | ★6.0/10
- · Deportes/Motor · La F3 Series es un campeonato de automovilismo de velocidad por debajo de la F2. Votos: 3.</desc>
+ · Deportes/Motor · La F3 Series es un campeonato de automovilismo de velocidad por debajo de la F2. Votos: 4.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4356686"></icon>
 		<star-rating system="ES">
@@ -29281,7 +29363,7 @@
 	<programme start="20250801231500 +0200" stop="20250802012500 +0200" channel="DAZN F1 HD">
 		<title lang="es">Mundial de Fórmula 1 T2024</title>
 		<desc lang="es">GP de Hungría: Carrera | 2024 | TP | ★6.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2024 promete más emoción y espectáculo que nunca. Votos: 43.</desc>
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2024 promete más emoción y espectáculo que nunca. Votos: 44.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4246250"></icon>
 		<rating system="ES">
@@ -29558,15 +29640,15 @@
 	</programme>
 	<programme start="20250802230000 +0200" stop="20250803010000 +0200" channel="DAZN F1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
-		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★8.0/10
- · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 5.</desc>
+		<desc lang="es">Mundial F1 - GP de Bélgica | 2025 | TP | ★6.0/10
+ · Deportes/Motor · Vuelven las rectas frenéticas, las curvas imposibles y los adelantamientos al límite: ya está aquí el Mundial de Fórmula 1. La temporada 2025 promete más emoción y espectáculo que nunca. Votos: 10.</desc>
 		<category lang="es">Deportes, Motor</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4389047"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
 		<star-rating system="ES">
-			<value>8.0/10</value>
+			<value>6.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250803010000 +0200" stop="20250803013000 +0200" channel="DAZN F1 HD">
@@ -31115,25 +31197,31 @@
 	</programme>
 	<programme start="20250727130000 +0200" stop="20250727154500 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727154500 +0200" stop="20250727200000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 21 - Mantes-la-Ville - París T2025</title>
-		<desc lang="es">Tour de Francia | 2025 | TP
- · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos.
+		<desc lang="es">Tour de Francia | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387104"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727200000 +0200" stop="20250727203000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">La montonera T2025</title>
@@ -31170,25 +31258,31 @@
 	</programme>
 	<programme start="20250727220000 +0200" stop="20250727230000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727230000 +0200" stop="20250728000000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 21 - Mantes-la-Ville - París T2025</title>
-		<desc lang="es">Tour de Francia | 2025 | TP
- · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos.
+		<desc lang="es">Tour de Francia | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387104"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728000000 +0200" stop="20250728003000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Carrera T2025</title>
@@ -31220,14 +31314,17 @@
 	</programme>
 	<programme start="20250728020000 +0200" stop="20250728040000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728040000 +0200" stop="20250728044500 +0200" channel="Eurosport 1 HD">
 		<title lang="es">Copa del mundo de escalada - Chamonix T2025</title>
@@ -31253,14 +31350,17 @@
 	</programme>
 	<programme start="20250728060000 +0200" stop="20250728080000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728080000 +0200" stop="20250728113000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Primera ronda - Sesión 2 T25/26</title>
@@ -31275,14 +31375,17 @@
 	</programme>
 	<programme start="20250728113000 +0200" stop="20250728120000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 21 - Mantes-la-Ville - París T2025</title>
-		<desc lang="es">Tour de Francia | 2025 | TP
- · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos.
+		<desc lang="es">Tour de Francia | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387104"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728120000 +0200" stop="20250728130000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Carrera 2 T2025</title>
@@ -31308,14 +31411,17 @@
 	</programme>
 	<programme start="20250728140000 +0200" stop="20250728151500 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728151500 +0200" stop="20250728174500 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 3 - La Gacilly - Angers T2025</title>
@@ -31616,14 +31722,17 @@
 	</programme>
 	<programme start="20250729200000 +0200" stop="20250729220000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4076573"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250729220000 +0200" stop="20250729230000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">Mundial de Fórmula E T24/25</title>
@@ -31652,14 +31761,17 @@
 	</programme>
 	<programme start="20250730000000 +0200" stop="20250730020000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4076573"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250730020000 +0200" stop="20250730040000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
@@ -31702,14 +31814,17 @@
 	</programme>
 	<programme start="20250730060000 +0200" stop="20250730080000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4076573"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250730080000 +0200" stop="20250730113000 +0200" channel="Eurosport 1 HD">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 3 T25/26</title>
@@ -32623,14 +32738,17 @@
 	</programme>
 	<programme start="20250727203000 +0200" stop="20250727220000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727220000 +0200" stop="20250727230000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO ePrix de Londres 2 T24/25</title>
@@ -32659,14 +32777,17 @@
 	</programme>
 	<programme start="20250728000000 +0200" stop="20250728020000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728020000 +0200" stop="20250728024500 +0200" channel="Eurosport 2">
 		<title lang="es">Copa del mundo de escalada - Chamonix T2025</title>
@@ -32692,14 +32813,17 @@
 	</programme>
 	<programme start="20250728040000 +0200" stop="20250728060000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728060000 +0200" stop="20250728080000 +0200" channel="Eurosport 2">
 		<title lang="es">6 Horas de Sao Paulo - Mundial de resistencia de la FIA T2025</title>
@@ -32977,14 +33101,17 @@
 	</programme>
 	<programme start="20250729133000 +0200" stop="20250729170000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4076573"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250729170000 +0200" stop="20250729173000 +0200" channel="Eurosport 2">
 		<title lang="es">Mundial de motocross - Chequia T2025</title>
@@ -33046,14 +33173,17 @@
 	</programme>
 	<programme start="20250729220000 +0200" stop="20250730000000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4076573"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250730000000 +0200" stop="20250730020000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
@@ -33071,14 +33201,17 @@
 	</programme>
 	<programme start="20250730020000 +0200" stop="20250730040000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Octavos de final: Segunda ronda - Sesión 2 T25/26</title>
-		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP
- · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título.
+		<desc lang="es">Masters de Shanghái de snooker | 2025 | TP | ★2.0/10
+ · Deportes/Snooker · El Masters de Shanghái abre a lo grande la temporada de snooker. Se trata de un torneo por invitación al que acuden grandes figuras del taco. Entre ellas, el flamante campeón del mundo, el local Zhao Xintong. Judd Trump defiende título. Votos: 1.
 · País: China</desc>
 		<category lang="es">Deportes, Snooker</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4076573"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>2.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250730040000 +0200" stop="20250730060000 +0200" channel="Eurosport 2">
 		<title lang="es">DIRECTO Etapa 4 - Saumur - Poitiers T2025</title>
@@ -34049,14 +34182,17 @@
 	</programme>
 	<programme start="20250727145000 +0200" stop="20250727170500 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Etapa 2 - Brest - Quimper T2025</title>
-		<desc lang="es">Tour de Francia F | 2025 | TP
- · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024.
+		<desc lang="es">Tour de Francia F | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · La cuarta edición del Tour de Francia femenino se disputa del 26 de julio al 3 de agosto. La carrera crece y ya cuenta con nueve etapas y casi 1.200 kilómetros de recorrido. La polaca Katarzyna Niewiadoma se impuso en 2024. Votos: 1.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/MESP2P4075060"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250727170500 +0200" stop="20250727183000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO 10m sincronizados mixto - Final T2025</title>
@@ -34115,25 +34251,28 @@
 	</programme>
 	<programme start="20250727220000 +0200" stop="20250728000000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
+		<desc lang="es">Eurocopa F | 2025 | ★8.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 30.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
 		<star-rating system="ES">
-			<value>6.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728000000 +0200" stop="20250728020000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Etapa 21 - Mantes-la-Ville - París T2025</title>
-		<desc lang="es">Tour de Francia | 2025 | TP
- · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos.
+		<desc lang="es">Tour de Francia | 2025 | TP | ★10.0/10
+ · Deportes/Ciclismo · Fiel a su cita veraniega, el Tour de Francia convoca a lo más selecto del pelotón del 5 al 27 de julio. La exigente prueba cuenta con más de 3.300 kilómetros repartidos en 21 etapas y recupera su tradicional final en los Campos Elíseos. Votos: 2.
 · País: Francia</desc>
 		<category lang="es">Deportes, Ciclismo</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387104"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
+		<star-rating system="ES">
+			<value>10.0/10</value>
+		</star-rating>
 	</programme>
 	<programme start="20250728020000 +0200" stop="20250728024500 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Carrera 2 T2025</title>
@@ -34325,13 +34464,13 @@
 	</programme>
 	<programme start="20250728174500 +0200" stop="20250728194500 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
+		<desc lang="es">Eurocopa F | 2025 | ★8.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 30.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
 		<star-rating system="ES">
-			<value>6.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250728194500 +0200" stop="20250728233000 +0200" channel="Teledeporte">
@@ -34607,13 +34746,13 @@
 	</programme>
 	<programme start="20250729210000 +0200" stop="20250729230000 +0200" channel="Teledeporte">
 		<title lang="es">DIRECTO Final: Inglaterra - España T2025</title>
-		<desc lang="es">Eurocopa F | 2025 | ★6.0/10
- · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 5.
+		<desc lang="es">Eurocopa F | 2025 | ★8.0/10
+ · Deportes/Fútbol · España, actual campeona del mundo y de la Liga de Naciones, quiere la triple corona. Las de Montse Tomé pelean en la final por un título que nunca han alzado, el de la Eurocopa. Enfrente, una Inglaterra que defiende el cinturón y que no lo pondrá fácil. Votos: 30.
 · País: Suiza</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4393834"></icon>
 		<star-rating system="ES">
-			<value>6.0/10</value>
+			<value>8.0/10</value>
 		</star-rating>
 	</programme>
 	<programme start="20250729230000 +0200" stop="20250730000000 +0200" channel="Teledeporte">
@@ -34912,7 +35051,7 @@
 	<programme start="20250727091500 +0200" stop="20250727110000 +0200" channel="Vamos BAR">
 		<title lang="es">LeMond: un americano en París</title>
 		<desc lang="es">2022 | ⑫ | ★6.0/10
- · Documentales/Deportes · Tras un accidente de caza, el ciclista Greg LeMond estuvo al borde de la muerte. Nadie podía presagiar que, tras ese suceso, ganaría uno de los Tour de Francia más reñidos que se recuerden. Votos: 346.
+ · Documentales/Deportes · Tras un accidente de caza, el ciclista Greg LeMond estuvo al borde de la muerte. Nadie podía presagiar que, tras ese suceso, ganaría uno de los Tour de Francia más reñidos que se recuerden. Votos: 347.
 · País: R.U.
 · Dirección: Alex Holmes.
 · Productora: New Black Films.</desc>
@@ -34938,7 +35077,7 @@
 	<programme start="20250727120000 +0200" stop="20250727135000 +0200" channel="Vamos BAR">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Moutet - De Minaur | 2025 | TP | ★6.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 5.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383891"></icon>
 		<rating system="ES">
@@ -35007,7 +35146,7 @@
 	<programme start="20250727165500 +0200" stop="20250727185500 +0200" channel="Vamos BAR">
 		<title lang="es">Torneo de Washington T2025</title>
 		<desc lang="es">Semifinales: Davidovich - Shelton | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 6.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
 		<category lang="es">Deportes, Tenis</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383891"></icon>
 		<rating system="ES">
@@ -35033,7 +35172,7 @@
 	<programme start="20250727195500 +0200" stop="20250727205500 +0200" channel="Vamos BAR">
 		<title lang="es">CD Mirandés, cada partido me vuelvo a enamorar</title>
 		<desc lang="es">2025 | TP | ★8.0/10
- · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 73.
+ · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 74.
 · País: España</desc>
 		<category lang="es">Deportes, Programa deportes</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387009"></icon>
@@ -35075,7 +35214,7 @@
 	<programme start="20250727232000 +0200" stop="20250728013000 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 3.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -35148,7 +35287,7 @@
 	<programme start="20250728065500 +0200" stop="20250728083500 +0200" channel="Vamos BAR">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
@@ -35204,11 +35343,11 @@
 		</star-rating>
 	</programme>
 	<programme start="20250728104300 +0200" stop="20250728124300 +0200" channel="Vamos BAR">
-		<title lang="es">DIRECTO Final T2025</title>
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -35306,7 +35445,7 @@
 	<programme start="20250728180000 +0200" stop="20250728190000 +0200" channel="Vamos BAR">
 		<title lang="es">CD Mirandés, cada partido me vuelvo a enamorar</title>
 		<desc lang="es">2025 | TP | ★8.0/10
- · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 73.
+ · Deportes/Programa deportes · La heroicidad del CD Mirandés le llevó que a rozar la gloria y ver muy de cerca el ascenso. Así son las intimidades de un modesto equipo que nos abre las puertas de par en par en los días más importantes de su historia. Votos: 74.
 · País: España</desc>
 		<category lang="es">Deportes, Programa deportes</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4387009"></icon>
@@ -35365,7 +35504,7 @@
 	<programme start="20250728220000 +0200" stop="20250728234000 +0200" channel="Vamos BAR">
 		<title lang="es">Drazen</title>
 		<desc lang="es">2024 | ⑫ | ★10.0/10
- · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 4.
+ · Cine/Biopic · Croacia, 1975. A pesar de sus problemas respiratorios y la insistencia de sus padres para que se dedique a la música, Drazen descubre que baloncesto es su verdadera pasión. Así nace la leyenda del "Mozart del baloncesto". Votos: 13.
 · País: Croacia
 · Dirección: Danilo Serbedzija, Ljubo Zdjelarevic.
 · Reparto: Domagoj Nizic, Zrinka Cvitesic, Dragan Micanovic.
@@ -35437,11 +35576,11 @@
 		</rating>
 	</programme>
 	<programme start="20250729045000 +0200" stop="20250729070000 +0200" channel="Vamos BAR">
-		<title lang="es">DIRECTO Final T2025</title>
+		<title lang="es">DIRECTO Final: Davidovich - De Miñaur T2025</title>
 		<desc lang="es">Torneo de Washington | 2025 | TP | ★8.0/10
- · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 7.</desc>
+ · Deportes/Tenis · Los mejores tenistas recorren las pistas de todo el mundo luchando por ir sumando puntos que les aúpen a lo más alto del Ranking ATP. En arcilla, en hierba o en pista dura estos torneos se agrupan en cuatro categorías: 250, 500, 1000 y Grand Slams. Votos: 9.</desc>
 		<category lang="es">Deportes, Tenis</category>
-		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4383887"></icon>
+		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4394016"></icon>
 		<rating system="ES">
 			<value>TP</value>
 		</rating>
@@ -35757,7 +35896,7 @@
 	<programme start="20250730064000 +0200" stop="20250730083000 +0200" channel="Vamos BAR">
 		<title lang="es">DIRECTO Jornada 3: Huracán - Boca Juniors T2025</title>
 		<desc lang="es">Liga Argentina. Torneo Clausura | 2025 | TP | ★10.0/10
- · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 2.
+ · Deportes/Fútbol · Vive en directo toda la emoción de La Liga de Fútbol AFA de Argentina. La eterna rivalidad entre Boca Juniors y River Plate, las estrellas más destacadas y los dos mejores partidos de cada jornada. Todo en Movistar Plus. Votos: 3.
 · País: Argentina</desc>
 		<category lang="es">Deportes, Fútbol</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4392430"></icon>
@@ -36019,7 +36158,7 @@
 	<programme start="20250731023500 +0200" stop="20250731043500 +0200" channel="Vamos BAR">
 		<title lang="es">Gira de los Lions T2025</title>
 		<desc lang="es">Australia - British &amp; Irish Lions (Partido 2) | TP | ★8.0/10
- · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 8.</desc>
+ · Deportes/Rugby · Los British &amp; Irish Lions golpearon primero en Brisbane y ahora quieren sellar las Series en Melbourne ante una Australia al límite. Votos: 9.</desc>
 		<category lang="es">Deportes, Rugby</category>
 		<icon src="https://www.movistarplus.es/recorte/n/dispficha/F4385034"></icon>
 		<rating system="ES">
