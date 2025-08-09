@@ -3,3 +3,4 @@ requests==2.32.3
 xmltodict==0.13.0
 gunicorn==22.0.0
 pytz==2024.1
+schedule==1.2.2
