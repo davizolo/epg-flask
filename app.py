@@ -8,7 +8,10 @@ import logging
 import re
 import os
 import urllib.parse
-import unicodedata # Import for accent handling
+import unicodedata
+import schedule
+import time
+import threading
 
 # Configuración de logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -182,6 +185,55 @@ def get_epg_data():
     except Exception as e:
         logger.error(f"Error inesperado al obtener o procesar la EPG: {e}")
         raise # Propagar la excepción
+
+def cleanup_and_download_epg():
+    """
+    Elimina los archivos temporales y de caché y fuerza una nueva descarga de la EPG.
+    """
+    cache_file = "epg_cache.xml"
+    temp_file = "epg_temp.xml"
+    
+    # Eliminar archivos si existen
+    for file in [cache_file, temp_file]:
+        if os.path.exists(file):
+            try:
+                os.remove(file)
+                logger.info(f"Archivo {file} eliminado exitosamente.")
+            except Exception as e:
+                logger.error(f"Error al eliminar archivo {file}: {e}")
+    
+    # Forzar nueva descarga
+    try:
+        get_epg_data()
+        logger.info("Nueva EPG descargada y procesada exitosamente.")
+    except Exception as e:
+        logger.error(f"Error al descargar y procesar nueva EPG: {e}")
+
+def schedule_cleanup():
+    """
+    Configura la tarea programada para ejecutarse todos los días a las 8:00 AM en la zona horaria de Madrid.
+    """
+    madrid_tz = pytz.timezone("Europe/Madrid")
+    
+    def job():
+        now = datetime.now(madrid_tz)
+        if now.hour == 8 and now.minute == 0:
+            logger.info("Ejecutando limpieza y re-descarga de EPG a las 8:00 AM")
+            cleanup_and_download_epg()
+    
+    # Programar la verificación cada minuto
+    schedule.every(1).minutes.do(job)
+    
+    # Ejecutar el bucle de schedule en un hilo separado
+    def run_schedule():
+        while True:
+            schedule.run_pending()
+            time.sleep(60) # Esperar 60 segundos entre verificaciones
+    
+    # Iniciar el hilo
+    schedule_thread = threading.Thread(target=run_schedule, daemon=True)
+    schedule_thread.start()
+    logger.info("Programación de limpieza diaria iniciada.")
 
 def escape_js_string(s):
     """Escapa caracteres especiales para usar una cadena Python en JavaScript."""
@@ -1094,6 +1146,30 @@ def mostrar_epg():
 """
     return Response(html_content, mimetype="text/html")
 
+@app.route("/cleanup")
+def manual_cleanup():
+    cache_file = "epg_cache.xml"
+    temp_file = "epg_temp.xml"
+    deleted_files = []
+    
+    for file in [cache_file, temp_file]:
+        if os.path.exists(file):
+            try:
+                os.remove(file)
+                deleted_files.append(file)
+                logger.info(f"Archivo {file} eliminado manualmente.")
+            except Exception as e:
+                logger.error(f"Error al eliminar archivo {file}: {e}")
+        else:
+            logger.info(f"Archivo {file} no encontrado.")
+    
+    if deleted_files:
+        return f"Archivos eliminados: {', '.join(deleted_files)}", 200
+    else:
+        return "No se encontraron archivos para eliminar.", 200
+
 if __name__ == "__main__":
+    # Iniciar la programación de limpieza diaria
+    schedule_cleanup()
     print("🔵 Servidor EPG en: http://0.0.0.0:5053/")
     app.run(host="0.0.0.0", port=5053, debug=True)
