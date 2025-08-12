@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, redirect
 import requests
 import xmltodict
 from datetime import datetime, timedelta
@@ -12,6 +12,7 @@ import unicodedata
 import schedule
 import time
 import threading
+import json
 
 # Configuración de logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -26,6 +27,9 @@ CHANNELS_OFICIALES = [
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
 ]
+
+# Canales personalizados
+CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 9)]
 
 # Diccionario de alias para mapear nombres de canales de la EPG a nombres oficiales
 ALIAS_CANAL = {
@@ -80,8 +84,33 @@ CANAL_TO_PNG = {
     "Teledeporte": "teledeporte.png"
 }
 
+# Mapeo de canales personalizados a sus logos
+CUSTOM_TO_PNG = {
+    "Canal 1": "canal1.png",
+    "Canal 2": "canal2.png",
+    "Canal 3": "canal3.png",
+    "Canal 4": "canal4.png",
+    "Canal 5": "canal5.png",
+    "Canal 6": "canal6.png",
+    "Canal 7": "canal7.png",
+    "Canal 8": "canal8.png"
+}
+
 # URL de la guía EPG
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
+
+def load_channel_mapping():
+    mapping_file = "channel_mapping.json"
+    if os.path.exists(mapping_file):
+        with open(mapping_file, "r", encoding="utf-8") as f:
+            return json.load(f)
+    else:
+        return {custom: None for custom in CUSTOM_CHANNELS}
+
+def save_channel_mapping(mapping):
+    mapping_file = "channel_mapping.json"
+    with open(mapping_file, "w", encoding="utf-8") as f:
+        json.dump(mapping, f)
 
 def create_temp_epg_file(data, temp_file="epg_temp.xml"):
     """
@@ -249,6 +278,110 @@ def normalize_text(text):
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
     return text.lower()
 
+@app.route("/programacion", methods=['GET', 'POST'])
+def programacion():
+    mapping = load_channel_mapping()
+    if request.method == 'POST':
+        for custom in CUSTOM_CHANNELS:
+            mapping[custom] = request.form.get(custom, None)
+        save_channel_mapping(mapping)
+        return redirect('/programacion')
+
+    # Generar el formulario con selectores
+    form_html = ""
+    for custom in CUSTOM_CHANNELS:
+        options = '<option value="">Ninguno</option>' + "".join(
+            f'<option value="{ch}" {"selected" if mapping.get(custom) == ch else ""}>{ch}</option>'
+            for ch in CHANNELS_OFICIALES
+        )
+        form_html += f'''
+            <div class="mb-4">
+                <label for="{custom}" class="block text-sm font-medium text-gray-300 light-mode:text-gray-700">{custom}:</label>
+                <select name="{custom}" id="{custom}" class="card w-full p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
+                    {options}
+                </select>
+            </div>
+        '''
+
+    html_content = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Canales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {{
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #3b82f6;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --bg-light: #ffffff;
+            --text-dark: #111827;
+            --text-dark-secondary: #4b5563;
+        }}
+        body {{
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }}
+        body.light-mode {{
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }}
+        .card {{
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }}
+        .light-mode .card {{
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }}
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="fixed top-4 right-4 flex space-x-2 z-50">
+        <button class="theme-toggle card px-4 py-2 rounded-lg" onclick="toggleTheme()">
+            <span id="theme-text">Noche</span>
+        </button>
+    </div>
+    <div class="w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Configuración de Canales</h1>
+        <form method="post" class="space-y-4">
+            {form_html}
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">Guardar</button>
+            <a href="/" class="w-full bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-600 transition-colors text-center block mt-2">Volver a la guía</a>
+        </form>
+    </div>
+    <script>
+        function toggleTheme() {{
+            document.body.classList.toggle('light-mode');
+            const themeText = document.getElementById('theme-text');
+            themeText.textContent = document.body.classList.contains('light-mode') ? 'Día' : 'Noche';
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }}
+        document.addEventListener('DOMContentLoaded', () => {{
+            if (localStorage.getItem('theme') === 'light') {{
+                document.body.classList.add('light-mode');
+                document.getElementById('theme-text').textContent = 'Día';
+            }}
+        }});
+    </script>
+</body>
+</html>
+"""
+    return html_content
+
 @app.route("/")
 def mostrar_epg():
     """
@@ -260,9 +393,16 @@ def mostrar_epg():
     categoria_entrada = request.args.get("categoria", "Todos").strip()
     search_query = request.args.get("search_query", "").strip()
     
-    # Mapear el canal de entrada a su nombre oficial si existe un alias
-    canal = ALIAS_CANAL.get(canal_entrada, canal_entrada)
-    logger.debug(f"Canal de entrada: '{canal_entrada}', Mapeado a: '{canal}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}', Búsqueda: '{search_query}'")
+    # Cargar el mapeo de canales
+    mapping = load_channel_mapping()
+    reverse_mapping = {}
+    for custom, official in mapping.items():
+        if official:
+            if official not in reverse_mapping:
+                reverse_mapping[official] = []
+            reverse_mapping[official].append(custom)
+
+    logger.debug(f"Canal de entrada: '{canal_entrada}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}', Búsqueda: '{search_query}'")
 
     # Generar opciones del selector de días
     now = datetime.now(pytz.timezone("Europe/Madrid"))
@@ -296,14 +436,14 @@ def mostrar_epg():
         for d in dias_opciones
     )
 
-    # Generar el grid de canales con logos
+    # Generar el grid de canales con logos de canales personalizados
     channel_grid = "".join(
         f'<div class="logo-tile-wrapper">'
-        f'<a href="/?canal={urllib.parse.quote(nombre)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center">'
-        f'<img src="/static/img/{CANAL_TO_PNG.get(nombre, "default.png")}" alt="{nombre}" class="max-h-32 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+        f'<a href="/?canal={urllib.parse.quote(custom)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center">'
+        f'<img src="/static/img/{CUSTOM_TO_PNG.get(custom, "default.png")}" alt="{custom}" class="max-h-32 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
         f'</a>'
         f'</div>'
-        for nombre in CHANNELS_OFICIALES
+        for custom in CUSTOM_CHANNELS if mapping.get(custom)  # Solo mostrar si está mapeado
     )
 
     try:
@@ -489,24 +629,10 @@ def mostrar_epg():
     # Procesar todos los programas de la EPG
     for prog in data['tv']['programme']:
         canal_xml = prog.get('@channel', '')
-        canal_mapped = ALIAS_CANAL.get(canal_xml, canal_xml)
+        canal_official = ALIAS_CANAL.get(canal_xml, canal_xml)
         
-        # Si se ha seleccionado un canal específico, filtrar por él
-        if canal_entrada and canal_entrada != "Todos" and canal_mapped != canal:
-             continue # Si el canal no coincide con el filtro, saltar
-
-        # Si no se ha seleccionado un canal específico, asegurar que sea un canal oficial
-        if not canal_entrada and canal_mapped not in CHANNELS_OFICIALES:
-            continue
-        
-        # Si se ha seleccionado un canal específico y es oficial, pero el mapeo no es exacto
-        # (ej. "Vamos" variantes), asegurar que el canal mapeado sea el que se espera.
-        if canal_entrada and canal_entrada != "Todos" and canal_mapped == canal and canal not in CHANNELS_OFICIALES:
-            # Esto maneja el caso donde el usuario busca un alias que no está en CHANNELS_OFICIALES
-            # pero sí en ALIAS_CANAL y el mapeo es correcto.
-            pass
-        elif canal_mapped not in CHANNELS_OFICIALES:
-            continue # Si no es un canal oficial y no se está buscando un alias específico, saltar
+        if canal_official not in reverse_mapping:
+            continue  # Solo procesar si está mapeado a al menos un custom
 
         try:
             inicio = datetime.strptime(prog['@start'], "%Y%m%d%H%M%S %z")
@@ -536,9 +662,9 @@ def mostrar_epg():
                normalized_search_query not in normalized_description:
                 continue
 
-        prog_key = (prog['@start'], prog['@stop'], titulo, canal_mapped)
+        prog_key = (prog['@start'], prog['@stop'], titulo, canal_official)
         if prog_key in seen_programs:
-            continue # Evitar programas duplicados
+            continue  # Evitar programas duplicados
         seen_programs.add(prog_key)
 
         hora_inicio = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
@@ -557,19 +683,26 @@ def mostrar_epg():
         synopsis = desc_parts[0][:200] + "..." if len(desc_parts[0]) > 200 else desc_parts[0]
         details = ". ".join(desc_parts[1:])[:400] + "..." if len(". ".join(desc_parts[1:])) > 400 else ". ".join(desc_parts[1:])
 
-        eventos.append({
-            "inicio": inicio,
-            "fecha": fecha,
-            "hora_inicio": hora_inicio,
-            "hora_fin": hora_fin,
-            "titulo": titulo,
-            "synopsis": synopsis,
-            "details": details,
-            "categoria": categoria_display_class, # Para la clase CSS
-            "categoria_text": categoria_display_text, # Para el texto visible
-            "imagen": imagen,
-            "canal": canal_mapped
-        })
+        # Crear un evento por cada custom mapeado a este official
+        for custom in reverse_mapping[canal_official]:
+            # Si hay filtro de canal y no coincide con el custom, saltar
+            if canal_entrada and canal_entrada != "Todos" and custom != canal_entrada:
+                continue
+
+            eventos.append({
+                "inicio": inicio,
+                "fecha": fecha,
+                "hora_inicio": hora_inicio,
+                "hora_fin": hora_fin,
+                "titulo": titulo,
+                "synopsis": synopsis,
+                "details": details,
+                "categoria": categoria_display_class, # Para la clase CSS
+                "categoria_text": categoria_display_text, # Para el texto visible
+                "imagen": imagen,
+                "canal": custom,
+                "official": canal_official  # Para logo, etc.
+            })
 
     eventos.sort(key=lambda x: x["inicio"])
 
@@ -587,9 +720,9 @@ def mostrar_epg():
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                 f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
+                f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
-                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                 f'</a>'
                 f'</div>'
                 f'<div>'
@@ -604,11 +737,11 @@ def mostrar_epg():
         page_title = f"Resultados para \"{search_query}\""
         show_back_link = True
     elif canal_entrada and canal_entrada != "Todos":
-        # Modo canal específico
-        eventos_filtrados_canal = [e for e in eventos if e["canal"] == canal]
+        # Modo canal específico (custom)
+        eventos_filtrados_canal = [e for e in eventos if e["canal"] == canal_entrada]
         if not eventos_filtrados_canal:
-            logger.warning(f"No se encontraron eventos para {canal} en el rango {fecha_inicio} a {fecha_fin}")
-            lista_html = f'<p class="text-center text-red-700 light-mode:text-red-800 text-lg font-semibold card p-4">No hay programas disponibles para {canal} en las fechas seleccionadas.</p>'
+            logger.warning(f"No se encontraron eventos para {canal_entrada} en el rango {fecha_inicio} a {fecha_fin}")
+            lista_html = f'<p class="text-center text-red-700 light-mode:text-red-800 text-lg font-semibold card p-4">No hay programas disponibles para {canal_entrada} en las fechas seleccionadas.</p>'
         else:
             lista_html = "".join(
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
@@ -623,12 +756,12 @@ def mostrar_epg():
             )
         channel_logo_html = (
             f'<div class="flex justify-center mb-6">'
-            f'<div class="logo-tile p-2">'
-            f'<img src="/static/img/{CANAL_TO_PNG.get(canal, "default.png")}" alt="{canal}" class="max-h-20 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+            f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
+            f'<img src="/static/img/{CUSTOM_TO_PNG.get(canal_entrada, "default.png")}" alt="{canal_entrada}" class="max-h-20 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
             f'</div>'
             f'</div>'
         )
-        page_title = canal
+        page_title = canal_entrada
         show_back_link = True
     else:
         # Modo categoría o general
@@ -642,9 +775,9 @@ def mostrar_epg():
                     f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                     f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                     f'<div class="ml-4 flex items-start space-x-4">'
-                    f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
+                    f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
                     f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
-                    f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                    f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                     f'</a>'
                     f'</div>'
                     f'<div>'
@@ -664,9 +797,9 @@ def mostrar_epg():
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                 f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="logo-tile p-2 bg-white">' # Baldosa blanca explícita
+                f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
-                    f'<img src="/static/img/{CANAL_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                 f'</a>'
                 f'</div>'
                 f'<div>'
@@ -741,7 +874,6 @@ def mostrar_epg():
         }}
 
         .logo-tile-wrapper {{
-            background: white; /* Siempre blanco para la baldosa del logo */
             border-radius: 8px;
             padding: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -760,12 +892,10 @@ def mostrar_epg():
         .logo-tile {{
             border-radius: 8px;
             padding: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: white; /* Asegura que la baldosa sea blanca en modo día y noche */
         }}
 
 
@@ -1119,15 +1249,6 @@ def mostrar_epg():
             if (event.target === fullScreenModal) {{
                 fullScreenModal.classList.add('hidden');
             }}
-        }};
-
-        // Funciones para el modo de búsqueda
-        function toggleSearchMode() {{
-            document.getElementById('mainContent').classList.toggle('hidden');
-            document.getElementById('searchSection').classList.toggle('hidden');
-            if (!document.getElementById('searchSection').classList.contains('hidden')) {{
-                document.getElementById('searchInput').focus();
-            }}
         }}
 
         function performSearch() {{
@@ -1138,38 +1259,32 @@ def mostrar_epg():
         function exitSearchMode() {{
             window.location.href = '/'; // Go back to the main page without any filters
         }}
+
+        function toggleSearchMode() {{
+            const mainContent = document.getElementById('mainContent');
+            const searchSection = document.getElementById('searchSection');
+            mainContent.classList.toggle('hidden');
+            searchSection.classList.toggle('hidden');
+            if (!searchSection.classList.contains('hidden')) {{
+                document.getElementById('searchInput').focus();
+            }}
+        }}
+
+        // Permitir búsqueda al presionar Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {{
+            if (e.key === 'Enter') {{
+                performSearch();
+            }}
+        }});
     </script>
 </body>
 </html>
-
-
 """
+
     return Response(html_content, mimetype="text/html")
 
-@app.route("/cleanup")
-def manual_cleanup():
-    cache_file = "epg_cache.xml"
-    temp_file = "epg_temp.xml"
-    deleted_files = []
-    
-    for file in [cache_file, temp_file]:
-        if os.path.exists(file):
-            try:
-                os.remove(file)
-                deleted_files.append(file)
-                logger.info(f"Archivo {file} eliminado manualmente.")
-            except Exception as e:
-                logger.error(f"Error al eliminar archivo {file}: {e}")
-        else:
-            logger.info(f"Archivo {file} no encontrado.")
-    
-    if deleted_files:
-        return f"Archivos eliminados: {', '.join(deleted_files)}", 200
-    else:
-        return "No se encontraron archivos para eliminar.", 200
+# Iniciar la programación de limpieza al arrancar el servidor
+schedule_cleanup()
 
 if __name__ == "__main__":
-    # Iniciar la programación de limpieza diaria
-    schedule_cleanup()
-    print("🔵 Servidor EPG en: http://0.0.0.0:5053/")
-    app.run(host="0.0.0.0", port=5053, debug=True)
+    app.run(debug=True, host="0.0.0.0", port=5053)
