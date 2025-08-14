@@ -278,6 +278,13 @@ def normalize_text(text):
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
     return text.lower()
 
+
+@app.route("/cleanup")
+def cleanup():
+    cleanup_and_download_epg()
+    return "Archivos temporales eliminados y EPG actualizada."
+
+
 @app.route("/programacion", methods=['GET', 'POST'])
 def programacion():
     mapping = load_channel_mapping()
