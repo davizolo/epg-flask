@@ -23,7 +23,7 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 # Lista de canales oficiales que se mostrarán en la guía
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
-    "M. LaLiga", "M. LaLiga 2", "DAZN LaLiga", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD",
+    "M. LaLiga", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD",
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
 ]
@@ -37,7 +37,7 @@ ALIAS_CANAL = {
     "La Sexta": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte", "Movistar LaLiga": "M. LaLiga",
     "Movistar La Liga": "M. LaLiga", "M LaLiga": "M. LaLiga", "M+ LaLiga TV HD": "M. LaLiga",
     "M+ LaLiga TV 2 HD": "M. LaLiga 2",
-    "Dazn Laliga": "DAZN LaLiga", "DAZN LaLiga HD": "DAZN LaLiga", "vamos": "#Vamos por M+", "#vamos": "#Vamos por M+",
+    "Dazn Laliga": "DAZN LaLiga", "DAZN LaLiga HD": "DAZN LaLiga", "Dazn Laliga 2": "DAZN LaLiga 2 HD", "vamos": "#Vamos por M+", "#vamos": "#Vamos por M+",
     "M+ Vamos HD": "#Vamos por M+", "Vamos BAR": "#Vamos por M+", "Movistar Vamos": "#Vamos por M+",
     "M+ Vamos": "#Vamos por M+", "M+ Vamos.TV": "#Vamos por M+", "M+ Vamos SD": "#Vamos por M+",
     "M+ Vamos FHD": "#Vamos por M+", "M+ Vamos UHD": "#Vamos por M+", "M+ Vamos 720": "#Vamos por M+",
@@ -62,6 +62,7 @@ CANAL_TO_PNG = {
     "M. LaLiga": "Mlaliga.png",
     "M. LaLiga 2": "Mlaliga2.png",
     "DAZN LaLiga": "daznlaliga.png",
+    "DAZN LaLiga 2": "daznlaliga2.png",
     "#Vamos por M+": "vamos.png",
     "Movistar Plus+": "mplus.png",
     "DAZN 1": "dazn1.png",
