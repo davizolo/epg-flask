@@ -62,7 +62,7 @@ CANAL_TO_PNG = {
     "M. LaLiga": "Mlaliga.png",
     "M. LaLiga 2": "Mlaliga2.png",
     "DAZN LaLiga": "daznlaliga.png",
-    "DAZN LaLiga 2": "daznlaliga2.png",
+    "DAZN LaLiga 2 HD": "daznlaliga2.png",
     "#Vamos por M+": "vamos.png",
     "Movistar Plus+": "mplus.png",
     "DAZN 1": "dazn1.png",
