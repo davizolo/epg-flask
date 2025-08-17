@@ -334,6 +334,9 @@ def programacion():
             --text-dark: #111827;
             --text-dark-secondary: #4b5563;
         }}
+
+
+
         body {{
             background: var(--bg-dark);
             color: var(--text-primary);
@@ -449,9 +452,12 @@ def mostrar_epg():
 
     # Generar el grid de canales con logos de canales personalizados
     channel_grid = "".join(
-        f'<div class="logo-tile-wrapper">'
+        f'<div class="logo-tile-wrapper relative">'
         f'<a href="/?canal={urllib.parse.quote(custom)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center">'
         f'<img src="/static/img/{CUSTOM_TO_PNG.get(custom, "default.png")}" alt="{custom}" class="max-h-32 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+        f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
+        f'<img src="/static/img/{CANAL_TO_PNG.get(mapping[custom], "default.png")}" alt="{mapping[custom]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+        f'</div>'
         f'</a>'
         f'</div>'
         for custom in CUSTOM_CHANNELS if mapping.get(custom)  # Solo mostrar si está mapeado
@@ -731,9 +737,12 @@ def mostrar_epg():
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                 f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
+                f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                 f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
+                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["official"], "default.png")}" alt="{evento["official"]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'</div>'
                 f'</a>'
                 f'</div>'
                 f'<div>'
@@ -767,8 +776,11 @@ def mostrar_epg():
             )
         channel_logo_html = (
             f'<div class="flex justify-center mb-6">'
-            f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
+            f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
             f'<img src="/static/img/{CUSTOM_TO_PNG.get(canal_entrada, "default.png")}" alt="{canal_entrada}" class="max-h-20 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+            f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-right justify-center">'
+            f'<img src="/static/img/{CANAL_TO_PNG.get(mapping[canal_entrada], "default.png")}" alt="{mapping[canal_entrada]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+            f'</div>'
             f'</div>'
             f'</div>'
         )
@@ -786,9 +798,12 @@ def mostrar_epg():
                     f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                     f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                     f'<div class="ml-4 flex items-start space-x-4">'
-                    f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
+                    f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
                     f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                     f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                    f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
+                    f'<img src="/static/img/{CANAL_TO_PNG.get(evento["official"], "default.png")}" alt="{evento["official"]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                    f'</div>'
                     f'</a>'
                     f'</div>'
                     f'<div>'
@@ -808,9 +823,12 @@ def mostrar_epg():
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                 f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="logo-tile p-2">' # Eliminado fondo blanco explícito
+                f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                 f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
+                f'<img src="/static/img/{CANAL_TO_PNG.get(evento["official"], "default.png")}" alt="{evento["official"]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+                f'</div>'
                 f'</a>'
                 f'</div>'
                 f'<div>'
@@ -847,6 +865,12 @@ def mostrar_epg():
             --text-dark-secondary: #4b5563;
         }}
 
+// Fuerza modo día permanentemente (opcional)
+document.body.classList.add('light-mode');
+document.body.classList.remove('dark-mode');
+localStorage.setItem('theme', 'light');
+
+
         body {{
             background: var(--bg-dark);
             color: var(--text-primary);
@@ -859,6 +883,8 @@ def mostrar_epg():
             background: var(--bg-light);
             color: var(--text-dark);
         }}
+
+
 
         .card {{
             background: var(--card-bg);
@@ -1056,6 +1082,8 @@ def mostrar_epg():
             background-color: #2563eb !important; /* blue-600 */
             color: white !important;
         }}
+
+
         .light-mode .search-section-button-blue:hover {{
             background-color: #1d4ed8 !important; /* blue-700 */
         }}
@@ -1262,26 +1290,37 @@ def mostrar_epg():
             }}
         }}
 
-        function performSearch() {{
-            const query = document.getElementById('searchInput').value;
-            window.location.href = `/?search_query=${{encodeURIComponent(query)}}`;
+        // Funciones para manejar la búsqueda
+        function toggleSearchMode() {{
+            document.getElementById('mainContent').classList.add('hidden');
+            document.getElementById('searchSection').classList.remove('hidden');
+            document.getElementById('searchInput').focus();
         }}
 
         function exitSearchMode() {{
-            window.location.href = '/'; // Go back to the main page without any filters
-        }}
-
-        function toggleSearchMode() {{
-            const mainContent = document.getElementById('mainContent');
-            const searchSection = document.getElementById('searchSection');
-            mainContent.classList.toggle('hidden');
-            searchSection.classList.toggle('hidden');
-            if (!searchSection.classList.contains('hidden')) {{
-                document.getElementById('searchInput').focus();
+            document.getElementById('mainContent').classList.remove('hidden');
+            document.getElementById('searchSection').classList.add('hidden');
+            // Limpiar la búsqueda al salir
+            document.getElementById('searchInput').value = '';
+            // Si estamos en una URL con parámetro de búsqueda, redirigir sin él
+            if (window.location.search.includes('search_query')) {{
+                window.location.href = window.location.pathname + window.location.search.replace(/[?&]search_query=[^&]*/, '');
             }}
         }}
 
-        // Permitir búsqueda al presionar Enter
+        function performSearch() {{
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {{
+                // Construir la URL con los parámetros actuales más la nueva búsqueda
+                const url = new URL(window.location.href);
+                url.searchParams.set('search_query', query);
+                window.location.href = url.toString();
+            }} else {{
+                exitSearchMode();
+            }}
+        }}
+
+        // Permitir búsqueda con Enter
         document.getElementById('searchInput').addEventListener('keypress', function(e) {{
             if (e.key === 'Enter') {{
                 performSearch();
@@ -1291,11 +1330,11 @@ def mostrar_epg():
 </body>
 </html>
 """
-
-    return Response(html_content, mimetype="text/html")
-
-# Iniciar la programación de limpieza al arrancar el servidor
-schedule_cleanup()
+    return html_content
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5053)
+    # Iniciar el programador de tareas en un hilo separado
+    schedule_cleanup()
+    
+    # Configurar y ejecutar la aplicación Flask
+    app.run(host="0.0.0.0", port=5053, debug=True)
