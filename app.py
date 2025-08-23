@@ -23,7 +23,7 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 # Lista de canales oficiales que se mostrarán en la guía
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
-    "M. LaLiga", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2",
+    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2",
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
 ]
@@ -34,8 +34,8 @@ CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 9)]
 # Diccionario de alias para mapear nombres de canales de la EPG a nombres oficiales
 ALIAS_CANAL = {
     "La 1": "La 1 HD", "La 2": "La 2", "Antena 3": "Antena 3 HD", "Cuatro": "Cuatro HD", "Telecinco": "Telecinco HD",
-    "La Sexta": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte", "Movistar LaLiga": "M. LaLiga",
-    "Movistar La Liga": "M. LaLiga", "M LaLiga": "M. LaLiga", "M+ LaLiga TV HD": "M. LaLiga",
+    "La Sexta": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte", "Movistar LaLiga": "M+ LaLiga HD",
+    "Movistar La Liga": "M+ LaLiga HD", "M LaLiga": "M+ LaLiga HD", "M+ LaLiga TV HD": "M+ LaLiga HD", "Movistar LaLiga": "M+ LaLiga HD", "M+ LaLiga HD": "M+ LaLiga HD",
     "M+ LaLiga TV 2 HD": "M. LaLiga 2",
     "Dazn Laliga": "DAZN LaLiga", "DAZN LaLiga HD": "DAZN LaLiga", "Dazn Laliga 2": "DAZN LaLiga 2 HD", "vamos": "#Vamos por M+", "#vamos": "#Vamos por M+",
     "M+ Vamos HD": "#Vamos por M+", "Vamos BAR": "#Vamos por M+", "Movistar Vamos": "#Vamos por M+",
@@ -59,7 +59,7 @@ ALIAS_CANAL = {
 
 # Mapeo de canales a nombres de archivo PNG para los logos
 CANAL_TO_PNG = {
-    "M. LaLiga": "Mlaliga.png",
+    "M+ LaLiga HD": "Mlaliga.png",
     "M. LaLiga 2": "Mlaliga2.png",
     "DAZN LaLiga": "daznlaliga.png",
     "DAZN LaLiga 2 HD": "daznlaliga2.png",
@@ -453,8 +453,8 @@ def mostrar_epg():
     # Generar el grid de canales con logos de canales personalizados
     channel_grid = "".join(
         f'<div class="logo-tile-wrapper relative">'
-        f'<a href="/?canal={urllib.parse.quote(custom)}&dia={dia_entrada}" class="block w-full h-20 flex items-center justify-center">'
-        f'<img src="/static/img/{CUSTOM_TO_PNG.get(custom, "default.png")}" alt="{custom}" class="max-h-32 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
+        f'<a href="/?canal={urllib.parse.quote(custom)}&dia={dia_entrada}" class="block w-full h-15 flex items-center justify-center">'
+        f'<img src="/static/img/{CUSTOM_TO_PNG.get(custom, "default.png")}" alt="{custom}" class="max-h-30 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
         f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
         f'<img src="/static/img/{CANAL_TO_PNG.get(mapping[custom], "default.png")}" alt="{mapping[custom]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
         f'</div>'
@@ -912,8 +912,8 @@ localStorage.setItem('theme', 'light');
 
         .logo-tile-wrapper {{
             border-radius: 8px;
-            padding: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 1px;
+            box-shadow: 0 1px 1px rgba(0, 2, 2, 5.20);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -928,7 +928,7 @@ localStorage.setItem('theme', 'light');
         /* Estilo específico para la baldosa del logo en los eventos individuales */
         .logo-tile {{
             border-radius: 8px;
-            padding: 8px;
+            padding: 2px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
