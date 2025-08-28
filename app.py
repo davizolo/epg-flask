@@ -23,7 +23,7 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 # Lista de canales oficiales que se mostrarán en la guía
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
-    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2",
+    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", 
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
 ]
@@ -44,7 +44,7 @@ ALIAS_CANAL = {
     "M+ Vamos 1080": "#Vamos por M+", "Movistar Plus": "Movistar Plus+", "Movistar+": "Movistar Plus+",
     "Movistar Plus+ HD": "Movistar Plus+", "Dazn 1": "DAZN 1", "DAZN 1 HD": "DAZN 1", "Dazn 2": "DAZN 2",
     "DAZN 2 HD": "DAZN 2", "Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga Hypermotion": "LaLiga TV Hypermotion HD",
-    "LaLiga TV Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2": "LaLiga TV Hypermotion 2", 
+    "LaLiga TV Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2": "LaLiga TV Hypermotion 2", "Primera Federación": "Primera Federación", 
     "Dazn F1": "DAZN F1", "DAZN F1 HD": "DAZN F1", "Eurosport1": "Eurosport 1",
     "Eurosport 1 HD": "Eurosport 1", "Eurosport2": "Eurosport 2", "Eurosport 2 HD": "Eurosport 2",
     "Movistar Deportes": "M. Deportes", "M Deportes": "M. Deportes", "M+ Deportes HD": "M. Deportes",
@@ -69,6 +69,7 @@ CANAL_TO_PNG = {
     "DAZN 2": "dazn2.png",
     "LaLiga TV Hypermotion HD": "hypermotion.png",
     "LaLiga TV Hypermotion 2": "hypermotion2.png",
+    "Primera Federación": "1reff.png",
     "DAZN F1": "f1.png",
     "Eurosport 1": "eurosport.png",
     "Eurosport 2": "eurosport2.png",
