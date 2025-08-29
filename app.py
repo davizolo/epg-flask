@@ -29,7 +29,7 @@ CHANNELS_OFICIALES = [
 ]
 
 # Canales personalizados
-CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 9)]
+CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 10)]
 
 # Diccionario de alias para mapear nombres de canales de la EPG a nombres oficiales
 ALIAS_CANAL = {
@@ -98,7 +98,8 @@ CUSTOM_TO_PNG = {
     "Canal 5": "canal5.png",
     "Canal 6": "canal6.png",
     "Canal 7": "canal7.png",
-    "Canal 8": "canal8.png"
+    "Canal 8": "canal8.png",
+    "Canal 9": "canal9.png"
 }
 
 # URL de la guía EPG
