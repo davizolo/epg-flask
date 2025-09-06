@@ -23,7 +23,7 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 # Lista de canales oficiales que se mostrarán en la guía
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
-    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", 
+    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", "M+ Ellas Vamos HD",
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
 ]
@@ -41,7 +41,7 @@ ALIAS_CANAL = {
     "M+ Vamos HD": "#Vamos por M+", "Vamos BAR": "#Vamos por M+", "Movistar Vamos": "#Vamos por M+",
     "M+ Vamos": "#Vamos por M+", "M+ Vamos.TV": "#Vamos por M+", "M+ Vamos SD": "#Vamos por M+",
     "M+ Vamos FHD": "#Vamos por M+", "M+ Vamos UHD": "#Vamos por M+", "M+ Vamos 720": "#Vamos por M+",
-    "M+ Vamos 1080": "#Vamos por M+", "Movistar Plus": "Movistar Plus+", "Movistar+": "Movistar Plus+",
+    "M+ Vamos 1080": "#Vamos por M+", "M+ Ellas Vamos HD": "M+ Ellas Vamos", "M+ Ellas Vamos HD": "M+ Ellas Vamos HD", "Movistar Plus": "Movistar Plus+", "Movistar+": "Movistar Plus+",
     "Movistar Plus+ HD": "Movistar Plus+", "Dazn 1": "DAZN 1", "DAZN 1 HD": "DAZN 1", "Dazn 2": "DAZN 2",
     "DAZN 2 HD": "DAZN 2", "Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga Hypermotion": "LaLiga TV Hypermotion HD",
     "LaLiga TV Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2": "LaLiga TV Hypermotion 2", "Primera Federación": "Primera Federación", 
@@ -64,6 +64,7 @@ CANAL_TO_PNG = {
     "DAZN LaLiga": "daznlaliga.png",
     "DAZN LaLiga 2 HD": "daznlaliga2.png",
     "#Vamos por M+": "vamos.png",
+    "M+ Ellas Vamos HD": "ellas.png",
     "Movistar Plus+": "mplus.png",
     "DAZN 1": "dazn1.png",
     "DAZN 2": "dazn2.png",
