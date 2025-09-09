@@ -72,7 +72,7 @@ CANAL_TO_PNG = {
     "LaLiga TV Hypermotion HD": "hypermotion.png",
     "LaLiga TV Hypermotion 2": "hypermotion2.png",
     "Primera Federación": "1reff.png",
-    "Basket": "basket.png",
+    "basket": "basket.png",
     "DAZN F1": "f1.png",
     "Eurosport 1": "eurosport.png",
     "Eurosport 2": "eurosport2.png",
