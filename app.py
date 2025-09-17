@@ -25,7 +25,7 @@ CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
     "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", "M+ Ellas Vamos HD", "DAZN Liga F", "basket", "parrulo", 
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
-    "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4"
+    "Liga de Campeones 2", "Liga de Campeones 3", "Liga de Campeones 4", "M+ Golf HD"
 ]
 
 # Canales personalizados
@@ -54,8 +54,7 @@ ALIAS_CANAL = {
     "LigaCampeones2": "Liga de Campeones 2", "M+ Liga de Campeones 2 HD": "Liga de Campeones 2",
     "Movistar Liga de Campeones 3": "Liga de Campeones 3", "LigaCampeones3": "Liga de Campeones 3",
     "M+ Liga de Campeones 3 HD": "Liga de Campeones 3", "Movistar Liga de Campeones 4": "Liga de Campeones 4",
-    "LigaCampeones4": "Liga de Campeones 4", "M+ Liga de Campeones 4 HD": "Liga de Campeones 4"
-}
+    "LigaCampeones4": "Liga de Campeones 4", "M+ Liga de Campeones 4 HD": "Liga de Campeones 4", "M+ Golf HD": "M+ Golf HD"}
 
 # Mapeo de canales a nombres de archivo PNG para los logos
 CANAL_TO_PNG = {
@@ -90,7 +89,8 @@ CANAL_TO_PNG = {
     "Telecinco HD": "telecincohd.png",
     "La Sexta HD": "lasextahd.png",
     "TVG Europa HD": "tvgeuropahd.png",
-    "Teledeporte": "teledeporte.png"
+    "Teledeporte": "teledeporte.png",
+    "M+ Golf HD": "golf.png"
 }
 
 # Mapeo de canales personalizados a sus logos
