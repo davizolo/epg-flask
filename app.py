@@ -25,7 +25,7 @@ CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
     "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", "M+ Ellas Vamos HD", "DAZN Liga F", "basket", "parrulo", 
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "Liga de Campeones",
-    "Liga de Campeones 2", "Liga de Campeones 3", "Supercopa_Endesa", "Liga de Campeones 4", "racing", "M+ Golf HD"
+    "Liga de Campeones 2", "Liga de Campeones 3", "liga_endesa", "Liga de Campeones 4", "racing", "M+ Golf HD"
 ]
 
 # Canales personalizados
@@ -37,7 +37,7 @@ ALIAS_CANAL = {
     "La Sexta": "La Sexta HD", "Tvga": "TVG Europa HD", "tdp": "Teledeporte", "Movistar LaLiga": "M+ LaLiga HD",
     "Movistar La Liga": "M+ LaLiga HD", "M LaLiga": "M+ LaLiga HD", "M+ LaLiga TV HD": "M+ LaLiga HD", "Movistar LaLiga": "M+ LaLiga HD", "M+ LaLiga HD": "M+ LaLiga HD",
     "M+ LaLiga TV 2 HD": "M. LaLiga 2",
-    "Dazn Laliga": "DAZN LaLiga", "DAZN LaLiga HD": "DAZN LaLiga", "Supercopa_Endesa": "Supercopa_Endesa", "Dazn Laliga 2": "DAZN LaLiga 2 HD", "vamos": "#Vamos por M+", "#vamos": "#Vamos por M+",
+    "Dazn Laliga": "DAZN LaLiga", "DAZN LaLiga HD": "DAZN LaLiga", "liga_endesa": "liga_endesa", "Dazn Laliga 2": "DAZN LaLiga 2 HD", "vamos": "#Vamos por M+", "#vamos": "#Vamos por M+",
     "M+ Vamos HD": "#Vamos por M+", "Vamos BAR": "#Vamos por M+", "Movistar Vamos": "#Vamos por M+",
     "M+ Vamos": "#Vamos por M+", "M+ Vamos.TV": "#Vamos por M+", "M+ Vamos SD": "#Vamos por M+",
     "M+ Vamos FHD": "#Vamos por M+", "M+ Vamos UHD": "#Vamos por M+", "M+ Vamos 720": "#Vamos por M+",
@@ -90,7 +90,7 @@ CANAL_TO_PNG = {
     "La Sexta HD": "lasextahd.png",
     "TVG Europa HD": "tvgeuropahd.png",
     "Teledeporte": "teledeporte.png",
-    "Supercopa_Endesa": "Supercopa_Endesa.png", 
+    "liga_endesa": "liga_endesa.png", 
     "M+ Golf HD": "golf.png",
     "racing": "racing.png"
 }
