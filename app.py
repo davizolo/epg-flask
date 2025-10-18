@@ -31,6 +31,45 @@ CHANNELS_OFICIALES = [
 # Canales personalizados
 CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 10)]
 
+# Mapeo de archivos PNG a nombres oficiales
+PNG_TO_OFFICIAL = {
+    'mlaliga.png': 'M+ LaLiga HD',
+    'mlaliga2.png': 'M. LaLiga 2', 
+    'daznlaliga.png': 'DAZN LaLiga',
+    'daznlaliga2.png': 'DAZN LaLiga 2 HD',
+    'hypermotion.png': 'LaLiga TV Hypermotion HD',
+    'hyperracing.png': 'Hyperracing',
+    'racing.png': 'racing',
+    'hyperbaxi.png': 'Hyperbaxi',
+    'baxi.png': 'baxi',
+    'basket.png': 'basket',
+    'parrulo.png': 'parrulo',
+    '1reff.png': 'Primera Federación',
+    'futbolsala.png': 'Fútbol Sala',
+    'hypermotion2.png': 'LaLiga TV Hypermotion 2',
+    'ellas.png': 'M+ Ellas Vamos HD',
+    'ligaf.png': 'DAZN Liga F',
+    'vamos.png': '#Vamos por M+',
+    'mplus.png': 'Movistar Plus+',
+    'dazn1.png': 'DAZN 1',
+    'dazn2.png': 'DAZN 2',
+    'dazn3.png': 'DAZN 3',
+    'dazn4.png': 'DAZN 4',
+    'f1.png': 'DAZN F1',
+    'ligadecampeones.png': 'Liga de Campeones',
+    'ligadecampeones2.png': 'Liga de Campeones 2',
+    'ligadecampeones3.png': 'Liga de Campeones 3',
+    'ligadecampeones4.png': 'Liga de Campeones 4',
+    'mdeportes.png': 'M. Deportes',
+    'mdeportes2.png': 'M. Deportes 2',
+    'eurosport.png': 'Eurosport 1',
+    'eurosport2.png': 'Eurosport 2',
+    'golf.png': 'M+ Golf HD',
+    'liga_endesa.png': 'liga_endesa',
+    'sixkings.png': 'Six Kings',
+    'premierpadel.png': 'Premier Padel'
+}
+
 # Diccionario de alias para mapear nombres de canales de la EPG a nombres oficiales
 ALIAS_CANAL = {
     "La 1": "La 1 HD", "La 2": "La 2", "Antena 3": "Antena 3 HD", "Cuatro": "Cuatro HD", "Telecinco": "Telecinco HD",
@@ -112,17 +151,49 @@ CUSTOM_TO_PNG = {
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
 
 def load_channel_mapping():
-    mapping_file = "channel_mapping.json"
-    if os.path.exists(mapping_file):
-        with open(mapping_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    else:
+    """Carga el mapeo desde el JSON del NAS o usa un mapeo por defecto si falla"""
+    try:
+        # Intentar cargar desde el NAS
+        nas_json_url = "http://privado2.dyndns.org/files/programacion/programacion_canales.json"
+        response = requests.get(nas_json_url, timeout=10)
+        response.raise_for_status()
+        
+        nas_data = response.json()
+        mapping = {}
+        
+        logger.info(f"JSON cargado desde NAS: {nas_data.get('timestamp', 'Sin timestamp')}")
+        
+        # Mapear la estructura del NAS a nuestro formato
+        for i in range(1, 10):
+            canal_key = f"canal{i}"
+            custom_channel = f"Canal {i}"  # "Canal 1", "Canal 2", etc.
+            
+            if canal_key in nas_data.get("channels", {}):
+                canal_info = nas_data["channels"][canal_key]
+                png_file = canal_info.get("file")
+                
+                if png_file and png_file in PNG_TO_OFFICIAL:
+                    official_channel = PNG_TO_OFFICIAL[png_file]
+                    mapping[custom_channel] = official_channel
+                    logger.debug(f"Mapeado {custom_channel} -> {official_channel} (desde {png_file})")
+                else:
+                    mapping[custom_channel] = None
+                    logger.debug(f"Canal {custom_channel} sin mapeo (archivo: {png_file})")
+            else:
+                mapping[custom_channel] = None
+                logger.debug(f"Canal {canal_key} no encontrado en JSON del NAS")
+        
+        logger.info(f"Mapeo cargado desde NAS: {mapping}")
+        return mapping
+        
+    except Exception as e:
+        logger.error(f"Error al cargar mapeo desde NAS: {e}")
+        # Fallback: mapeo por defecto vacío
         return {custom: None for custom in CUSTOM_CHANNELS}
 
 def save_channel_mapping(mapping):
-    mapping_file = "channel_mapping.json"
-    with open(mapping_file, "w", encoding="utf-8") as f:
-        json.dump(mapping, f)
+    """Función mantenida por compatibilidad, pero ya no guarda localmente"""
+    logger.info("La configuración ahora se maneja desde el NAS - no se guarda localmente")
 
 def create_temp_epg_file(data, temp_file="epg_temp.xml"):
     """
@@ -300,25 +371,15 @@ def cleanup():
 @app.route("/programacion", methods=['GET', 'POST'])
 def programacion():
     mapping = load_channel_mapping()
-    if request.method == 'POST':
-        for custom in CUSTOM_CHANNELS:
-            mapping[custom] = request.form.get(custom, None)
-        save_channel_mapping(mapping)
-        return redirect('/programacion')
-
-    # Generar el formulario con selectores
-    form_html = ""
+    
+    # Mostrar información pero no permitir cambios (ya que viene del NAS)
+    info_html = ""
     for custom in CUSTOM_CHANNELS:
-        options = '<option value="">Ninguno</option>' + "".join(
-            f'<option value="{ch}" {"selected" if mapping.get(custom) == ch else ""}>{ch}</option>'
-            for ch in CHANNELS_OFICIALES
-        )
-        form_html += f'''
-            <div class="mb-4">
-                <label for="{custom}" class="block text-sm font-medium text-gray-300 light-mode:text-gray-700">{custom}:</label>
-                <select name="{custom}" id="{custom}" class="card w-full p-3 text-white light-mode:text-black bg-gray-800 light-mode:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
-                    {options}
-                </select>
+        official = mapping.get(custom, "No asignado")
+        info_html += f'''
+            <div class="mb-4 p-4 bg-gray-700 light-mode:bg-gray-200 rounded-lg">
+                <label class="block text-sm font-medium text-gray-300 light-mode:text-gray-700">{custom}:</label>
+                <div class="text-white light-mode:text-black mt-1">{official}</div>
             </div>
         '''
 
@@ -342,8 +403,6 @@ def programacion():
             --text-dark: #111827;
             --text-dark-secondary: #4b5563;
         }}
-
-
 
         body {{
             background: var(--bg-dark);
@@ -379,11 +438,14 @@ def programacion():
     </div>
     <div class="w-full max-w-md">
         <h1 class="text-2xl font-bold mb-6 text-center">Configuración de Canales</h1>
-        <form method="post" class="space-y-4">
-            {form_html}
-            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">Guardar</button>
-            <a href="/" class="w-full bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-600 transition-colors text-center block mt-2">Volver a la guía</a>
-        </form>
+        <div class="bg-yellow-600 text-white p-4 rounded-lg mb-4">
+            <p class="text-sm">La configuración de canales ahora se carga automáticamente desde el NAS.</p>
+            <p class="text-sm mt-2">Para cambiar la programación, usa la aplicación de programación.</p>
+        </div>
+        <div class="space-y-4">
+            {info_html}
+            <a href="/" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-center block">Ver Guía</a>
+        </div>
     </div>
     <script>
         function toggleTheme() {{
@@ -415,7 +477,7 @@ def mostrar_epg():
     categoria_entrada = request.args.get("categoria", "Todos").strip()
     search_query = request.args.get("search_query", "").strip()
     
-    # Cargar el mapeo de canales
+    # Cargar el mapeo de canales desde el NAS
     mapping = load_channel_mapping()
     reverse_mapping = {}
     for custom, official in mapping.items():
@@ -425,6 +487,7 @@ def mostrar_epg():
             reverse_mapping[official].append(custom)
 
     logger.debug(f"Canal de entrada: '{canal_entrada}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}', Búsqueda: '{search_query}'")
+    logger.debug(f"Mapeo actual: {mapping}")
 
     # Generar opciones del selector de días
     now = datetime.now(pytz.timezone("Europe/Madrid"))
@@ -873,12 +936,6 @@ def mostrar_epg():
             --text-dark-secondary: #4b5563;
         }}
 
-// Fuerza modo día permanentemente (opcional)
-document.body.classList.add('light-mode');
-document.body.classList.remove('dark-mode');
-localStorage.setItem('theme', 'light');
-
-
         body {{
             background: var(--bg-dark);
             color: var(--text-primary);
@@ -891,8 +948,6 @@ localStorage.setItem('theme', 'light');
             background: var(--bg-light);
             color: var(--text-dark);
         }}
-
-
 
         .card {{
             background: var(--card-bg);
@@ -942,7 +997,6 @@ localStorage.setItem('theme', 'light');
             align-items: center;
             justify-content: center;
         }}
-
 
         /* Estilos para las categorías */
         .category-Fútbol {{ 
@@ -1028,7 +1082,6 @@ localStorage.setItem('theme', 'light');
             color: var(--text-dark) !important;
         }}
 
-
         header, select, .event-item {{
             -webkit-tap-highlight-color: transparent;
         }}
@@ -1091,7 +1144,6 @@ localStorage.setItem('theme', 'light');
             color: white !important;
         }}
 
-
         .light-mode .search-section-button-blue:hover {{
             background-color: #1d4ed8 !important; /* blue-700 */
         }}
@@ -1102,7 +1154,6 @@ localStorage.setItem('theme', 'light');
         .light-mode .search-section-button-gray:hover {{
             background-color: #374151 !important; /* gray-600 */
         }}
-
 
         /* Media queries para responsividad */
         @media (max-width: 640px) {{
