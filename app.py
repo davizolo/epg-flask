@@ -13,6 +13,7 @@ import schedule
 import time
 import threading
 import json
+import webdav3.client as wc
 
 # Configuración de logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -147,13 +148,23 @@ CUSTOM_TO_PNG = {
     "Canal 9": "canal9.png"
 }
 
+# Configuración de WebDAV para el NAS
+WEBDAV_OPTIONS = {
+    'webdav_hostname': "http://privado2.dyndns.org:5005/",
+    'webdav_login': "remoto",
+    'webdav_password': "Jor01dasJor01das",
+    'disable_check': True
+}
+
+# Path del NAS para eventos
+NAS_EVENTOS_PATH = "/web/files/programacion/eventos"
+
 # URL de la guía EPG
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
 
 def load_channel_mapping():
     """Carga el mapeo desde el JSON del NAS o usa un mapeo por defecto si falla"""
     try:
-        # Intentar cargar desde el NAS
         nas_json_url = "http://privado2.dyndns.org/files/programacion/programacion_canales.json"
         response = requests.get(nas_json_url, timeout=10)
         response.raise_for_status()
@@ -163,15 +174,12 @@ def load_channel_mapping():
         
         logger.info(f"JSON cargado desde NAS: {nas_data.get('timestamp', 'Sin timestamp')}")
         
-        # Mapear la estructura del NAS a nuestro formato
         for i in range(1, 10):
             canal_key = f"canal{i}"
-            custom_channel = f"Canal {i}"  # "Canal 1", "Canal 2", etc.
-            
+            custom_channel = f"Canal {i}"
             if canal_key in nas_data.get("channels", {}):
                 canal_info = nas_data["channels"][canal_key]
                 png_file = canal_info.get("file")
-                
                 if png_file and png_file in PNG_TO_OFFICIAL:
                     official_channel = PNG_TO_OFFICIAL[png_file]
                     mapping[custom_channel] = official_channel
@@ -185,20 +193,117 @@ def load_channel_mapping():
         
         logger.info(f"Mapeo cargado desde NAS: {mapping}")
         return mapping
-        
     except Exception as e:
         logger.error(f"Error al cargar mapeo desde NAS: {e}")
-        # Fallback: mapeo por defecto vacío
         return {custom: None for custom in CUSTOM_CHANNELS}
 
 def save_channel_mapping(mapping):
     """Función mantenida por compatibilidad, pero ya no guarda localmente"""
     logger.info("La configuración ahora se maneja desde el NAS - no se guarda localmente")
 
+def load_nas_events(fecha_inicio, fecha_fin, mapping):
+    """Carga eventos desde el NAS para los canales mapeados en el rango de fechas especificado"""
+    client = wc.Client(WEBDAV_OPTIONS)
+    eventos_nas = []
+    
+    # Convertir fechas a formato AAAAMMDD para buscar archivos
+    fechas = []
+    current_date = fecha_inicio
+    while current_date <= fecha_fin:
+        fechas.append(current_date.strftime("%Y%m%d"))
+        current_date += timedelta(days=1)
+    
+    try:
+        for custom, official in mapping.items():
+            if not official:
+                logger.debug(f"Saltando {custom} porque no tiene canal oficial asignado")
+                continue
+            for fecha in fechas:
+                # Ajustar el nombre del canal para que coincida con el formato del archivo
+                canal_file = f"canal_{custom.lower().replace(' ', '_')[-1]}"
+                file_name = f"eventos_{canal_file}_{fecha}.json"
+                file_path = f"{NAS_EVENTOS_PATH}/{file_name}"
+                logger.debug(f"Intentando leer {file_path}")
+                
+                try:
+                    if client.check(file_path):
+                        temp_file = f"temp_{file_name}"
+                        client.download(file_path, temp_file)
+                        with open(temp_file, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                        os.remove(temp_file)
+                        
+                        # Procesar los eventos en el campo "programacion"
+                        eventos_data = data.get("programacion", [])
+                        for evento in eventos_data:
+                            try:
+                                # Obtener fecha del JSON raíz
+                                fecha_str = data.get("fecha", "")
+                                if not fecha_str:
+                                    logger.warning(f"Evento sin fecha en {file_name}")
+                                    continue
+                                
+                                # Parsear hora_inicio y hora_final
+                                hora_inicio = evento.get("hora_inicio", "")
+                                hora_final = evento.get("hora_final", "")
+                                if not (hora_inicio and hora_final):
+                                    logger.warning(f"Evento sin hora_inicio o hora_final en {file_name}: {evento}")
+                                    continue
+                                
+                                # Crear objetos datetime combinando fecha y hora
+                                inicio = datetime.strptime(f"{fecha_str} {hora_inicio}", "%Y-%m-%d %H:%M").replace(tzinfo=pytz.timezone("Europe/Madrid"))
+                                fin = datetime.strptime(f"{fecha_str} {hora_final}", "%Y-%m-%d %H:%M").replace(tzinfo=pytz.timezone("Europe/Madrid"))
+                                
+                                # Verificar que el evento esté en el rango de fechas
+                                if not (fecha_inicio <= inicio.date() <= fecha_fin):
+                                    logger.debug(f"Evento fuera del rango de fechas: {inicio.date()}")
+                                    continue
+                                    
+                                # Normalizar categoría
+                                categoria = evento.get("deporte_evento", "Sin categoría")
+                                categorias_ordenadas = ["Fútbol", "Baloncesto", "Tenis", "Motor", "Motociclismo", "Rugby", "Padel", "Ciclismo"]
+                                categoria_display = next(
+                                    (cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)),
+                                    categoria
+                                )
+                                categoria_display_class = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
+                                categoria_display_text = categoria_display.replace("_", " ") if categoria_display else "Sin categoría"
+                                
+                                # Separar descripción en sinopsis y detalles
+                                descripcion = evento.get("descripcion", "Sin descripción")
+                                desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
+                                synopsis = desc_parts[0][:200] + "..." if len(desc_parts[0]) > 200 else desc_parts[0]
+                                details = ". ".join(desc_parts[1:])[:400] + "..." if len(". ".join(desc_parts[1:])) > 400 else ". ".join(desc_parts[1:])
+                                
+                                eventos_nas.append({
+                                    "inicio": inicio,
+                                    "fecha": inicio.strftime("%d/%m/%Y"),
+                                    "hora_inicio": inicio.strftime("%H:%M"),
+                                    "hora_fin": fin.strftime("%H:%M"),
+                                    "titulo": evento.get("titulo", "Sin título"),
+                                    "synopsis": synopsis,
+                                    "details": details,
+                                    "categoria": categoria_display_class,
+                                    "categoria_text": categoria_display_text,
+                                    "imagen": evento.get("imagen_url", ""),
+                                    "canal": custom,
+                                    "official": official
+                                })
+                                logger.debug(f"Evento añadido desde NAS: {evento.get('titulo', 'Sin título')} en {custom} para {fecha}")
+                            except Exception as e:
+                                logger.error(f"Error al procesar evento desde NAS en {file_name}: {e}")
+                    else:
+                        logger.debug(f"Archivo {file_path} no encontrado en NAS")
+                except Exception as e:
+                    logger.error(f"Error al descargar o procesar {file_path}: {e}")
+    except Exception as e:
+        logger.error(f"Error general al cargar eventos del NAS: {e}")
+    
+    logger.info(f"Total eventos cargados desde NAS: {len(eventos_nas)}")
+    return eventos_nas
+
 def create_temp_epg_file(data, temp_file="epg_temp.xml"):
-    """
-    Filtra los datos de la EPG para incluir solo los canales oficiales y crea un archivo XML temporal.
-    """
+    """Filtra los datos de la EPG para incluir solo los canales oficiales y crea un archivo XML temporal."""
     filtered_data = {
         'tv': {
             'channel': [],
@@ -206,11 +311,10 @@ def create_temp_epg_file(data, temp_file="epg_temp.xml"):
         }
     }
     
-    # Filtrar canales
     if 'channel' in data['tv']:
         channels = data['tv']['channel']
         if isinstance(channels, dict):
-            channels = [channels] # Asegura que sea una lista
+            channels = [channels]
         filtered_channels = []
         for ch in channels:
             channel_id = ch.get('@id', '')
@@ -219,19 +323,16 @@ def create_temp_epg_file(data, temp_file="epg_temp.xml"):
                 filtered_channels.append(ch)
         filtered_data['tv']['channel'] = filtered_channels
 
-    # Filtrar programas
     if 'programme' in data['tv']:
         programmes = data['tv']['programme']
         if isinstance(programmes, dict):
-            programmes = [programmes] # Asegura que sea una lista
+            programmes = [programmes]
         filtered_programmes = []
         for prog in programmes:
             channel_id = prog.get('@channel', '')
             mapped_channel = ALIAS_CANAL.get(channel_id, channel_id)
-            # Manejo especial para "#Vamos por M+" debido a variaciones en el XML
             if mapped_channel == "#Vamos por M+" and not re.search(r'vamos|m\+ vamos|#vamos', channel_id, re.IGNORECASE):
-                continue # Si es #Vamos pero el ID original no coincide con los patrones, lo saltamos
-            
+                continue
             if mapped_channel in CHANNELS_OFICIALES:
                 filtered_programmes.append(prog)
         filtered_data['tv']['programme'] = filtered_programmes
@@ -246,16 +347,12 @@ def create_temp_epg_file(data, temp_file="epg_temp.xml"):
     return filtered_data
 
 def get_epg_data():
-    """
-    Obtiene los datos de la EPG, utilizando caché local si está disponible y actualizada.
-    Descarga y descomprime si es necesario.
-    """
+    """Obtiene los datos de la EPG, utilizando caché local si está disponible y actualizada."""
     cache_file = "epg_cache.xml"
     temp_file = "epg_temp.xml"
     madrid_tz = pytz.timezone("Europe/Madrid")
     today = datetime.now(madrid_tz).date()
     
-    # 1. Intentar usar el archivo temporal (ya filtrado) si es de hoy
     if os.path.exists(temp_file):
         file_mtime = datetime.fromtimestamp(os.path.getmtime(temp_file), tz=madrid_tz).date()
         if file_mtime == today:
@@ -265,9 +362,8 @@ def get_epg_data():
                     return xmltodict.parse(f.read())
             except Exception as e:
                 logger.error(f"Error al leer el archivo temporal EPG: {e}. Reintentando con caché.")
-                os.remove(temp_file) # Eliminar archivo corrupto
+                os.remove(temp_file)
 
-    # 2. Intentar usar el archivo de caché (sin filtrar) si es de hoy
     if os.path.exists(cache_file):
         file_mtime = datetime.fromtimestamp(os.path.getmtime(cache_file), tz=madrid_tz).date()
         if file_mtime == today:
@@ -275,16 +371,15 @@ def get_epg_data():
                 with open(cache_file, "rb") as f:
                     data = xmltodict.parse(f.read())
                     logger.debug("Usando archivo caché EPG existente (sin filtrar)")
-                    return create_temp_epg_file(data, temp_file) # Filtrar y guardar en temp
+                    return create_temp_epg_file(data, temp_file)
             except Exception as e:
                 logger.error(f"Error al leer el archivo caché EPG: {e}. Reintentando descargar.")
-                os.remove(cache_file) # Eliminar archivo corrupto
+                os.remove(cache_file)
     
-    # 3. Descargar, descomprimir y cachear la EPG
     try:
         logger.info(f"Descargando EPG desde: {URL_Guia}")
-        respuesta = requests.get(URL_Guia, timeout=15) # Aumentar timeout
-        respuesta.raise_for_status() # Lanza excepción para códigos de estado HTTP erróneos
+        respuesta = requests.get(URL_Guia, timeout=15)
+        respuesta.raise_for_status()
         xml = gzip.decompress(respuesta.content)
         with open(cache_file, "wb") as f:
             f.write(xml)
@@ -293,19 +388,16 @@ def get_epg_data():
         return create_temp_epg_file(data, temp_file)
     except requests.exceptions.RequestException as e:
         logger.error(f"Error de red al obtener la EPG: {e}")
-        raise # Propagar la excepción para que la ruta principal la maneje
+        raise
     except Exception as e:
         logger.error(f"Error inesperado al obtener o procesar la EPG: {e}")
-        raise # Propagar la excepción
+        raise
 
 def cleanup_and_download_epg():
-    """
-    Elimina los archivos temporales y de caché y fuerza una nueva descarga de la EPG.
-    """
+    """Elimina los archivos temporales y de caché y fuerza una nueva descarga de la EPG."""
     cache_file = "epg_cache.xml"
     temp_file = "epg_temp.xml"
     
-    # Eliminar archivos si existen
     for file in [cache_file, temp_file]:
         if os.path.exists(file):
             try:
@@ -314,7 +406,6 @@ def cleanup_and_download_epg():
             except Exception as e:
                 logger.error(f"Error al eliminar archivo {file}: {e}")
     
-    # Forzar nueva descarga
     try:
         get_epg_data()
         logger.info("Nueva EPG descargada y procesada exitosamente.")
@@ -322,9 +413,7 @@ def cleanup_and_download_epg():
         logger.error(f"Error al descargar y procesar nueva EPG: {e}")
 
 def schedule_cleanup():
-    """
-    Configura la tarea programada para ejecutarse todos los días a las 8:00 AM en la zona horaria de Madrid.
-    """
+    """Configura la tarea programada para ejecutarse todos los días a las 8:00 AM en Madrid."""
     madrid_tz = pytz.timezone("Europe/Madrid")
     
     def job():
@@ -333,16 +422,13 @@ def schedule_cleanup():
             logger.info("Ejecutando limpieza y re-descarga de EPG a las 8:00 AM")
             cleanup_and_download_epg()
     
-    # Programar la verificación cada minuto
     schedule.every(1).minutes.do(job)
     
-    # Ejecutar el bucle de schedule en un hilo separado
     def run_schedule():
         while True:
             schedule.run_pending()
-            time.sleep(60) # Esperar 60 segundos entre verificaciones
+            time.sleep(60)
     
-    # Iniciar el hilo
     schedule_thread = threading.Thread(target=run_schedule, daemon=True)
     schedule_thread.start()
     logger.info("Programación de limpieza diaria iniciada.")
@@ -351,7 +437,6 @@ def escape_js_string(s):
     """Escapa caracteres especiales para usar una cadena Python en JavaScript."""
     if not s:
         return ""
-    # Escapa comillas simples, comillas dobles y saltos de línea
     return s.replace("'", "\\'").replace('"', '\\"').replace('\n', '\\n').replace('\r', '')
 
 def normalize_text(text):
@@ -361,18 +446,15 @@ def normalize_text(text):
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
     return text.lower()
 
-
 @app.route("/cleanup")
 def cleanup():
     cleanup_and_download_epg()
     return "Archivos temporales eliminados y EPG actualizada."
 
-
 @app.route("/programacion", methods=['GET', 'POST'])
 def programacion():
     mapping = load_channel_mapping()
     
-    # Mostrar información pero no permitir cambios (ya que viene del NAS)
     info_html = ""
     for custom in CUSTOM_CHANNELS:
         official = mapping.get(custom, "No asignado")
@@ -470,14 +552,13 @@ def programacion():
 def mostrar_epg():
     """
     Ruta principal para mostrar la guía de programación.
-    Permite filtrar por canal, día y categoría.
+    Permite filtrar por canal, día y categoría, e incluye eventos del NAS.
     """
     canal_entrada = request.args.get("canal", "").strip()
     dia_entrada = request.args.get("dia", "hoy").strip()
     categoria_entrada = request.args.get("categoria", "Todos").strip()
     search_query = request.args.get("search_query", "").strip()
     
-    # Cargar el mapeo de canales desde el NAS
     mapping = load_channel_mapping()
     reverse_mapping = {}
     for custom, official in mapping.items():
@@ -489,7 +570,6 @@ def mostrar_epg():
     logger.debug(f"Canal de entrada: '{canal_entrada}', Categoría: '{categoria_entrada}', Día: '{dia_entrada}', Búsqueda: '{search_query}'")
     logger.debug(f"Mapeo actual: {mapping}")
 
-    # Generar opciones del selector de días
     now = datetime.now(pytz.timezone("Europe/Madrid"))
     meses_es = {
         1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio",
@@ -497,15 +577,13 @@ def mostrar_epg():
     }
     hoy_str = f"{now.day} de {meses_es[now.month]}"
     
-    # Determinar las fechas para los filtros
     hoy_date = now.date()
     mañana_date = hoy_date + timedelta(days=1)
     
-    # Calcular fin de semana (próximo sábado y domingo)
-    if now.weekday() >= 5:  # Si es sábado (5) o domingo (6), usar fin de semana actual
+    if now.weekday() >= 5:
         sabado_date = hoy_date if now.weekday() == 5 else hoy_date - timedelta(days=1)
         domingo_date = sabado_date + timedelta(days=1)
-    else:  # Si es de lunes a viernes, usar próximo fin de semana
+    else:
         dias_hasta_sabado = (5 - now.weekday()) % 7
         sabado_date = hoy_date + timedelta(days=dias_hasta_sabado)
         domingo_date = sabado_date + timedelta(days=1)
@@ -521,7 +599,6 @@ def mostrar_epg():
         for d in dias_opciones
     )
 
-    # Generar el grid de canales con logos de canales personalizados
     channel_grid = "".join(
         f'<div class="logo-tile-wrapper relative">'
         f'<a href="/?canal={urllib.parse.quote(custom)}&dia={dia_entrada}" class="block w-full h-15 flex items-center justify-center">'
@@ -531,13 +608,12 @@ def mostrar_epg():
         f'</div>'
         f'</a>'
         f'</div>'
-        for custom in CUSTOM_CHANNELS if mapping.get(custom)  # Solo mostrar si está mapeado
+        for custom in CUSTOM_CHANNELS if mapping.get(custom)
     )
 
     try:
         data = get_epg_data()
     except Exception as e:
-        # HTML de error en caso de fallo al obtener la EPG
         error_html_content = f"""
 <!DOCTYPE html>
 <html lang="es">
@@ -587,7 +663,7 @@ def mostrar_epg():
             max-width: 42rem;
         }}
         .light-mode .card {{
-            background: rgba(255, 255, 255, 0.9) !important; /* Asegura fondo blanco */
+            background: rgba(255, 255, 255, 0.9) !important;
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }}
@@ -595,10 +671,10 @@ def mostrar_epg():
             width: 6rem;
             height: 6rem;
             margin: 0 auto 1.5rem;
-            color: #ef4444; /* red-500 */
+            color: #ef4444;
         }}
         .light-mode .error-icon {{
-            color: #dc2626; /* red-600 */
+            color: #dc2626;
         }}
         .theme-toggle {{
             background: var(--card-bg);
@@ -714,13 +790,18 @@ def mostrar_epg():
     eventos = []
     seen_programs = set()
 
-    # Procesar todos los programas de la EPG
+    # Cargar eventos del NAS
+    eventos_nas = load_nas_events(fecha_inicio, fecha_fin, mapping)
+    eventos.extend(eventos_nas)
+    logger.debug(f"Eventos cargados desde NAS: {len(eventos_nas)}")
+
+    # Procesar eventos de la EPG
     for prog in data['tv']['programme']:
         canal_xml = prog.get('@channel', '')
         canal_official = ALIAS_CANAL.get(canal_xml, canal_xml)
         
         if canal_official not in reverse_mapping:
-            continue  # Solo procesar si está mapeado a al menos un custom
+            continue
 
         try:
             inicio = datetime.strptime(prog['@start'], "%Y%m%d%H%M%S %z")
@@ -729,19 +810,16 @@ def mostrar_epg():
             logger.warning(f"Error al parsear fecha/hora para un programa: {prog.get('title', 'N/A')}")
             continue
 
-        # Filtrar por rango de fechas solo si no hay una búsqueda activa
         if not search_query and not (fecha_inicio <= inicio.date() <= fecha_fin):
             continue
 
         categoria = prog.get("category", {}).get("#text", "Sin categoría")
-        # Filtrar por categoría con límites de palabra para evitar coincidencias parciales no deseadas
         if categoria_entrada != "Todos" and not re.search(r'\b' + re.escape(categoria_entrada) + r'\b', categoria, re.IGNORECASE):
             continue
         
         titulo = prog.get("title", {}).get("#text", "Sin título")
         descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
 
-        # Filtrar por búsqueda si hay una query
         if search_query:
             normalized_search_query = normalize_text(search_query)
             normalized_title = normalize_text(titulo)
@@ -752,28 +830,24 @@ def mostrar_epg():
 
         prog_key = (prog['@start'], prog['@stop'], titulo, canal_official)
         if prog_key in seen_programs:
-            continue  # Evitar programas duplicados
+            continue
         seen_programs.add(prog_key)
 
         hora_inicio = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
         hora_fin = fin.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
         fecha = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%d/%m/%Y")
         
-        # Mapear categoría a las predefinidas si coincide, sino usar la categoría del EPG
         categoria_display = next((cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)), categoria)
         categoria_display_class = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
         categoria_display_text = categoria_display.replace("_", " ") if categoria_display else "Sin categoría"
         
         imagen = prog.get("icon", {}).get("@src", "")
         
-        # Generar sinopsis y detalles para el modal
         desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
         synopsis = desc_parts[0][:200] + "..." if len(desc_parts[0]) > 200 else desc_parts[0]
         details = ". ".join(desc_parts[1:])[:400] + "..." if len(". ".join(desc_parts[1:])) > 400 else ". ".join(desc_parts[1:])
 
-        # Crear un evento por cada custom mapeado a este official
         for custom in reverse_mapping[canal_official]:
-            # Si hay filtro de canal y no coincide con el custom, saltar
             if canal_entrada and canal_entrada != "Todos" and custom != canal_entrada:
                 continue
 
@@ -785,11 +859,11 @@ def mostrar_epg():
                 "titulo": titulo,
                 "synopsis": synopsis,
                 "details": details,
-                "categoria": categoria_display_class, # Para la clase CSS
-                "categoria_text": categoria_display_text, # Para el texto visible
+                "categoria": categoria_display_class,
+                "categoria_text": categoria_display_text,
                 "imagen": imagen,
                 "canal": custom,
-                "official": canal_official  # Para logo, etc.
+                "official": canal_official
             })
 
     eventos.sort(key=lambda x: x["inicio"])
@@ -800,7 +874,7 @@ def mostrar_epg():
     show_back_link = False
 
     if search_query:
-        eventos_filtrados_search = eventos # eventos ya está filtrado por la búsqueda
+        eventos_filtrados_search = eventos
         if not eventos_filtrados_search:
             lista_html = f'<p class="text-center text-red-700 light-mode:text-red-800 text-lg font-semibold card p-4">No se encontraron resultados para "{search_query}".</p>'
         else:
@@ -808,7 +882,7 @@ def mostrar_epg():
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                 f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
+                f'<div class="logo-tile p-2 relative">'
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                 f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                 f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
@@ -828,7 +902,6 @@ def mostrar_epg():
         page_title = f"Resultados para \"{search_query}\""
         show_back_link = True
     elif canal_entrada and canal_entrada != "Todos":
-        # Modo canal específico (custom)
         eventos_filtrados_canal = [e for e in eventos if e["canal"] == canal_entrada]
         if not eventos_filtrados_canal:
             logger.warning(f"No se encontraron eventos para {canal_entrada} en el rango {fecha_inicio} a {fecha_fin}")
@@ -847,7 +920,7 @@ def mostrar_epg():
             )
         channel_logo_html = (
             f'<div class="flex justify-center mb-6">'
-            f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
+            f'<div class="logo-tile p-2 relative">'
             f'<img src="/static/img/{CUSTOM_TO_PNG.get(canal_entrada, "default.png")}" alt="{canal_entrada}" class="max-h-20 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
             f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-right justify-center">'
             f'<img src="/static/img/{CANAL_TO_PNG.get(mapping[canal_entrada], "default.png")}" alt="{mapping[canal_entrada]}" class="max-h-full max-w-full object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
@@ -858,7 +931,6 @@ def mostrar_epg():
         page_title = canal_entrada
         show_back_link = True
     else:
-        # Modo categoría o general
         if categoria_entrada != "Todos":
             eventos_filtrados_categoria = [e for e in eventos if e["categoria_text"] == categoria_entrada]
             if not eventos_filtrados_categoria:
@@ -869,7 +941,7 @@ def mostrar_epg():
                     f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                     f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                     f'<div class="ml-4 flex items-start space-x-4">'
-                    f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
+                    f'<div class="logo-tile p-2 relative">'
                     f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                     f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                     f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
@@ -889,12 +961,11 @@ def mostrar_epg():
             page_title = f"Categoría: {categoria_entrada}"
             show_back_link = True
         else:
-            # Modo general (mostrar grid de canales y luego eventos de todos)
             lista_html = f'<div class="channel-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 mb-6">{channel_grid}</div>' + "".join(
                 f'<div class="event-item card p-4 cursor-pointer transition-all duration-300 mb-4 hover:bg-gray-800 light-mode:hover:bg-gray-200" onclick="openModal(\'{escape_js_string(evento["titulo"])}\', \'{escape_js_string(evento["fecha"])}\', \'{escape_js_string(evento["hora_inicio"])}\', \'{escape_js_string(evento["hora_fin"])}\', \'{escape_js_string(evento["synopsis"])}\', \'{escape_js_string(evento["details"])}\', \'{escape_js_string(evento["categoria"])}\', \'{escape_js_string(evento["categoria_text"])}\', \'{escape_js_string(evento["imagen"])}\')">'
                 f'<div class="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-blue-500 to-blue-700 rounded-l"></div>'
                 f'<div class="ml-4 flex items-start space-x-4">'
-                f'<div class="logo-tile p-2 relative">' # Eliminado fondo blanco explícito
+                f'<div class="logo-tile p-2 relative">'
                 f'<a href="/?canal={urllib.parse.quote(evento["canal"])}&dia={dia_entrada}" class="block">'
                 f'<img src="/static/img/{CUSTOM_TO_PNG.get(evento["canal"], "default.png")}" alt="{evento["canal"]}" class="max-h-24 object-contain" onerror="this.src=\'/static/img/default.png\'; this.onerror=null;">'
                 f'<div class="absolute bottom-0 right-0 w-2/5 h-2/5 flex items-center justify-center">'
@@ -914,7 +985,6 @@ def mostrar_epg():
             page_title = "Guía de Programación"
             show_back_link = False
 
-    # HTML principal de la aplicación
     html_content = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -959,7 +1029,7 @@ def mostrar_epg():
         }}
 
         .light-mode .card {{
-            background: rgba(255, 255, 255, 0.9) !important; /* Asegura fondo blanco para las tarjetas en modo día */
+            background: rgba(255, 255, 255, 0.9) !important;
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }}
@@ -988,7 +1058,6 @@ def mostrar_epg():
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }}
         
-        /* Estilo específico para la baldosa del logo en los eventos individuales */
         .logo-tile {{
             border-radius: 8px;
             padding: 2px;
@@ -998,7 +1067,6 @@ def mostrar_epg():
             justify-content: center;
         }}
 
-        /* Estilos para las categorías */
         .category-Fútbol {{ 
             background: linear-gradient(45deg, #166534, #22c55e); 
             box-shadow: 0 0 12px rgba(34, 197, 94, 0.5); 
@@ -1055,29 +1123,25 @@ def mostrar_epg():
             background: rgba(229, 231, 235, 0.5);
         }}
 
-        /* Asegurar que el texto sea oscuro en modo día */
         body.light-mode .event-title {{
             color: var(--text-dark) !important;
         }}
         body.light-mode .event-time {{
             color: var(--text-dark-secondary) !important;
         }}
-        /* Modal text color in light mode - now white */
         .light-mode #modalTitle,
         .light-mode #modalDateTime,
         .light-mode #modalSynopsis,
         .light-mode #modalDetails {{
-            color: white !important; /* Changed to white */
+            color: white !important;
         }}
         .light-mode strong {{
-            color: white !important; /* Changed to white */
+            color: white !important;
         }}
-        /* Estilo para el texto de los selectores en modo día */
         .light-mode select {{
             color: var(--text-dark) !important;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); /* Asegura que la flecha sea oscura */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23000000'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
         }}
-        /* Estilo para el texto del input de búsqueda en modo día */
         .light-mode .search-input {{
             color: var(--text-dark) !important;
         }}
@@ -1086,7 +1150,6 @@ def mostrar_epg():
             -webkit-tap-highlight-color: transparent;
         }}
 
-        /* Estilos para el tema */
         .theme-toggle, .search-toggle, .back-button, .search-button-header {{
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -1117,12 +1180,12 @@ def mostrar_epg():
             width: 24px;
             height: 24px;
             fill: var(--text-primary);
-            stroke: var(--text-primary); /* Para iconos stroke */
+            stroke: var(--text-primary);
         }}
 
         .light-mode .theme-toggle svg, .light-mode .search-toggle svg, .light-mode .search-button-header svg {{
             fill: var(--text-dark);
-            stroke: var(--text-dark); /* Para iconos stroke */
+            stroke: var(--text-dark);
         }}
 
         .theme-toggle span, .search-toggle span, .back-button span, .search-button-header span {{
@@ -1135,27 +1198,25 @@ def mostrar_epg():
             color: var(--text-dark);
         }}
         .search-input {{
-            color: white; /* Default text color for search input in dark mode */
+            color: white;
         }}
 
-        /* Specific styles for search section buttons in light mode */
         .light-mode .search-section-button-blue {{
-            background-color: #2563eb !important; /* blue-600 */
+            background-color: #2563eb !important;
             color: white !important;
         }}
 
         .light-mode .search-section-button-blue:hover {{
-            background-color: #1d4ed8 !important; /* blue-700 */
+            background-color: #1d4ed8 !important;
         }}
         .light-mode .search-section-button-gray {{
-            background-color: #4b5563 !important; /* gray-700 */
+            background-color: #4b5563 !important;
             color: white !important;
         }}
         .light-mode .search-section-button-gray:hover {{
-            background-color: #374151 !important; /* gray-600 */
+            background-color: #374151 !important;
         }}
 
-        /* Media queries para responsividad */
         @media (max-width: 640px) {{
             .channel-grid {{
                 grid-template-columns: repeat(3, minmax(0, 1fr));
