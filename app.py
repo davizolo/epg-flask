@@ -25,7 +25,7 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
     "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", "M+ Ellas Vamos HD", "DAZN Liga F", "basket", "parrulo", 
-    "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "M. Deportes 3", "Liga de Campeones",
+    "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "mdeportes3", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "liga_endesa", "Liga de Campeones 4", "racing", "racing_parrulo", "nba", "M+ Golf HD"
 ]
 
@@ -63,7 +63,7 @@ PNG_TO_OFFICIAL = {
     'ligadecampeones4.png': 'Liga de Campeones 4',
     'mdeportes.png': 'M. Deportes',
     'mdeportes2.png': 'M. Deportes 2',
-    'Mdeportes3.png': 'M. Deportes 3',
+    'mdeportes3.png': 'mdeportes3',
     'eurosport.png': 'Eurosport 1',
     'eurosport2.png': 'Eurosport 2',
     'golf.png': 'M+ Golf HD',
@@ -92,7 +92,7 @@ ALIAS_CANAL = {
     "Eurosport 1 HD": "Eurosport 1", "Eurosport2": "Eurosport 2", "Eurosport 2 HD": "Eurosport 2",
     "Movistar Deportes": "M. Deportes", "M Deportes": "M. Deportes", "M+ Deportes HD": "M. Deportes",
     "Movistar Deportes 2": "M. Deportes 2", "M Deportes 2": "M. Deportes 2", "M+ Deportes 2 HD": "M. Deportes 2", 
- "Movistar Deportes 3": "M. Deportes 3", "M Deportes 3": "M. Deportes 3", "M+ Deportes 3 HD": "M. Deportes 3",
+ "Movistar Deportes 3": "mdeportes3", "M Deportes 3": "mdeportes3", "M+ Deportes 3 HD": "mdeportes3",
     "Movistar Liga de Campeones": "Liga de Campeones", "LigaCampeones": "Liga de Campeones",
     "M+ Liga de Campeones HD": "Liga de Campeones", "Movistar Liga de Campeones 2": "Liga de Campeones 2",
     "LigaCampeones2": "Liga de Campeones 2", "M+ Liga de Campeones 2 HD": "Liga de Campeones 2",
@@ -122,7 +122,7 @@ CANAL_TO_PNG = {
     "Eurosport 2": "eurosport2.png",
     "M. Deportes": "mdeportes.png",
     "M. Deportes 2": "mdeportes2.png",
-    "M. Deportes 3": "mdeportes3.png",
+    "mdeportes3": "mdeportes3.png",
     "Liga de Campeones": "ligadecampeones.png",
     "Liga de Campeones 2": "ligadecampeones2.png",
     "Liga de Campeones 3": "ligadecampeones3.png",
