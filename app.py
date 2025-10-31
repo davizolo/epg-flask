@@ -169,6 +169,79 @@ NAS_EVENTOS_PATH = "/web/files/programacion/eventos"
 # URL de la guía EPG
 URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv_sincolor0.xml.gz"
 
+# Archivo de configuración local para programación
+CONFIG_FILE = "config_programacion.json"
+
+def load_programming_config():
+    """Carga la configuración de programación desde archivo local"""
+    default_config = {
+        f"Canal {i}": {
+            "default": "epg",
+            "lunes": "epg",
+            "martes": "epg", 
+            "miercoles": "epg",
+            "jueves": "epg",
+            "viernes": "epg",
+            "sabado": "epg",
+            "domingo": "epg"
+        } for i in range(1, 10)
+    }
+    
+    if os.path.exists(CONFIG_FILE):
+        try:
+            with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+                user_config = json.load(f)
+                
+            # Merge con configuración por defecto
+            for canal in default_config:
+                if canal in user_config:
+                    # Actualizar solo las claves existentes, mantener defaults para las faltantes
+                    for key in default_config[canal]:
+                        if key in user_config[canal]:
+                            default_config[canal][key] = user_config[canal][key]
+                    
+            logger.info("Configuración de programación cargada desde archivo local")
+            return default_config
+        except Exception as e:
+            logger.error(f"Error al cargar configuración: {e}")
+    
+    logger.info("Usando configuración de programación por defecto")
+    return default_config
+
+def save_programming_config(config):
+    """Guarda la configuración de programación en archivo local"""
+    try:
+        with open(CONFIG_FILE, 'w', encoding='utf-8') as f:
+            json.dump(config, f, indent=2, ensure_ascii=False)
+        logger.info("Configuración de programación guardada exitosamente")
+        return True
+    except Exception as e:
+        logger.error(f"Error al guardar configuración: {e}")
+        return False
+
+def get_programming_source(channel, target_date, programming_config):
+    """Determina si usar EPG o NAS para un canal en una fecha específica"""
+    try:
+        dias_semana = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
+        dia_semana = dias_semana[target_date.weekday()]
+        
+        config = programming_config.get(channel, {})
+        
+        # Verificar si hay configuración específica para este día
+        if dia_semana in config:
+            source = config[dia_semana]
+            logger.debug(f"Usando {source} para {channel} el {dia_semana}")
+            return source
+        
+        # Usar configuración por defecto
+        source = config.get("default", "epg")
+        logger.debug(f"Usando fuente por defecto {source} para {channel}")
+        return source
+        
+    except Exception as e:
+        logger.error(f"Error al determinar fuente para {channel}: {e}")
+        return "epg"
+
 def load_channel_mapping():
     """Carga el mapeo desde el JSON del NAS o usa un mapeo por defecto si falla"""
     try:
@@ -294,7 +367,8 @@ def load_nas_events(fecha_inicio, fecha_fin, mapping):
                                     "categoria_text": categoria_display_text,
                                     "imagen": evento.get("imagen_url", ""),
                                     "canal": custom,
-                                    "official": official
+                                    "official": official,
+                                    "from_nas": True  # Marcar como evento del NAS
                                 })
                                 logger.debug(f"Evento añadido desde NAS: {evento.get('titulo', 'Sin título')} en {custom} para {fecha}")
                             except Exception as e:
@@ -461,23 +535,88 @@ def cleanup():
 @app.route("/programacion", methods=['GET', 'POST'])
 def programacion():
     mapping = load_channel_mapping()
+    programming_config = load_programming_config()
     
-    info_html = ""
-    for custom in CUSTOM_CHANNELS:
-        official = mapping.get(custom, "No asignado")
-        info_html += f'''
-            <div class="mb-4 p-4 bg-gray-700 light-mode:bg-gray-200 rounded-lg">
-                <label class="block text-sm font-medium text-gray-300 light-mode:text-gray-700">{custom}:</label>
-                <div class="text-white light-mode:text-black mt-1">{official}</div>
+    mensaje = ""
+    if request.method == 'POST':
+        # Procesar el formulario de configuración
+        new_config = {}
+        for i in range(1, 10):
+            canal = f"Canal {i}"
+            new_config[canal] = {
+                "default": request.form.get(f"{canal}_default", "epg"),
+                "lunes": request.form.get(f"{canal}_lunes", "epg"),
+                "martes": request.form.get(f"{canal}_martes", "epg"),
+                "miercoles": request.form.get(f"{canal}_miercoles", "epg"),
+                "jueves": request.form.get(f"{canal}_jueves", "epg"),
+                "viernes": request.form.get(f"{canal}_viernes", "epg"),
+                "sabado": request.form.get(f"{canal}_sabado", "epg"),
+                "domingo": request.form.get(f"{canal}_domingo", "epg")
+            }
+        
+        if save_programming_config(new_config):
+            programming_config = new_config
+            mensaje = '<div class="bg-green-600 text-white p-3 rounded-lg mb-4">Configuración guardada exitosamente</div>'
+        else:
+            mensaje = '<div class="bg-red-600 text-white p-3 rounded-lg mb-4">Error al guardar la configuración</div>'
+    
+    # Generar HTML con los selectores para cada canal
+    config_html = ""
+    dias_semana = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
+    
+    for i in range(1, 10):
+        canal = f"Canal {i}"
+        official = mapping.get(canal, "No asignado")
+        config_canal = programming_config.get(canal, {})
+        
+        # Selector para configuración por defecto
+        default_options = f"""
+            <option value="epg" {'selected' if config_canal.get('default') == 'epg' else ''}>EPG</option>
+            <option value="nas" {'selected' if config_canal.get('default') == 'nas' else ''}>NAS</option>
+        """
+        
+        # Selectores para cada día de la semana
+        dias_html = ""
+        for dia in dias_semana:
+            dias_html += f"""
+            <div class="flex items-center justify-between p-2 bg-gray-700 light-mode:bg-gray-200 rounded">
+                <span class="text-gray-300 light-mode:text-gray-700 font-medium capitalize">{dia}</span>
+                <select name="{canal}_{dia}" class="bg-gray-800 light-mode:bg-white text-white light-mode:text-black rounded px-2 py-1">
+                    <option value="epg" {'selected' if config_canal.get(dia) == 'epg' else ''}>EPG</option>
+                    <option value="nas" {'selected' if config_canal.get(dia) == 'nas' else ''}>NAS</option>
+                </select>
             </div>
-        '''
+            """
+        
+        config_html += f"""
+        <div class="card p-4 mb-4">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-lg font-bold text-white light-mode:text-gray-900">{canal}</h3>
+                <span class="text-sm text-gray-300 light-mode:text-gray-600 bg-gray-600 light-mode:bg-gray-300 px-2 py-1 rounded">{official}</span>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-300 light-mode:text-gray-700 mb-2">Configuración por defecto:</label>
+                <select name="{canal}_default" class="w-full bg-gray-800 light-mode:bg-white text-white light-mode:text-black rounded px-3 py-2">
+                    {default_options}
+                </select>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-300 light-mode:text-gray-700 mb-2">Configuración por días:</label>
+                <div class="space-y-2">
+                    {dias_html}
+                </div>
+            </div>
+        </div>
+        """
 
     html_content = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración de Canales</title>
+    <title>Configuración de Programación</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {{
@@ -517,25 +656,58 @@ def programacion():
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }}
+        .theme-toggle {{
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }}
+        .light-mode .theme-toggle {{
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }}
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen p-4">
     <div class="fixed top-4 right-4 flex space-x-2 z-50">
-        <button class="theme-toggle card px-4 py-2 rounded-lg" onclick="toggleTheme()">
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
             <span id="theme-text">Noche</span>
         </button>
     </div>
-    <div class="w-full max-w-md">
-        <h1 class="text-2xl font-bold mb-6 text-center">Configuración de Canales</h1>
-        <div class="bg-yellow-600 text-white p-4 rounded-lg mb-4">
-            <p class="text-sm">La configuración de canales ahora se carga automáticamente desde el NAS.</p>
-            <p class="text-sm mt-2">Para cambiar la programación, usa la aplicación de programación.</p>
+
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-center">Configuración de Programación</h1>
+        
+        {mensaje}
+        
+        <div class="bg-blue-600 text-white p-4 rounded-lg mb-6">
+            <p class="text-sm"><strong>EPG:</strong> Usa la programación oficial de los canales</p>
+            <p class="text-sm"><strong>NAS:</strong> Usa solo la programación personalizada del NAS</p>
+            <p class="text-sm mt-2">La configuración por días tiene prioridad sobre la configuración por defecto.</p>
         </div>
-        <div class="space-y-4">
-            {info_html}
-            <a href="/" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-center block">Ver Guía</a>
-        </div>
+        
+        <form method="POST" class="space-y-6">
+            {config_html}
+            
+            <div class="flex gap-4">
+                <button type="submit" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                    Guardar Configuración
+                </button>
+                <a href="/" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors text-center">
+                    Ver Guía
+                </a>
+            </div>
+        </form>
     </div>
+
     <script>
         function toggleTheme() {{
             document.body.classList.toggle('light-mode');
@@ -543,6 +715,7 @@ def programacion():
             themeText.textContent = document.body.classList.contains('light-mode') ? 'Día' : 'Noche';
             localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }}
+        
         document.addEventListener('DOMContentLoaded', () => {{
             if (localStorage.getItem('theme') === 'light') {{
                 document.body.classList.add('light-mode');
@@ -567,6 +740,8 @@ def mostrar_epg():
     search_query = request.args.get("search_query", "").strip()
     
     mapping = load_channel_mapping()
+    programming_config = load_programming_config()
+    
     reverse_mapping = {}
     for custom, official in mapping.items():
         if official:
@@ -870,9 +1045,24 @@ def mostrar_epg():
                 "categoria_text": categoria_display_text,
                 "imagen": imagen,
                 "canal": custom,
-                "official": canal_official
+                "official": canal_official,
+                "from_nas": False  # Marcar como evento de EPG
             })
 
+    # FILTRAR EVENTOS SEGÚN CONFIGURACIÓN
+    eventos_filtrados = []
+    for evento in eventos:
+        canal = evento["canal"]
+        fecha_evento = evento["inicio"].date()
+        
+        source = get_programming_source(canal, fecha_evento, programming_config)
+        is_from_nas = evento.get("from_nas", False)
+        
+        if (source == "nas" and is_from_nas) or (source == "epg" and not is_from_nas):
+            eventos_filtrados.append(evento)
+            logger.debug(f"Mostrando evento {evento['titulo']} de {'NAS' if is_from_nas else 'EPG'} para {canal}")
+
+    eventos = eventos_filtrados
     eventos.sort(key=lambda x: x["inicio"])
 
     lista_html = ""
