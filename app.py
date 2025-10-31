@@ -172,18 +172,21 @@ URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv
 # Archivo de configuración local para programación
 CONFIG_FILE = "config_programacion.json"
 
+
+
+
 def load_programming_config():
     """Carga la configuración de programación desde archivo local"""
     default_config = {
         f"Canal {i}": {
-            "default": "epg",
-            "lunes": "epg",
-            "martes": "epg", 
-            "miercoles": "epg",
-            "jueves": "epg",
-            "viernes": "epg",
-            "sabado": "epg",
-            "domingo": "epg"
+            "default": "epg+nas",  # Cambiar por defecto a EPG+NAS
+            "lunes": "epg+nas",
+            "martes": "epg+nas", 
+            "miercoles": "epg+nas",
+            "jueves": "epg+nas",
+            "viernes": "epg+nas",
+            "sabado": "epg+nas",
+            "domingo": "epg+nas"
         } for i in range(1, 10)
     }
     
@@ -205,8 +208,10 @@ def load_programming_config():
         except Exception as e:
             logger.error(f"Error al cargar configuración: {e}")
     
-    logger.info("Usando configuración de programación por defecto")
+    logger.info("Usando configuración de programación por defecto (EPG+NAS)")
     return default_config
+
+
 
 def save_programming_config(config):
     """Guarda la configuración de programación en archivo local"""
@@ -219,8 +224,12 @@ def save_programming_config(config):
         logger.error(f"Error al guardar configuración: {e}")
         return False
 
+
+
+
+
 def get_programming_source(channel, target_date, programming_config):
-    """Determina si usar EPG o NAS para un canal en una fecha específica"""
+    """Determina si usar EPG, NAS o ambos para un canal en una fecha específica"""
     try:
         dias_semana = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
         dia_semana = dias_semana[target_date.weekday()]
@@ -234,13 +243,17 @@ def get_programming_source(channel, target_date, programming_config):
             return source
         
         # Usar configuración por defecto
-        source = config.get("default", "epg")
+        source = config.get("default", "epg+nas")  # Cambiar por defecto
         logger.debug(f"Usando fuente por defecto {source} para {channel}")
         return source
         
     except Exception as e:
         logger.error(f"Error al determinar fuente para {channel}: {e}")
-        return "epg"
+        return "epg+nas"  # Cambiar por defecto
+
+
+
+
 
 def load_channel_mapping():
     """Carga el mapeo desde el JSON del NAS o usa un mapeo por defecto si falla"""
@@ -569,12 +582,16 @@ def programacion():
         official = mapping.get(canal, "No asignado")
         config_canal = programming_config.get(canal, {})
         
+
+
+
         # Selector para configuración por defecto
         default_options = f"""
             <option value="epg" {'selected' if config_canal.get('default') == 'epg' else ''}>EPG</option>
             <option value="nas" {'selected' if config_canal.get('default') == 'nas' else ''}>NAS</option>
+            <option value="epg+nas" {'selected' if config_canal.get('default') == 'epg+nas' else ''}>EPG+NAS</option>
         """
-        
+
         # Selectores para cada día de la semana
         dias_html = ""
         for dia in dias_semana:
@@ -584,10 +601,11 @@ def programacion():
                 <select name="{canal}_{dia}" class="bg-gray-800 light-mode:bg-white text-white light-mode:text-black rounded px-2 py-1">
                     <option value="epg" {'selected' if config_canal.get(dia) == 'epg' else ''}>EPG</option>
                     <option value="nas" {'selected' if config_canal.get(dia) == 'nas' else ''}>NAS</option>
+                    <option value="epg+nas" {'selected' if config_canal.get(dia) == 'epg+nas' else ''}>EPG+NAS</option>
                 </select>
             </div>
             """
-        
+
         config_html += f"""
         <div class="card p-4 mb-4">
             <div class="flex justify-between items-center mb-3">
@@ -610,7 +628,6 @@ def programacion():
             </div>
         </div>
         """
-
     html_content = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -688,12 +705,12 @@ def programacion():
         
         {mensaje}
         
-        <div class="bg-blue-600 text-white p-4 rounded-lg mb-6">
-            <p class="text-sm"><strong>EPG:</strong> Usa la programación oficial de los canales</p>
-            <p class="text-sm"><strong>NAS:</strong> Usa solo la programación personalizada del NAS</p>
-            <p class="text-sm mt-2">La configuración por días tiene prioridad sobre la configuración por defecto.</p>
-        </div>
-        
+<div class="bg-blue-600 text-white p-4 rounded-lg mb-6">
+    <p class="text-sm"><strong>EPG:</strong> Usa solo la programación oficial de los canales</p>
+    <p class="text-sm"><strong>NAS:</strong> Usa solo la programación personalizada del NAS</p>
+    <p class="text-sm"><strong>EPG+NAS:</strong> Muestra tanto la programación oficial como la del NAS</p>
+    <p class="text-sm mt-2">La configuración por días tiene prioridad sobre la configuración por defecto.</p>
+</div>        
         <form method="POST" class="space-y-6">
             {config_html}
             
@@ -1049,6 +1066,10 @@ def mostrar_epg():
                 "from_nas": False  # Marcar como evento de EPG
             })
 
+
+
+
+
     # FILTRAR EVENTOS SEGÚN CONFIGURACIÓN
     eventos_filtrados = []
     for evento in eventos:
@@ -1058,11 +1079,23 @@ def mostrar_epg():
         source = get_programming_source(canal, fecha_evento, programming_config)
         is_from_nas = evento.get("from_nas", False)
         
-        if (source == "nas" and is_from_nas) or (source == "epg" and not is_from_nas):
+        # Lógica para las tres opciones
+        if source == "nas" and is_from_nas:
             eventos_filtrados.append(evento)
-            logger.debug(f"Mostrando evento {evento['titulo']} de {'NAS' if is_from_nas else 'EPG'} para {canal}")
+            logger.debug(f"Mostrando evento NAS: {evento['titulo']} para {canal}")
+        elif source == "epg" and not is_from_nas:
+            eventos_filtrados.append(evento)
+            logger.debug(f"Mostrando evento EPG: {evento['titulo']} para {canal}")
+        elif source == "epg+nas":
+            eventos_filtrados.append(evento)
+            logger.debug(f"Mostrando evento {'NAS' if is_from_nas else 'EPG'}: {evento['titulo']} para {canal}")
 
     eventos = eventos_filtrados
+
+    eventos.sort(key=lambda x: x["inicio"])
+
+
+
     eventos.sort(key=lambda x: x["inicio"])
 
     lista_html = ""
