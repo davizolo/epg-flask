@@ -24,10 +24,14 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 # Lista de canales oficiales que se mostrarán en la guía
 CHANNELS_OFICIALES = [
     "La 1 HD", "La 2", "Antena 3 HD", "Cuatro HD", "Telecinco HD", "La Sexta HD", "TVG Europa HD", "Teledeporte",
-    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", "M+ Ellas Vamos HD", "DAZN Liga F", "basket", "parrulo", 
+    "M+ LaLiga HD", "M. LaLiga 2", "DAZN LaLiga", "DAZN LaLiga 2 HD", "#Vamos por M+", "M+ Vamos 2", "Movistar Plus+", "DAZN 1", "DAZN 2", "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2", "Primera Federación", "M+ Ellas Vamos HD", "DAZN Liga F", "basket", "parrulo", 
     "DAZN F1", "Eurosport 1", "Eurosport 2", "M. Deportes", "M. Deportes 2", "mdeportes3", "Liga de Campeones",
     "Liga de Campeones 2", "Liga de Campeones 3", "liga_endesa", "Liga de Campeones 4", "racing", "racing_parrulo", "nba", "M+ Golf HD"
 ]
+
+
+
+
 
 # Canales personalizados
 CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 10)]
@@ -85,7 +89,7 @@ ALIAS_CANAL = {
     "M+ Vamos HD": "#Vamos por M+", "Vamos BAR": "#Vamos por M+", "Movistar Vamos": "#Vamos por M+",
     "M+ Vamos": "#Vamos por M+", "M+ Vamos.TV": "#Vamos por M+", "M+ Vamos SD": "#Vamos por M+",
     "M+ Vamos FHD": "#Vamos por M+", "M+ Vamos UHD": "#Vamos por M+", "M+ Vamos 720": "#Vamos por M+",
-    "M+ Vamos 1080": "#Vamos por M+", "#Vamos 2": "M+ Vamos 2", "Vamos2": "M+ Vamos 2", "#vamos 2": "M+ Vamos 2", "M+ Ellas Vamos HD": "M+ Ellas Vamos", "M+ Ellas Vamos HD": "M+ Ellas Vamos HD", "DAZN Liga F": "DAZN Liga F", "Movistar Plus": "Movistar Plus+", "Movistar+": "Movistar Plus+",
+    "M+ Vamos 1080": "#Vamos por M+", "vamos2": "M+ Vamos 2", "Vamos2": "M+ Vamos 2", "#Vamos2": "M+ Vamos 2", "M+ Ellas Vamos HD": "M+ Ellas Vamos", "M+ Ellas Vamos HD": "M+ Ellas Vamos HD", "DAZN Liga F": "DAZN Liga F", "Movistar Plus": "Movistar Plus+", "Movistar+": "Movistar Plus+",
     "Movistar Plus+ HD": "Movistar Plus+", "Dazn 1": "DAZN 1", "DAZN 1 HD": "DAZN 1", "Dazn 2": "DAZN 2",
     "DAZN 2 HD": "DAZN 2", "Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga Hypermotion": "LaLiga TV Hypermotion HD",
     "LaLiga TV Hypermotion": "LaLiga TV Hypermotion HD", "LaLiga TV Hypermotion 2": "LaLiga TV Hypermotion 2", "Primera Federación": "Primera Federación", "basket": "basket", "parrulo": "parrulo", 
@@ -143,6 +147,12 @@ CANAL_TO_PNG = {
     "nba": "nba.png",
     "racing": "racing.png"
 }
+
+
+
+
+
+
 
 # Mapeo de canales personalizados a sus logos
 CUSTOM_TO_PNG = {
