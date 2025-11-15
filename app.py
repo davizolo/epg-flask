@@ -29,12 +29,14 @@ CHANNELS_OFICIALES = [
     "Liga de Campeones 2", "Liga de Campeones 3", "liga_endesa", "Liga de Campeones 4", "racing", "racing_parrulo", "nba", "M+ Golf HD"
 ]
 
-
-
-
-
 # Canales personalizados
 CUSTOM_CHANNELS = [f"Canal {i}" for i in range(1, 10)]
+
+# Categorías ordenadas (lista maestra)
+CATEGORIAS_ORDENADAS = [
+    "Fútbol", "Baloncesto", "Tenis", "Motor", "Motociclismo", 
+    "Rugby", "Padel", "Ciclismo", "Sin categoría"
+]
 
 # Mapeo de archivos PNG a nombres oficiales
 PNG_TO_OFFICIAL = {
@@ -148,12 +150,6 @@ CANAL_TO_PNG = {
     "racing": "racing.png"
 }
 
-
-
-
-
-
-
 # Mapeo de canales personalizados a sus logos
 CUSTOM_TO_PNG = {
     "Canal 1": "canal1.png",
@@ -172,7 +168,9 @@ WEBDAV_OPTIONS = {
     'webdav_hostname': "http://privado2.dyndns.org:5005/",
     'webdav_login': "remoto",
     'webdav_password': "Jor01dasJor01das",
-    'disable_check': True
+    'disable_check': True,
+    'timeout': 30,
+    'verbose': False
 }
 
 # Path del NAS para eventos
@@ -184,14 +182,49 @@ URL_Guia = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv
 # Archivo de configuración local para programación
 CONFIG_FILE = "config_programacion.json"
 
-
-
+def normalizar_categoria(categoria):
+    """Normaliza las categorías a una lista consistente"""
+    if not categoria or categoria == "Sin categoría":
+        return "Sin categoría"
+    
+    categoria = categoria.strip().title()
+    
+    # Mapeo de categorías similares
+    mapeo_categorias = {
+        "Futbol": "Fútbol",
+        "Fútbol": "Fútbol",
+        "Baloncesto": "Baloncesto", 
+        "Tenis": "Tenis",
+        "Motor": "Motor",
+        "Motociclismo": "Motociclismo",
+        "Rugby": "Rugby",
+        "Padel": "Padel",
+        "Pádel": "Padel",
+        "Ciclismo": "Ciclismo"
+    }
+    
+    # Buscar coincidencias exactas primero
+    for cat_base, cat_normalizada in mapeo_categorias.items():
+        if cat_base.lower() == categoria.lower():
+            return cat_normalizada
+    
+    # Buscar coincidencias parciales
+    for cat_base, cat_normalizada in mapeo_categorias.items():
+        if cat_base.lower() in categoria.lower():
+            return cat_normalizada
+    
+    # Si no coincide con ninguna categoría conocida
+    for cat in CATEGORIAS_ORDENADAS:
+        if cat.lower() in categoria.lower():
+            return cat
+    
+    return "Sin categoría"
 
 def load_programming_config():
     """Carga la configuración de programación desde archivo local"""
     default_config = {
         f"Canal {i}": {
-            "default": "epg+nas",  # Cambiar por defecto a EPG+NAS
+            "default": "epg+nas",
             "lunes": "epg+nas",
             "martes": "epg+nas", 
             "miercoles": "epg+nas",
@@ -210,7 +243,6 @@ def load_programming_config():
             # Merge con configuración por defecto
             for canal in default_config:
                 if canal in user_config:
-                    # Actualizar solo las claves existentes, mantener defaults para las faltantes
                     for key in default_config[canal]:
                         if key in user_config[canal]:
                             default_config[canal][key] = user_config[canal][key]
@@ -223,8 +255,6 @@ def load_programming_config():
     logger.info("Usando configuración de programación por defecto (EPG+NAS)")
     return default_config
 
-
-
 def save_programming_config(config):
     """Guarda la configuración de programación en archivo local"""
     try:
@@ -236,10 +266,6 @@ def save_programming_config(config):
         logger.error(f"Error al guardar configuración: {e}")
         return False
 
-
-
-
-
 def get_programming_source(channel, target_date, programming_config):
     """Determina si usar EPG, NAS o ambos para un canal en una fecha específica"""
     try:
@@ -248,24 +274,18 @@ def get_programming_source(channel, target_date, programming_config):
         
         config = programming_config.get(channel, {})
         
-        # Verificar si hay configuración específica para este día
         if dia_semana in config:
             source = config[dia_semana]
             logger.debug(f"Usando {source} para {channel} el {dia_semana}")
             return source
         
-        # Usar configuración por defecto
-        source = config.get("default", "epg+nas")  # Cambiar por defecto
+        source = config.get("default", "epg+nas")
         logger.debug(f"Usando fuente por defecto {source} para {channel}")
         return source
         
     except Exception as e:
         logger.error(f"Error al determinar fuente para {channel}: {e}")
-        return "epg+nas"  # Cambiar por defecto
-
-
-
-
+        return "epg+nas"
 
 def load_channel_mapping():
     """Carga el mapeo desde el JSON del NAS o usa un mapeo por defecto si falla"""
@@ -311,7 +331,6 @@ def load_nas_events(fecha_inicio, fecha_fin, mapping):
     client = wc.Client(WEBDAV_OPTIONS)
     eventos_nas = []
     
-    # Convertir fechas a formato AAAAMMDD para buscar archivos
     fechas = []
     current_date = fecha_inicio
     while current_date <= fecha_fin:
@@ -323,10 +342,10 @@ def load_nas_events(fecha_inicio, fecha_fin, mapping):
             if not official:
                 logger.debug(f"Saltando {custom} porque no tiene canal oficial asignado")
                 continue
+                
             for fecha in fechas:
-                # Ajustar el nombre del canal para que coincida con el formato del archivo
-                canal_file = f"canal_{custom.lower().replace(' ', '_')[-1]}"
-                file_name = f"eventos_{canal_file}_{fecha}.json"
+                canal_num = custom.split()[-1]
+                file_name = f"eventos_canal_{canal_num}_{fecha}.json"
                 file_path = f"{NAS_EVENTOS_PATH}/{file_name}"
                 logger.debug(f"Intentando leer {file_path}")
                 
@@ -334,47 +353,34 @@ def load_nas_events(fecha_inicio, fecha_fin, mapping):
                     if client.check(file_path):
                         temp_file = f"temp_{file_name}"
                         client.download(file_path, temp_file)
+                        
                         with open(temp_file, 'r', encoding='utf-8') as f:
                             data = json.load(f)
+                        
                         os.remove(temp_file)
                         
-                        # Procesar los eventos en el campo "programacion"
                         eventos_data = data.get("programacion", [])
                         for evento in eventos_data:
                             try:
-                                # Obtener fecha del JSON raíz
                                 fecha_str = data.get("fecha", "")
-                                if not fecha_str:
-                                    logger.warning(f"Evento sin fecha en {file_name}")
-                                    continue
-                                
-                                # Parsear hora_inicio y hora_final
                                 hora_inicio = evento.get("hora_inicio", "")
                                 hora_final = evento.get("hora_final", "")
-                                if not (hora_inicio and hora_final):
-                                    logger.warning(f"Evento sin hora_inicio o hora_final en {file_name}: {evento}")
+                                
+                                if not (fecha_str and hora_inicio and hora_final):
                                     continue
                                 
-                                # Crear objetos datetime combinando fecha y hora
                                 inicio = datetime.strptime(f"{fecha_str} {hora_inicio}", "%Y-%m-%d %H:%M").replace(tzinfo=pytz.timezone("Europe/Madrid"))
                                 fin = datetime.strptime(f"{fecha_str} {hora_final}", "%Y-%m-%d %H:%M").replace(tzinfo=pytz.timezone("Europe/Madrid"))
                                 
-                                # Verificar que el evento esté en el rango de fechas
                                 if not (fecha_inicio <= inicio.date() <= fecha_fin):
-                                    logger.debug(f"Evento fuera del rango de fechas: {inicio.date()}")
                                     continue
-                                    
-                                # Normalizar categoría
-                                categoria = evento.get("deporte_evento", "Sin categoría")
-                                categorias_ordenadas = ["Fútbol", "Baloncesto", "Tenis", "Motor", "Motociclismo", "Rugby", "Padel", "Ciclismo"]
-                                categoria_display = next(
-                                    (cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)),
-                                    categoria
-                                )
-                                categoria_display_class = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
-                                categoria_display_text = categoria_display.replace("_", " ") if categoria_display else "Sin categoría"
                                 
-                                # Separar descripción en sinopsis y detalles
+                                # NORMALIZAR CATEGORÍA
+                                categoria = evento.get("deporte_evento", "Sin categoría")
+                                categoria_normalizada = normalizar_categoria(categoria)
+                                categoria_display_class = re.sub(r'\s+', '_', categoria_normalizada.strip())
+                                categoria_display_text = categoria_normalizada
+                                
                                 descripcion = evento.get("descripcion", "Sin descripción")
                                 desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
                                 synopsis = desc_parts[0][:200] + "..." if len(desc_parts[0]) > 200 else desc_parts[0]
@@ -393,15 +399,17 @@ def load_nas_events(fecha_inicio, fecha_fin, mapping):
                                     "imagen": evento.get("imagen_url", ""),
                                     "canal": custom,
                                     "official": official,
-                                    "from_nas": True  # Marcar como evento del NAS
+                                    "from_nas": True
                                 })
                                 logger.debug(f"Evento añadido desde NAS: {evento.get('titulo', 'Sin título')} en {custom} para {fecha}")
+                                
                             except Exception as e:
                                 logger.error(f"Error al procesar evento desde NAS en {file_name}: {e}")
-                    else:
-                        logger.debug(f"Archivo {file_path} no encontrado en NAS")
+                                continue
                 except Exception as e:
-                    logger.error(f"Error al descargar o procesar {file_path}: {e}")
+                    logger.debug(f"Archivo {file_path} no disponible: {e}")
+                    continue
+                    
     except Exception as e:
         logger.error(f"Error general al cargar eventos del NAS: {e}")
     
@@ -564,7 +572,6 @@ def programacion():
     
     mensaje = ""
     if request.method == 'POST':
-        # Procesar el formulario de configuración
         new_config = {}
         for i in range(1, 10):
             canal = f"Canal {i}"
@@ -585,7 +592,6 @@ def programacion():
         else:
             mensaje = '<div class="bg-red-600 text-white p-3 rounded-lg mb-4">Error al guardar la configuración</div>'
     
-    # Generar HTML con los selectores para cada canal
     config_html = ""
     dias_semana = ["lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"]
     
@@ -593,18 +599,13 @@ def programacion():
         canal = f"Canal {i}"
         official = mapping.get(canal, "No asignado")
         config_canal = programming_config.get(canal, {})
-        
 
-
-
-        # Selector para configuración por defecto
         default_options = f"""
             <option value="epg" {'selected' if config_canal.get('default') == 'epg' else ''}>EPG</option>
             <option value="nas" {'selected' if config_canal.get('default') == 'nas' else ''}>NAS</option>
             <option value="epg+nas" {'selected' if config_canal.get('default') == 'epg+nas' else ''}>EPG+NAS</option>
         """
 
-        # Selectores para cada día de la semana
         dias_html = ""
         for dia in dias_semana:
             dias_html += f"""
@@ -640,6 +641,7 @@ def programacion():
             </div>
         </div>
         """
+        
     html_content = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -977,15 +979,12 @@ def mostrar_epg():
         """
         return Response(error_html_content, mimetype="text/html")
 
-    # Definir categorías fijas y ordenadas para el selector
-    categorias_ordenadas = ["Fútbol", "Baloncesto", "Tenis", "Motor", "Motociclismo", "Rugby", "Padel", "Ciclismo"]
-    logger.debug(f"Categorías ordenadas para el selector: {categorias_ordenadas}")
-    
+    # Usar la lista maestra de categorías
     selector_categorias = (
         f'<option value="Todos" {"selected" if categoria_entrada == "Todos" else ""}>Todos</option>' +
         "".join(
             f'<option value="{cat}" {"selected" if categoria_entrada == cat else ""}>{cat}</option>'
-            for cat in categorias_ordenadas
+            for cat in CATEGORIAS_ORDENADAS if cat != "Sin categoría"
         )
     )
 
@@ -1006,6 +1005,10 @@ def mostrar_epg():
     eventos.extend(eventos_nas)
     logger.debug(f"Eventos cargados desde NAS: {len(eventos_nas)}")
 
+  
+
+
+
     # Procesar eventos de la EPG
     for prog in data['tv']['programme']:
         canal_xml = prog.get('@channel', '')
@@ -1024,12 +1027,32 @@ def mostrar_epg():
         if not search_query and not (fecha_inicio <= inicio.date() <= fecha_fin):
             continue
 
-        categoria = prog.get("category", {}).get("#text", "Sin categoría")
-        if categoria_entrada != "Todos" and not re.search(r'\b' + re.escape(categoria_entrada) + r'\b', categoria, re.IGNORECASE):
+        # CORRECCIÓN: Manejar categoría que puede ser string o dict
+        categoria_raw = prog.get("category", "Sin categoría")
+        if isinstance(categoria_raw, dict):
+            categoria = categoria_raw.get("#text", "Sin categoría")
+        else:
+            categoria = str(categoria_raw)
+        
+        categoria_normalizada = normalizar_categoria(categoria)
+        
+        # FILTRO DE CATEGORÍA CORREGIDO
+        if categoria_entrada != "Todos" and categoria_entrada != categoria_normalizada:
             continue
         
-        titulo = prog.get("title", {}).get("#text", "Sin título")
-        descripcion = prog.get("desc", {}).get("#text", "Sin descripción")
+        # CORRECCIÓN: Manejar título que puede ser string o dict
+        titulo_raw = prog.get("title", "Sin título")
+        if isinstance(titulo_raw, dict):
+            titulo = titulo_raw.get("#text", "Sin título")
+        else:
+            titulo = str(titulo_raw)
+            
+        # CORRECCIÓN: Manejar descripción que puede ser string o dict
+        descripcion_raw = prog.get("desc", "Sin descripción")
+        if isinstance(descripcion_raw, dict):
+            descripcion = descripcion_raw.get("#text", "Sin descripción")
+        else:
+            descripcion = str(descripcion_raw)
 
         if search_query:
             normalized_search_query = normalize_text(search_query)
@@ -1048,11 +1071,15 @@ def mostrar_epg():
         hora_fin = fin.astimezone(pytz.timezone("Europe/Madrid")).strftime("%H:%M")
         fecha = inicio.astimezone(pytz.timezone("Europe/Madrid")).strftime("%d/%m/%Y")
         
-        categoria_display = next((cat for cat in categorias_ordenadas if re.search(r'\b' + re.escape(cat) + r'\b', categoria, re.IGNORECASE)), categoria)
-        categoria_display_class = re.sub(r'\s+', '_', categoria_display.strip()) if categoria_display else "Sin_categoría"
-        categoria_display_text = categoria_display.replace("_", " ") if categoria_display else "Sin categoría"
+        categoria_display_class = re.sub(r'\s+', '_', categoria_normalizada.strip())
+        categoria_display_text = categoria_normalizada
         
-        imagen = prog.get("icon", {}).get("@src", "")
+        # CORRECCIÓN: Manejar imagen que puede ser string o dict
+        imagen_raw = prog.get("icon", "")
+        if isinstance(imagen_raw, dict):
+            imagen = imagen_raw.get("@src", "")
+        else:
+            imagen = str(imagen_raw)
         
         desc_parts = descripcion.split(". ") if ". " in descripcion else [descripcion]
         synopsis = desc_parts[0][:200] + "..." if len(desc_parts[0]) > 200 else desc_parts[0]
@@ -1075,8 +1102,9 @@ def mostrar_epg():
                 "imagen": imagen,
                 "canal": custom,
                 "official": canal_official,
-                "from_nas": False  # Marcar como evento de EPG
+                "from_nas": False
             })
+
 
 
 
@@ -1091,23 +1119,14 @@ def mostrar_epg():
         source = get_programming_source(canal, fecha_evento, programming_config)
         is_from_nas = evento.get("from_nas", False)
         
-        # Lógica para las tres opciones
         if source == "nas" and is_from_nas:
             eventos_filtrados.append(evento)
-            logger.debug(f"Mostrando evento NAS: {evento['titulo']} para {canal}")
         elif source == "epg" and not is_from_nas:
             eventos_filtrados.append(evento)
-            logger.debug(f"Mostrando evento EPG: {evento['titulo']} para {canal}")
         elif source == "epg+nas":
             eventos_filtrados.append(evento)
-            logger.debug(f"Mostrando evento {'NAS' if is_from_nas else 'EPG'}: {evento['titulo']} para {canal}")
 
     eventos = eventos_filtrados
-
-    eventos.sort(key=lambda x: x["inicio"])
-
-
-
     eventos.sort(key=lambda x: x["inicio"])
 
     lista_html = ""
@@ -1227,6 +1246,7 @@ def mostrar_epg():
             page_title = "Guía de Programación"
             show_back_link = False
 
+    # HTML completo (igual que antes, pero manteniendo el CSS existente)
     html_content = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1699,4 +1719,5 @@ if __name__ == "__main__":
     schedule_cleanup()
     
     # Configurar y ejecutar la aplicación Flask
-    app.run(host="0.0.0.0", port=5053, debug=True)
+    port = int(os.environ.get("PORT", 5053))
+    app.run(host="0.0.0.0", port=port, debug=True)
