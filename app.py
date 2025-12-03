@@ -3,7 +3,7 @@ import requests
 import os
 import re
 
-# Desactivamos el static folder integrado de Flask
+# Desactivamos static_folder por precaución
 app = Flask(__name__, static_folder=None)
 
 SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5052')
@@ -31,7 +31,12 @@ def rewrite_all_urls(content):
     
     return text.encode('utf-8')
 
+# 🔹 Captura EXPLÍCITA de /static/... para evitar el sistema automático de Flask
+@app.route('/static/<path:filename>')
+def proxy_static(filename):
+    return proxy_epg(f"static/{filename}")
 
+# Ruta genérica
 @app.route('/')
 @app.route('/<path:subpath>')
 def proxy_epg(subpath=''):
@@ -69,7 +74,6 @@ def proxy_epg(subpath=''):
         error_msg = f"Proxy Error: {str(e)}"
         print(error_msg)
         return error_msg, 500
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
