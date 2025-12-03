@@ -8,34 +8,23 @@ app = Flask(__name__)
 SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5052')
 
 def rewrite_all_urls(content):
-    """Reescribe URLs solo si el contenido es texto válido UTF-8"""
-    # Si es bytes, intentamos decodificar; si falla, devolvemos intacto (es binario)
+    """Reescribe URLs solo si el contenido es texto y evita exponer /epg"""
     if isinstance(content, bytes):
         try:
             text = content.decode('utf-8')
         except UnicodeDecodeError:
-            # Contenido binario → no modificar
-            return content
+            return content  # contenido binario → no tocar
     else:
         text = content
 
-    # Lista de transformaciones más completa para URLs
+    # Reescribir todas las referencias a /epg/... como rutas relativas sin /epg
     transformations = [
-        # URLs de la EPG
         (r'["\']/epg/([^"\']*)["\']', r'"/\1"'),
         (r'["\']/epg["\']', r'"/"'),
-        
-        # URLs estáticas
-        (r'["\']/static/epg/([^"\']*)["\']', r'"/static/\1"'),
-        
-        # URLs en JavaScript
+        # Asegurar que en JS/CSS también se normalicen
         (r'window\.location\.href\s*=\s*["\']/epg/([^"\']*)["\']', r'window.location.href = "/\1"'),
         (r'window\.open\(["\']/epg/([^"\']*)["\']', r'window.open("/\1"'),
-        
-        # Form actions
         (r'action=["\']/epg/([^"\']*)["\']', r'action="/\1"'),
-        
-        # URLs en CSS
         (r'url\(["\']?/epg/([^"\'\)]*)["\']?\)', r'url(/\1)'),
     ]
     
@@ -48,21 +37,17 @@ def rewrite_all_urls(content):
 @app.route('/')
 @app.route('/<path:subpath>')
 def proxy_epg(subpath=''):
-    # Redirigir rutas que comienzan con /epg/ para normalizar
+    # Si por error alguien pone /epg/... en la URL pública, normalizamos
     if subpath.startswith('epg/'):
-        new_path = subpath[4:]  # Quitar 'epg/'
+        new_path = subpath[4:]
         return redirect(f'/{new_path}' if new_path else '/')
 
-    # Construir la URL de destino en el servidor Synology
-    if subpath.startswith('static/'):
-        target_url = f"{SYNOLOGY_URL}/{subpath}"
-    else:
-        target_url = f"{SYNOLOGY_URL}/epg/{subpath}" if subpath else f"{SYNOLOGY_URL}/epg/"
+    # ✅ TODAS las peticiones se proxyean dentro de /epg/ → aislamiento garantizado
+    target_url = f"{SYNOLOGY_URL}/epg/{subpath}" if subpath else f"{SYNOLOGY_URL}/epg/"
 
-    print(f"🔁 Proxy: /{subpath} -> {target_url}")
+    print(f"🔁 Proxy seguro: /{subpath} -> {target_url}")
 
     try:
-        # Realizar la petición al backend
         resp = requests.request(
             method=request.method,
             url=target_url,
@@ -77,20 +62,11 @@ def proxy_epg(subpath=''):
         content = resp.content
         content_type = resp.headers.get('content-type', '').lower()
 
-        # Solo reescribir contenido textual conocido
-        text_content_types = [
-            'text/html',
-            'text/css',
-            'application/javascript',
-            'application/json',
-            'text/plain'  # opcional: solo si estás seguro de que el plain es texto
-        ]
-
-        if any(t in content_type for t in text_content_types):
+        # Solo reescribir contenido textual
+        if any(t in content_type for t in ['text/html', 'text/css', 'application/javascript', 'application/json']):
             content = rewrite_all_urls(content)
-        # Si no es texto, se deja como bytes originales (imágenes, etc.)
 
-        # Filtrar headers que no deben reenviarse
+        # Eliminar headers que interfieren con la respuesta modificada
         excluded_headers = {'content-encoding', 'content-length', 'transfer-encoding', 'connection', 'keep-alive'}
         headers = [(k, v) for k, v in resp.raw.headers.items() if k.lower() not in excluded_headers]
 
