@@ -3,25 +3,23 @@ import requests
 import os
 import re
 
-app = Flask(__name__)
+# Desactivamos el static folder integrado de Flask
+app = Flask(__name__, static_folder=None)
 
 SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5052')
 
 def rewrite_all_urls(content):
-    """Reescribe URLs solo si el contenido es texto y evita exponer /epg"""
     if isinstance(content, bytes):
         try:
             text = content.decode('utf-8')
         except UnicodeDecodeError:
-            return content  # contenido binario → no tocar
+            return content
     else:
         text = content
 
-    # Reescribir todas las referencias a /epg/... como rutas relativas sin /epg
     transformations = [
         (r'["\']/epg/([^"\']*)["\']', r'"/\1"'),
         (r'["\']/epg["\']', r'"/"'),
-        # Asegurar que en JS/CSS también se normalicen
         (r'window\.location\.href\s*=\s*["\']/epg/([^"\']*)["\']', r'window.location.href = "/\1"'),
         (r'window\.open\(["\']/epg/([^"\']*)["\']', r'window.open("/\1"'),
         (r'action=["\']/epg/([^"\']*)["\']', r'action="/\1"'),
@@ -37,15 +35,12 @@ def rewrite_all_urls(content):
 @app.route('/')
 @app.route('/<path:subpath>')
 def proxy_epg(subpath=''):
-    # Si por error alguien pone /epg/... en la URL pública, normalizamos
     if subpath.startswith('epg/'):
         new_path = subpath[4:]
         return redirect(f'/{new_path}' if new_path else '/')
 
-    # ✅ TODAS las peticiones se proxyean dentro de /epg/ → aislamiento garantizado
     target_url = f"{SYNOLOGY_URL}/epg/{subpath}" if subpath else f"{SYNOLOGY_URL}/epg/"
-
-    print(f"🔁 Proxy seguro: /{subpath} -> {target_url}")
+    print(f"🔁 Proxy: /{subpath} -> {target_url}")
 
     try:
         resp = requests.request(
@@ -62,11 +57,9 @@ def proxy_epg(subpath=''):
         content = resp.content
         content_type = resp.headers.get('content-type', '').lower()
 
-        # Solo reescribir contenido textual
         if any(t in content_type for t in ['text/html', 'text/css', 'application/javascript', 'application/json']):
             content = rewrite_all_urls(content)
 
-        # Eliminar headers que interfieren con la respuesta modificada
         excluded_headers = {'content-encoding', 'content-length', 'transfer-encoding', 'connection', 'keep-alive'}
         headers = [(k, v) for k, v in resp.raw.headers.items() if k.lower() not in excluded_headers]
 
