@@ -8,11 +8,18 @@ app = Flask(__name__)
 SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5052')
 
 def rewrite_all_urls(content):
-    """Reescribe TODAS las URLs posibles"""
+    """Reescribe URLs solo si el contenido es texto válido UTF-8"""
+    # Si es bytes, intentamos decodificar; si falla, devolvemos intacto (es binario)
     if isinstance(content, bytes):
-        content = content.decode('utf-8')
-    
-    # Lista de transformaciones más completa
+        try:
+            text = content.decode('utf-8')
+        except UnicodeDecodeError:
+            # Contenido binario → no modificar
+            return content
+    else:
+        text = content
+
+    # Lista de transformaciones más completa para URLs
     transformations = [
         # URLs de la EPG
         (r'["\']/epg/([^"\']*)["\']', r'"/\1"'),
@@ -33,53 +40,67 @@ def rewrite_all_urls(content):
     ]
     
     for pattern, replacement in transformations:
-        content = re.sub(pattern, replacement, content, flags=re.IGNORECASE)
+        text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
     
-    return content.encode('utf-8')
+    return text.encode('utf-8')
+
 
 @app.route('/')
 @app.route('/<path:subpath>')
 def proxy_epg(subpath=''):
-    # Si alguien intenta acceder directamente a /epg/, redirigir
+    # Redirigir rutas que comienzan con /epg/ para normalizar
     if subpath.startswith('epg/'):
         new_path = subpath[4:]  # Quitar 'epg/'
         return redirect(f'/{new_path}' if new_path else '/')
-    
-    # Determinar URL destino
+
+    # Construir la URL de destino en el servidor Synology
     if subpath.startswith('static/'):
         target_url = f"{SYNOLOGY_URL}/{subpath}"
     else:
         target_url = f"{SYNOLOGY_URL}/epg/{subpath}" if subpath else f"{SYNOLOGY_URL}/epg/"
-    
+
     print(f"🔁 Proxy: /{subpath} -> {target_url}")
-    
+
     try:
+        # Realizar la petición al backend
         resp = requests.request(
             method=request.method,
             url=target_url,
             params=request.args,
-            headers={k: v for k, v in request.headers if k.lower() != 'host'},
+            headers={k: v for k, v in request.headers if k.lower() not in ('host', 'content-length')},
             data=request.get_data(),
             cookies=request.cookies,
             allow_redirects=False,
             timeout=30
         )
-        
+
         content = resp.content
-        
-        # Reescribir URLs en HTML, CSS y JavaScript
         content_type = resp.headers.get('content-type', '').lower()
-        if any(t in content_type for t in ['text/html', 'text/css', 'application/javascript']):
+
+        # Solo reescribir contenido textual conocido
+        text_content_types = [
+            'text/html',
+            'text/css',
+            'application/javascript',
+            'application/json',
+            'text/plain'  # opcional: solo si estás seguro de que el plain es texto
+        ]
+
+        if any(t in content_type for t in text_content_types):
             content = rewrite_all_urls(content)
-        
-        # Filtrar headers
-        excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+        # Si no es texto, se deja como bytes originales (imágenes, etc.)
+
+        # Filtrar headers que no deben reenviarse
+        excluded_headers = {'content-encoding', 'content-length', 'transfer-encoding', 'connection', 'keep-alive'}
         headers = [(k, v) for k, v in resp.raw.headers.items() if k.lower() not in excluded_headers]
-        
+
         return Response(content, resp.status_code, headers)
-        
+
     except Exception as e:
-        return f"Proxy Error: {str(e)}", 500
+        error_msg = f"Proxy Error: {str(e)}"
+        print(error_msg)
+        return error_msg, 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
