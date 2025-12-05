@@ -6,9 +6,15 @@ import re
 # Desactivamos static_folder por precaución
 app = Flask(__name__, static_folder=None)
 
-SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5052')
+# Tu nueva URL principal SIN /epg
+SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5062')
 
 def rewrite_all_urls(content):
+    """
+    Reescribe todas las rutas internas que estén codificadas con / algo
+    y las convierte para funcionar detrás del proxy.
+    """
+
     if isinstance(content, bytes):
         try:
             text = content.decode('utf-8')
@@ -17,35 +23,48 @@ def rewrite_all_urls(content):
     else:
         text = content
 
+    # 🔥 Transformaciones ajustadas: ya no usamos /epg en ningún sitio
     transformations = [
+        # href="/algo" -> href="/algo" (nada cambia salvo quitar prefijos heredados)
         (r'["\']/epg/([^"\']*)["\']', r'"/\1"'),
         (r'["\']/epg["\']', r'"/"'),
+
+        # JS redirect
         (r'window\.location\.href\s*=\s*["\']/epg/([^"\']*)["\']', r'window.location.href = "/\1"'),
+
+        # window.open
         (r'window\.open\(["\']/epg/([^"\']*)["\']', r'window.open("/\1"'),
+
+        # Formularios
         (r'action=["\']/epg/([^"\']*)["\']', r'action="/\1"'),
+
+        # CSS url()
         (r'url\(["\']?/epg/([^"\'\)]*)["\']?\)', r'url(/\1)'),
     ]
-    
+
     for pattern, replacement in transformations:
         text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
-    
+
     return text.encode('utf-8')
 
-# 🔹 Captura EXPLÍCITA de /static/... para evitar el sistema automático de Flask
+
+# 📌 Captura explícita de /static/...
 @app.route('/static/<path:filename>')
 def proxy_static(filename):
-    return proxy_epg(f"static/{filename}")
+    return proxy_generic(filename)
 
-# Ruta genérica
+
+# 📌 Ruta principal SIN /epg
 @app.route('/')
 @app.route('/<path:subpath>')
-def proxy_epg(subpath=''):
-    if subpath.startswith('epg/'):
-        new_path = subpath[4:]
-        return redirect(f'/{new_path}' if new_path else '/')
-
-    target_url = f"{SYNOLOGY_URL}/epg/{subpath}" if subpath else f"{SYNOLOGY_URL}/epg/"
-    print(f"🔁 Proxy: /{subpath} -> {target_url}")
+def proxy_generic(subpath=''):
+    # Para debug
+    if subpath:
+        print(f"🔁 Proxy: /{subpath}  →  {SYNOLOGY_URL}/{subpath}")
+        target_url = f"{SYNOLOGY_URL}/{subpath}"
+    else:
+        print(f"🔁 Proxy: /  →  {SYNOLOGY_URL}/")
+        target_url = f"{SYNOLOGY_URL}/"
 
     try:
         resp = requests.request(
@@ -62,6 +81,7 @@ def proxy_epg(subpath=''):
         content = resp.content
         content_type = resp.headers.get('content-type', '').lower()
 
+        # Reescritura de HTML, CSS, JS, JSON
         if any(t in content_type for t in ['text/html', 'text/css', 'application/javascript', 'application/json']):
             content = rewrite_all_urls(content)
 
@@ -71,9 +91,9 @@ def proxy_epg(subpath=''):
         return Response(content, resp.status_code, headers)
 
     except Exception as e:
-        error_msg = f"Proxy Error: {str(e)}"
-        print(error_msg)
-        return error_msg, 500
+        print(f"❌ Proxy Error: {e}")
+        return f"Proxy Error: {str(e)}", 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
