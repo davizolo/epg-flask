@@ -1,100 +1,71 @@
 from flask import Flask, request, Response, redirect
 import requests
 import os
-import re
 
+# Sin carpeta estática local
 app = Flask(__name__, static_folder=None)
 
-# Nueva URL base sin /epg
-TARGET_BASE = os.environ.get("TARGET_BASE", "http://privado.dyndns.org:5062")
+# Nueva URL base
+SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5062')
 
 
-def rewrite_urls(content):
-    """Reescribe cualquier URL absoluta para que funcione detrás del proxy."""
-
-    if isinstance(content, bytes):
-        try:
-            text = content.decode("utf-8")
-        except UnicodeDecodeError:
-            return content
-    else:
-        text = content
-
-    # Como ya NO hay /epg, solo limpiamos rutas absolutas si existen
-    replacements = [
-        (r'http://privado\.dyndns\.org:5062', ""),  # limpiar hardcodeos
-        (r'https://privado\.dyndns\.org:5062', "")
-    ]
-
-    for pattern, repl in replacements:
-        text = re.sub(pattern, repl, text, flags=re.IGNORECASE)
-
-    return text.encode("utf-8")
-
-
-# ---------- MANEJO DE STATIC ----------
-
-@app.route("/static/<path:filename>")
-def static_files(filename):
-    """Proxy específico para imágenes, CSS, JS, etc."""
-    url = f"{TARGET_BASE}/static/{filename}"
-    return proxy_generic(url)
-
-
-# ---------- RUTA GENERAL DE PROXY ----------
-
-@app.route("/", defaults={"subpath": ""})
-@app.route("/<path:subpath>")
-def proxy(subpath):
-    # Construimos ruta final (ya NO existe /epg)
-    url = f"{TARGET_BASE}/{subpath}"
-    return proxy_generic(url)
-
-
-# ---------- FUNCIÓN CENTRAL DE PROXY ----------
-
-def proxy_generic(url):
-    print(f"🔁 Proxy -> {url}")
+# --------------------------
+# PROXY PARA STATIC/*
+# --------------------------
+@app.route('/static/<path:filename>')
+def proxy_static(filename):
+    target_url = f"{SYNOLOGY_URL}/static/{filename}"
+    print(f"🔁 STATIC -> {target_url}")
 
     try:
-        upstream = requests.request(
-            method=request.method,
-            url=url,
-            params=request.args,
-            headers={k: v for k, v in request.headers.items()
-                     if k.lower() not in ["host", "content-length"]},
-            data=request.get_data(),
-            cookies=request.cookies,
-            timeout=30,
-            allow_redirects=False,
+        resp = requests.get(
+            target_url,
+            headers={k: v for k, v in request.headers if k.lower() != 'host'},
+            stream=True,
+            timeout=30
         )
 
-        content = upstream.content
-        content_type = upstream.headers.get("content-type", "").lower()
+        excluded = {'content-encoding', 'transfer-encoding', 'connection'}
+        headers = [(k, v) for k, v in resp.headers.items() if k.lower() not in excluded]
 
-        # Reescritura solo en archivos HTML / CSS / JS / JSON
-        if any(t in content_type for t in [
-            "text/html", "text/css", "application/javascript", "application/json"
-        ]):
-            content = rewrite_urls(content)
-
-        blocked_headers = {
-            "content-encoding", "content-length",
-            "transfer-encoding", "connection"
-        }
-
-        headers = [(k, v) for k, v in upstream.headers.items()
-                   if k.lower() not in blocked_headers]
-
-        return Response(content, upstream.status_code, headers)
+        return Response(resp.content, resp.status_code, headers)
 
     except Exception as e:
-        msg = f"Proxy Error: {e}"
-        print(msg)
-        return msg, 500
+        return f"Static proxy error: {e}", 500
 
 
-# ---------- MAIN ----------
+# --------------------------
+# PROXY GENERAL
+# --------------------------
+@app.route('/', defaults={'subpath': ''})
+@app.route('/<path:subpath>')
+def proxy_all(subpath):
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    # Objetivo: misma ruta pero en el NAS
+    target_url = f"{SYNOLOGY_URL}/{subpath}"
+
+    print(f"🔁 PROXY: /{subpath} -> {target_url}")
+
+    try:
+        resp = requests.request(
+            method=request.method,
+            url=target_url,
+            params=request.args,
+            headers={k: v for k, v in request.headers if k.lower() not in ('host', 'content-length')},
+            data=request.get_data(),
+            cookies=request.cookies,
+            allow_redirects=False,
+            timeout=30
+        )
+
+        excluded_headers = {'content-encoding', 'content-length', 'transfer-encoding', 'connection'}
+        headers = [(k, v) for k, v in resp.raw.headers.items() if k.lower() not in excluded_headers]
+
+        return Response(resp.content, resp.status_code, headers)
+
+    except Exception as e:
+        return f"Proxy error: {e}", 500
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
