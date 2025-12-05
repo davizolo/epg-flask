@@ -3,97 +3,98 @@ import requests
 import os
 import re
 
-# Desactivamos static_folder por precaución
 app = Flask(__name__, static_folder=None)
 
-# Tu nueva URL principal SIN /epg
-SYNOLOGY_URL = os.environ.get('SYNOLOGY_URL', 'http://privado.dyndns.org:5062')
+# Nueva URL base sin /epg
+TARGET_BASE = os.environ.get("TARGET_BASE", "http://privado.dyndns.org:5062")
 
-def rewrite_all_urls(content):
-    """
-    Reescribe todas las rutas internas que estén codificadas con / algo
-    y las convierte para funcionar detrás del proxy.
-    """
+
+def rewrite_urls(content):
+    """Reescribe cualquier URL absoluta para que funcione detrás del proxy."""
 
     if isinstance(content, bytes):
         try:
-            text = content.decode('utf-8')
+            text = content.decode("utf-8")
         except UnicodeDecodeError:
             return content
     else:
         text = content
 
-    # 🔥 Transformaciones ajustadas: ya no usamos /epg en ningún sitio
-    transformations = [
-        # href="/algo" -> href="/algo" (nada cambia salvo quitar prefijos heredados)
-        (r'["\']/epg/([^"\']*)["\']', r'"/\1"'),
-        (r'["\']/epg["\']', r'"/"'),
-
-        # JS redirect
-        (r'window\.location\.href\s*=\s*["\']/epg/([^"\']*)["\']', r'window.location.href = "/\1"'),
-
-        # window.open
-        (r'window\.open\(["\']/epg/([^"\']*)["\']', r'window.open("/\1"'),
-
-        # Formularios
-        (r'action=["\']/epg/([^"\']*)["\']', r'action="/\1"'),
-
-        # CSS url()
-        (r'url\(["\']?/epg/([^"\'\)]*)["\']?\)', r'url(/\1)'),
+    # Como ya NO hay /epg, solo limpiamos rutas absolutas si existen
+    replacements = [
+        (r'http://privado\.dyndns\.org:5062', ""),  # limpiar hardcodeos
+        (r'https://privado\.dyndns\.org:5062', "")
     ]
 
-    for pattern, replacement in transformations:
-        text = re.sub(pattern, replacement, text, flags=re.IGNORECASE)
+    for pattern, repl in replacements:
+        text = re.sub(pattern, repl, text, flags=re.IGNORECASE)
 
-    return text.encode('utf-8')
-
-
-# 📌 Captura explícita de /static/...
-@app.route('/static/<path:filename>')
-def proxy_static(filename):
-    return proxy_generic(filename)
+    return text.encode("utf-8")
 
 
-# 📌 Ruta principal SIN /epg
-@app.route('/')
-@app.route('/<path:subpath>')
-def proxy_generic(subpath=''):
-    # Para debug
-    if subpath:
-        print(f"🔁 Proxy: /{subpath}  →  {SYNOLOGY_URL}/{subpath}")
-        target_url = f"{SYNOLOGY_URL}/{subpath}"
-    else:
-        print(f"🔁 Proxy: /  →  {SYNOLOGY_URL}/")
-        target_url = f"{SYNOLOGY_URL}/"
+# ---------- MANEJO DE STATIC ----------
+
+@app.route("/static/<path:filename>")
+def static_files(filename):
+    """Proxy específico para imágenes, CSS, JS, etc."""
+    url = f"{TARGET_BASE}/static/{filename}"
+    return proxy_generic(url)
+
+
+# ---------- RUTA GENERAL DE PROXY ----------
+
+@app.route("/", defaults={"subpath": ""})
+@app.route("/<path:subpath>")
+def proxy(subpath):
+    # Construimos ruta final (ya NO existe /epg)
+    url = f"{TARGET_BASE}/{subpath}"
+    return proxy_generic(url)
+
+
+# ---------- FUNCIÓN CENTRAL DE PROXY ----------
+
+def proxy_generic(url):
+    print(f"🔁 Proxy -> {url}")
 
     try:
-        resp = requests.request(
+        upstream = requests.request(
             method=request.method,
-            url=target_url,
+            url=url,
             params=request.args,
-            headers={k: v for k, v in request.headers if k.lower() not in ('host', 'content-length')},
+            headers={k: v for k, v in request.headers.items()
+                     if k.lower() not in ["host", "content-length"]},
             data=request.get_data(),
             cookies=request.cookies,
+            timeout=30,
             allow_redirects=False,
-            timeout=30
         )
 
-        content = resp.content
-        content_type = resp.headers.get('content-type', '').lower()
+        content = upstream.content
+        content_type = upstream.headers.get("content-type", "").lower()
 
-        # Reescritura de HTML, CSS, JS, JSON
-        if any(t in content_type for t in ['text/html', 'text/css', 'application/javascript', 'application/json']):
-            content = rewrite_all_urls(content)
+        # Reescritura solo en archivos HTML / CSS / JS / JSON
+        if any(t in content_type for t in [
+            "text/html", "text/css", "application/javascript", "application/json"
+        ]):
+            content = rewrite_urls(content)
 
-        excluded_headers = {'content-encoding', 'content-length', 'transfer-encoding', 'connection', 'keep-alive'}
-        headers = [(k, v) for k, v in resp.raw.headers.items() if k.lower() not in excluded_headers]
+        blocked_headers = {
+            "content-encoding", "content-length",
+            "transfer-encoding", "connection"
+        }
 
-        return Response(content, resp.status_code, headers)
+        headers = [(k, v) for k, v in upstream.headers.items()
+                   if k.lower() not in blocked_headers]
+
+        return Response(content, upstream.status_code, headers)
 
     except Exception as e:
-        print(f"❌ Proxy Error: {e}")
-        return f"Proxy Error: {str(e)}", 500
+        msg = f"Proxy Error: {e}"
+        print(msg)
+        return msg, 500
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+# ---------- MAIN ----------
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
